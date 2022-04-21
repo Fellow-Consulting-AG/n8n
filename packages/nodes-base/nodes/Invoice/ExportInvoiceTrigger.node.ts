@@ -18,6 +18,12 @@ import {
  import {
      snakeCase,
  } from 'change-case';
+
+ import {
+    OptionsWithUri,
+} from 'request';
+
+import FormData from 'form-data';
  
  
  export class ExportInvoiceTrigger implements INodeType {
@@ -53,18 +59,15 @@ import {
             async checkExists(this: IHookFunctions): Promise<boolean> {
                 const webhookData = this.getWorkflowStaticData('node');
                 const webhookUrl = this.getNodeWebhookUrl('default');
-                const event = this.getNodeParameter('event') as string;
-                // const { hooks: webhooks } = await exportInvoiceApiRequest.call(this, 'POST', '/configurations/get_configurations', {});
-                // for (const webhook of webhooks) {
-                //     if (webhook.target_url === webhookUrl && webhook.event === snakeCase(event)) {
-                //         webhookData.webhookId = webhook.hook_id;
-                //         return true;
-                //     }
-                // }
 
-                const reponse = await exportInvoiceApiRequest.call(this, 'POST', '/configurations/get_configurations', {});
+                console.info('in checkExists function');
+
+                const reponse = await exportInvoiceApiRequest.call(this, 'POST', '/configurations/get_configurations', {}, {});
                 for (const exportConf of reponse.data) {
                     if (exportConf.export_method === 'webhook' && exportConf.export_url === webhookUrl) {
+                        console.info('================================');
+                        console.info('found : ' + exportConf.id);
+                        console.info('=================================');
                         webhookData.webhookId = exportConf.id;
                         return true;
                     }
@@ -74,28 +77,70 @@ import {
             async create(this: IHookFunctions): Promise<boolean> {
                 const webhookUrl = this.getNodeWebhookUrl('default');
                 const webhookData = this.getWorkflowStaticData('node');
-                const event = this.getNodeParameter('event') as string;
-                const body: IDataObject = {
-                    title: snakeCase(event),
-                    doc_type: webhookUrl,
+
+                console.info('in create function');
+
+                const formData = {
+                    title: 'webhook title',
+                    doc_type: 'INVOICE',
                     export_url : webhookUrl
                 };
-                const webhook = await exportInvoiceApiRequest.call(this, 'POST', '/configurations/configure_webhook_export', body);
-                webhookData.webhookId = webhook.hook_id;
+
+
+                const options: OptionsWithUri = {
+                    headers: {
+                        // Accept: 'application/json',
+                        'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
+                    },
+                    method: 'POST',
+                    formData ,
+                    uri: `https://dev.doc2api.cloudintegration.eu/configurations/configure_webhook_export`,
+                    json: true,
+                };
+
+                let webhook;
+                try {
+                    webhook = await this.helpers.request(options);
+                } catch(e: any) {
+                    console.info(e);
+                    throw new Error('Some internal error occur. Please try again later');
+                    return false;
+                }
+                webhookData.webhookId = webhook.data.id;
+                console.info("sucess created : " + webhook.data.id);
+
                 return true;
             },
             async delete(this: IHookFunctions): Promise<boolean> {
                 const webhookData = this.getWorkflowStaticData('node');
 
-                const body: IDataObject = {
-                    id: webhookData.webhookId,
+                console.info('in delete function');
+                console.info('webhook id : ' + webhookData.webhookId);
+
+                const body = {
+                    id: webhookData.webhookId as number,
                 };
 
+                const options: OptionsWithUri = {
+                    headers: {
+                        Accept: 'application/json',
+                        'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
+                    },
+                    method: 'POST',
+                    body ,
+                    uri: `https://dev.doc2api.cloudintegration.eu/configurations/remove_configuration`,
+                    json: true,
+                };
+
+                let response;
                 try {
-                    await exportInvoiceApiRequest.call(this, 'POST', '/configurations/remove_configuration',body);
-                } catch (error) {
+                    // response = await this.helpers.request(options);
+                } catch(e: any) {
+                    console.info(e);
+                    throw new Error('Some internal error occur. Please try again later');
                     return false;
                 }
+
                 delete webhookData.webhookId;
                 return true;
             },
@@ -105,6 +150,8 @@ import {
 
     
     async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
+
+        console.info('My webhook worked ');
         const req = this.getRequestObject();
         return {
             workflowData: [

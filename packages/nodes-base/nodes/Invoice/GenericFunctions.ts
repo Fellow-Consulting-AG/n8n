@@ -15,11 +15,8 @@ import {
 
 export async function exportInvoiceApiRequest(this: IExecuteFunctions | IWebhookFunctions | IHookFunctions | ILoadOptionsFunctions, method: string, resource: string, body: any = {}, query: IDataObject = {}, uri?: string, option: IDataObject = {}): Promise<any> { // tslint:disable-line:no-any
 
-    // const credentials = await this.getCredentials('exportInvoiceApi') as IDataObject;
-
-    // const apiKey = credentials.apiKey;
-
     const endpoint = 'https://dev.doc2api.cloudintegration.eu';
+
 
     const options: OptionsWithUri = {
         headers: {
@@ -42,10 +39,15 @@ export async function exportInvoiceApiRequest(this: IExecuteFunctions | IWebhook
     try {
         return await this.helpers.request!(options);
     } catch (error : any) {
-        if (error.response) {
-            const errorMessage = error.response.body.message || error.response.body.description || error.message;
-            throw new Error(`Autopilot error response [${error.statusCode}]: ${errorMessage}`);
-        }
+
+        console.info('Some internal error occur. Please try again later');
+        console.info(error);
+
+        // if (error.response) {
+        //     console.info();
+            // const errorMessage = error.response.body.message || error.response.body.description || error.message;
+            // throw new Error(`Autopilot error response [${error.statusCode}]: ${errorMessage}`);
+        // }
         throw error;
     }
 }
