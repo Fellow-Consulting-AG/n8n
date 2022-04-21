@@ -103,11 +103,10 @@ import FormData from 'form-data';
                     webhook = await this.helpers.request(options);
                 } catch(e: any) {
                     console.info(e);
-                    throw new Error('Some internal error occur. Please try again later');
+                    // throw new Error('Some internal error occur. Please try again later');
                     return false;
                 }
                 webhookData.webhookId = webhook.data.id;
-                console.info("sucess created : " + webhook.data.id);
 
                 return true;
             },
@@ -115,29 +114,29 @@ import FormData from 'form-data';
                 const webhookData = this.getWorkflowStaticData('node');
 
                 console.info('in delete function');
-                console.info('webhook id : ' + webhookData.webhookId);
 
-                const body = {
+                const formData = {
                     id: webhookData.webhookId as number,
                 };
 
                 const options: OptionsWithUri = {
                     headers: {
-                        Accept: 'application/json',
+                        // Accept: 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded',
                         'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
                     },
                     method: 'POST',
-                    body ,
+                    formData ,
                     uri: `https://dev.doc2api.cloudintegration.eu/configurations/remove_configuration`,
                     json: true,
                 };
 
                 let response;
                 try {
-                    // response = await this.helpers.request(options);
+                    response = await this.helpers.request(options);
                 } catch(e: any) {
                     console.info(e);
-                    throw new Error('Some internal error occur. Please try again later');
+                    // throw new Error('Some internal error occur. Please try again later');
                     return false;
                 }
 
