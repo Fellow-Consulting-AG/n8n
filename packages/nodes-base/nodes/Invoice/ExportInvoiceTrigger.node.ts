@@ -4,7 +4,6 @@ import {
  } from 'n8n-core';
  
  import {
-    IDataObject,
     INodeType,
     INodeTypeDescription,
     IWebhookResponseData,
@@ -16,14 +15,9 @@ import {
  } from './GenericFunctions';
  
  import {
-     snakeCase,
- } from 'change-case';
-
- import {
     OptionsWithUri,
 } from 'request';
 
-import FormData from 'form-data';
  
  
  export class ExportInvoiceTrigger implements INodeType {
@@ -89,7 +83,6 @@ import FormData from 'form-data';
 
                 const options: OptionsWithUri = {
                     headers: {
-                        // Accept: 'application/json',
                         'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
                     },
                     method: 'POST',
@@ -103,7 +96,6 @@ import FormData from 'form-data';
                     webhook = await this.helpers.request(options);
                 } catch(e: any) {
                     console.info(e);
-                    // throw new Error('Some internal error occur. Please try again later');
                     return false;
                 }
                 webhookData.webhookId = webhook.data.id;
@@ -121,7 +113,6 @@ import FormData from 'form-data';
 
                 const options: OptionsWithUri = {
                     headers: {
-                        // Accept: 'application/json',
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
                     },
@@ -136,7 +127,6 @@ import FormData from 'form-data';
                     response = await this.helpers.request(options);
                 } catch(e: any) {
                     console.info(e);
-                    // throw new Error('Some internal error occur. Please try again later');
                     return false;
                 }
 
