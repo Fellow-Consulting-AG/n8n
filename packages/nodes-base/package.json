@@ -483,6 +483,7 @@
       "dist/nodes/Intercom/Intercom.node.js",
       "dist/nodes/Interval/Interval.node.js",
       "dist/nodes/Invoice/ExportInvoiceTrigger.node.js",
+      "dist/nodes/Invoice/Extract.node.js",
       "dist/nodes/Invoice/ImportInvoice.node.js",
       "dist/nodes/InvoiceNinja/InvoiceNinja.node.js",
       "dist/nodes/InvoiceNinja/InvoiceNinjaTrigger.node.js",
