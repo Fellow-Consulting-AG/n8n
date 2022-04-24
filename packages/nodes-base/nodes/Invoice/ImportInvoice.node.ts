@@ -1,4 +1,3 @@
-import { AnyPtrRecord } from 'dns';
 import {
     IExecuteFunctions,
 } from 'n8n-core';
@@ -37,15 +36,6 @@ export class ImportInvoice implements INodeType {
         ],
         properties: [
 
-            // {
-            //     displayName: 'Email',
-            //     name: 'email',
-            //     type: 'string',
-            //     required: true,
-                
-            //     default:'',
-            //     description:'Primary email for the contact',
-            // },
             {
 				displayName: 'Binary Property',
 				
@@ -86,7 +76,6 @@ export class ImportInvoice implements INodeType {
 
             const options: OptionsWithUri = {
                 headers: {
-                    // 'Accept': 'application/json',
                     'Content-Type': 'multipart/form-data',
                     'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
                 },
@@ -99,8 +88,6 @@ export class ImportInvoice implements INodeType {
             responseData = await this.helpers.request(options);
 
         }
-    
-        //Make http request according to <https://sendgrid.com/docs/api-reference/>
     
         // Map data to n8n data
         return [this.helpers.returnJsonArray(responseData)];
