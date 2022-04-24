@@ -343,6 +343,7 @@
       "dist/nodes/ApiTemplateIo/ApiTemplateIo.node.js",
       "dist/nodes/Asana/Asana.node.js",
       "dist/nodes/Asana/AsanaTrigger.node.js",
+      "dist/nodes/AssignEmployee/AssignEmployee.node.js",
       "dist/nodes/Automizy/Automizy.node.js",
       "dist/nodes/Autopilot/Autopilot.node.js",
       "dist/nodes/Autopilot/AutopilotTrigger.node.js",
