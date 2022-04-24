@@ -66,7 +66,6 @@ export class Extract implements INodeType {
 
         for (let i = 0; i < items.length; i++) {
             const item = items[i].binary as IBinaryKeyData;
-            
 
             const binaryData = item[binaryPropertyName] as IBinaryData;
             binaryData.fileName = 'invoice_node.pdf';
@@ -86,7 +85,6 @@ export class Extract implements INodeType {
 
             const options: OptionsWithUri = {
                 headers: {
-                    // 'Accept': 'application/json',
                     'Content-Type': 'multipart/form-data',
                     'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
                 },
@@ -99,8 +97,6 @@ export class Extract implements INodeType {
             responseData = await this.helpers.request(options);
 
         }
-    
-        //Make http request according to <https://sendgrid.com/docs/api-reference/>
     
         // Map data to n8n data
         return [this.helpers.returnJsonArray(responseData)];
