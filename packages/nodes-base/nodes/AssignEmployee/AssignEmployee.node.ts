@@ -57,37 +57,28 @@ export class AssignEmployee implements INodeType {
         const invoiceId = this.getNodeParameter('invoiceId', 0) as string;
         // const amount = this.getNodeParameter('amount', 0) as string;
 
+        const formData = {
+            assign_to : email,
+        };
 
-        console.info("i am in assigne employee node");
-        console.info(email);
-        console.info(invoiceId);
-        // console.info(amount);
+        let uri = 'https://dev.doc2api.cloudintegration.eu/document/assign_with_email/' + `${invoiceId}`;
 
-        // if(amount >)
+        const options: OptionsWithUri = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
+            },
+            method: 'POST',
+            formData ,
+            uri: uri,
+            json: true,
+        };
 
-
-        // const formData = {
-        //     id: '841234351',
-        // };
-
-        // const options: OptionsWithUri = {
-        //     headers: {
-        //         'Content-Type': 'application/x-www-form-urlencoded',
-        //         'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
-        //     },
-        //     method: 'POST',
-        //     formData ,
-        //     uri: `https://dev.doc2api.cloudintegration.eu/configurations/remove_configuration`,
-        //     json: true,
-        // };
-
-        // try {
-        //     responseData = await this.helpers.request(options);
-        // } catch(e: any) {
-        //     console.info(e);
-        // }
-        // return [this.helpers.returnJsonArray(responseData)];
-
-        return [[]];
+        try {
+            responseData = await this.helpers.request(options);
+        } catch(e: any) {
+            console.info(e);
+        }
+        return [this.helpers.returnJsonArray(responseData)];
     }
 }
