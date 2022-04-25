@@ -4,6 +4,9 @@ FROM node:16-alpine as builder
 # Update everything and install needed dependencies
 USER root
 
+ENV N8N_BASIC_AUTH_ACTIVE=true
+ENV N8N_USER_MANAGEMENT_DISABLED=ture
+
 # Install all needed dependencies
 RUN apk --update add --virtual build-dependencies python3 build-base ca-certificates && \
 	npm_config_user=root npm install -g lerna
@@ -30,6 +33,9 @@ RUN npm run build
 FROM node:16-alpine
 
 USER root
+
+ENV N8N_BASIC_AUTH_ACTIVE=true
+ENV N8N_USER_MANAGEMENT_DISABLED=ture
 
 RUN apk add --update graphicsmagick tzdata tini su-exec git
 

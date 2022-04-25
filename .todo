@@ -1,0 +1,14 @@
+N8N:
+    ✔ adjust logo @done (4/22/2022, 10:14:02 AM)
+    ☐ adjust colors
+    ✔ adjust fav.icon @done (4/22/2022, 10:14:03 AM)
+
+
+    LOGIN:
+        ✔ basic auth @done (4/22/2022, 10:35:57 AM)
+        -> if admin mail is set every user needs to login 
+        -> basic auth is disabled after admin mail is set?
+
+Doc2APP:
+    ☐ only show workflow button if https
+    ☐ show url in modules page

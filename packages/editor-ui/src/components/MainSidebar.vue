@@ -9,9 +9,9 @@
 			<n8n-menu default-active="workflow" @select="handleSelect" :collapse="isCollapsed">
 
 				<n8n-menu-item index="logo" class="logo-item">
-					<a href="https://n8n.io" target="_blank">
-						<img :src="basePath + 'n8n-icon-small.png'" class="icon" alt="n8n.io"/>
-						<span class="logo-text" slot="title">n8n.io</span>
+					<a href="https://polydocs.io" target="_blank">
+						<img :src="basePath + 'polydocs_white.svg'" class="icon" alt="polydocs.io" style="margin-left: 18px;"/>
+						<span class="logo-text" slot="title">Polydocs.io</span>
 					</a>
 				</n8n-menu-item>
 
@@ -267,29 +267,9 @@ export default mixins(
 						id: 'docs',
 						type: 'link',
 						properties: {
-							href: 'https://docs.n8n.io',
+							href: 'https://docs.polydocs.io',
 							title: this.$locale.baseText('mainSidebar.helpMenuItems.documentation'),
 							icon: 'book',
-							newWindow: true,
-						},
-					},
-					{
-						id: 'forum',
-						type: 'link',
-						properties: {
-							href: 'https://community.n8n.io',
-							title: this.$locale.baseText('mainSidebar.helpMenuItems.forum'),
-							icon: 'users',
-							newWindow: true,
-						},
-					},
-					{
-						id: 'examples',
-						type: 'link',
-						properties: {
-							href: 'https://docs.n8n.io/courses',
-							title: this.$locale.baseText('mainSidebar.helpMenuItems.course'),
-							icon: 'graduation-cap',
 							newWindow: true,
 						},
 					},

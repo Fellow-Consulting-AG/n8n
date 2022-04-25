@@ -53,7 +53,7 @@ export function addRoutes(this: N8nApp, ignoredEndpoints: string[], restEndpoint
 			// skip authentication for preflight requests
 			req.method === 'OPTIONS' ||
 			req.url === '/index.html' ||
-			req.url === '/favicon.ico' ||
+			req.url === '/polydocs_256x256.ico' ||
 			req.url.startsWith('/css/') ||
 			req.url.startsWith('/js/') ||
 			req.url.startsWith('/fonts/') ||

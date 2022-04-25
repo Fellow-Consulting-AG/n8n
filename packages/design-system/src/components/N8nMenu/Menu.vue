@@ -55,9 +55,9 @@ export default {
 	composes: menu;
 	--menu-font-color: var(--color-text-base);
 	--menu-item-font-weight: var(--font-weight-regular);
-	--menu-background-color: transparent;
+	--menu-background-color: #FFFF;
 	--menu-item-active-font-color: var(--color-text-dark);
-	--menu-item-active-background-color: var(--color-foreground-base);
+	--menu-item-active-background-color: #FFFF;
 	--menu-item-hover-font-color: var(--color-primary);
 	--menu-item-border-radius: 4px;
 	--menu-item-height: 38px;
