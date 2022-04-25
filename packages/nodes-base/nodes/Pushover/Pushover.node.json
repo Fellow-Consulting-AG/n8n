@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/pushover"
+				"url": "https://docs.polydocs.io/credentials/pushover"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.pushover/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.pushover/"
 			}
 		]
 	}

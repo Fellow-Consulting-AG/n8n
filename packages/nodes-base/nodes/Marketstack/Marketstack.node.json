@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/marketstack"
+				"url": "https://docs.polydocs.io/credentials/marketstack"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.marketstack/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.marketstack/"
 			}
 		]
 	}

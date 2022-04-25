@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/payPal"
+				"url": "https://docs.polydocs.io/credentials/payPal"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.payPalTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.payPalTrigger/"
 			}
 		]
 	}

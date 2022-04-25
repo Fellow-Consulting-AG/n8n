@@ -10,12 +10,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/ftp"
+				"url": "https://docs.polydocs.io/credentials/ftp"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.ftp/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.ftp/"
 			}
 		]
 	},

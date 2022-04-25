@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/mailerLite"
+				"url": "https://docs.polydocs.io/credentials/mailerLite"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.mailerLiteTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.mailerLiteTrigger/"
 			}
 		]
 	}

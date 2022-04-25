@@ -38,7 +38,7 @@ n8n has 200+ different nodes to automate workflows. The list can be found on: [h
 
 ## Documentation
 
-The official n8n documentation can be found under: [https://docs.n8n.io](https://docs.n8n.io)
+The official n8n documentation can be found under: [https://docs.polydocs.io](https://docs.polydocs.io)
 
 Additional information and example workflows on the n8n.io website: [https://n8n.io](https://n8n.io)
 
@@ -190,7 +190,7 @@ The following environment variables support file input:
 ## Example Setup with Lets Encrypt
 
 A basic step by step example setup of n8n with docker-compose and Lets Encrypt is available on the
-[Server Setup](https://docs.n8n.io/#/server-setup) page.
+[Server Setup](https://docs.polydocs.io/#/server-setup) page.
 
 ## Updating a running docker-compose instance
 
@@ -279,4 +279,4 @@ Before you upgrade to the latest version make sure to check here if there are an
 
 n8n is [fair-code](http://faircode.io) distributed under the [**Sustainable Use License**](https://github.com/n8n-io/n8n/blob/master/packages/cli/LICENSE.md).
 
-Additional information on the license can be found in the [FAQ](https://docs.n8n.io/reference/faq.html#license)
+Additional information on the license can be found in the [FAQ](https://docs.polydocs.io/reference/faq.html#license)

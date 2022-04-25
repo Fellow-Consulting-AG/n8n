@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/mindee"
+				"url": "https://docs.polydocs.io/credentials/mindee"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.mindee/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.mindee/"
 			}
 		],
 		"generic": [

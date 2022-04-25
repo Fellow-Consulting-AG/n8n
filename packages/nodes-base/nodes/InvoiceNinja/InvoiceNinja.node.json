@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/invoiceNinja"
+				"url": "https://docs.polydocs.io/credentials/invoiceNinja"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.invoiceNinja/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.invoiceNinja/"
 			}
 		]
 	}

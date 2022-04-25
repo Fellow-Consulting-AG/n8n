@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/postHog"
+				"url": "https://docs.polydocs.io/credentials/postHog"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.postHog/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.postHog/"
 			}
 		]
 	}

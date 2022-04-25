@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/gumroad"
+				"url": "https://docs.polydocs.io/credentials/gumroad"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.gumroadTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.gumroadTrigger/"
 			}
 		]
 	}

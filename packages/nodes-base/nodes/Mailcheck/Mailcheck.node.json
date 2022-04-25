@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/mailcheck"
+				"url": "https://docs.polydocs.io/credentials/mailcheck"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.mailcheck/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.mailcheck/"
 			}
 		]
 	}

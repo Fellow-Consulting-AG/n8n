@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/automizy"
+				"url": "https://docs.polydocs.io/credentials/automizy"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.automizy/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.automizy/"
 			}
 		]
 	}

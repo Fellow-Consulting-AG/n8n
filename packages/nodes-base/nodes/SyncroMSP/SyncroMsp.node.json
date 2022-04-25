@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/syncroMsp"
+				"url": "https://docs.polydocs.io/credentials/syncroMsp"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.syncroMsp/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.syncroMsp/"
 			}
 		]
 	}

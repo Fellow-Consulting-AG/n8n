@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/facebookGraphApp"
+				"url": "https://docs.polydocs.io/credentials/facebookGraphApp"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.facebookTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.facebookTrigger/"
 			}
 		]
 	}

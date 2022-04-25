@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/philipsHue"
+				"url": "https://docs.polydocs.io/credentials/philipsHue"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.philipsHue/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.philipsHue/"
 			}
 		]
 	}

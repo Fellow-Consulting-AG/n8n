@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/lingvaNex"
+				"url": "https://docs.polydocs.io/credentials/lingvaNex"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.lingvaNex/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.lingvaNex/"
 			}
 		],
 		"generic": [

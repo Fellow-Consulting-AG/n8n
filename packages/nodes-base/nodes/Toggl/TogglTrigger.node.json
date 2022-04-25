@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/toggl"
+				"url": "https://docs.polydocs.io/credentials/toggl"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.togglTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.togglTrigger/"
 			}
 		]
 	}

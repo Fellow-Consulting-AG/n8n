@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/zendesk"
+				"url": "https://docs.polydocs.io/credentials/zendesk"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.zendeskTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.zendeskTrigger/"
 			}
 		]
 	}

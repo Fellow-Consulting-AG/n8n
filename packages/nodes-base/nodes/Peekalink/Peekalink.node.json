@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/peekalink"
+				"url": "https://docs.polydocs.io/credentials/peekalink"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.peekalink/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.peekalink/"
 			}
 		]
 	}

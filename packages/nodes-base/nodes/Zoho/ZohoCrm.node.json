@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/zoho"
+				"url": "https://docs.polydocs.io/credentials/zoho"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.zohoCrm/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.zohoCrm/"
 			}
 		],
 		"generic": [

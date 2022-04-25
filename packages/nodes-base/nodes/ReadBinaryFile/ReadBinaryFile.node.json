@@ -8,7 +8,7 @@
 	"resources": {
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.readBinaryFile/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.readBinaryFile/"
 			}
 		],
 		"generic": [

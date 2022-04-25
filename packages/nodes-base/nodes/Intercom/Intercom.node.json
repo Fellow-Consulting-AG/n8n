@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/intercom"
+				"url": "https://docs.polydocs.io/credentials/intercom"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.intercom/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.intercom/"
 			}
 		]
 	}

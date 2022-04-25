@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/affinity"
+				"url": "https://docs.polydocs.io/credentials/affinity"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.affinity/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.affinity/"
 			}
 		]
 	}

@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/customerIo"
+				"url": "https://docs.polydocs.io/credentials/customerIo"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.customerIo/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.customerIo/"
 			}
 		]
 	}

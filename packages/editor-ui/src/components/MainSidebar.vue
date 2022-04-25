@@ -267,7 +267,7 @@ export default mixins(
 						id: 'docs',
 						type: 'link',
 						properties: {
-							href: 'https://docs.n8n.io',
+							href: 'https://docs.polydocs.io',
 							title: this.$locale.baseText('mainSidebar.helpMenuItems.documentation'),
 							icon: 'book',
 							newWindow: true,
@@ -287,7 +287,7 @@ export default mixins(
 						id: 'examples',
 						type: 'link',
 						properties: {
-							href: 'https://docs.n8n.io/courses',
+							href: 'https://docs.polydocs.io/courses',
 							title: this.$locale.baseText('mainSidebar.helpMenuItems.course'),
 							icon: 'graduation-cap',
 							newWindow: true,

@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/spotify"
+				"url": "https://docs.polydocs.io/credentials/spotify"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.spotify/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.spotify/"
 			}
 		]
 	},

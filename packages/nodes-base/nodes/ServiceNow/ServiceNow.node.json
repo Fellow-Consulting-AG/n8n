@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/serviceNow"
+				"url": "https://docs.polydocs.io/credentials/serviceNow"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.serviceNow/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.serviceNow/"
 			}
 		]
 	}
