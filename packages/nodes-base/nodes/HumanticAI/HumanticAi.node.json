@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/humanticAi"
+				"url": "https://docs.polydocs.io/credentials/humanticAi"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.humanticAi/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.humanticAi/"
 			}
 		],
 		"generic": [

@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/figma"
+				"url": "https://docs.polydocs.io/credentials/figma"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.figmaTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.figmaTrigger/"
 			}
 		]
 	}

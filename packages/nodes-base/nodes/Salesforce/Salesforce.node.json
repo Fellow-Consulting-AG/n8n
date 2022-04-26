@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/salesforce"
+				"url": "https://docs.polydocs.io/credentials/salesforce"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.salesforce/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.salesforce/"
 			}
 		]
 	}

@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/oneSimpleApi/"
+				"url": "https://docs.polydocs.io/credentials/oneSimpleApi/"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.oneSimpleApi/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.oneSimpleApi/"
 			}
 		]
 	}

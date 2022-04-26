@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/orbit"
+				"url": "https://docs.polydocs.io/credentials/orbit"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.orbit/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.orbit/"
 			}
 		],
 		"generic": [

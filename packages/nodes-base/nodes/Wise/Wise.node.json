@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/wise"
+				"url": "https://docs.polydocs.io/credentials/wise"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.wise/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.wise/"
 			}
 		]
 	},

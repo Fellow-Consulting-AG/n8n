@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/git"
+				"url": "https://docs.polydocs.io/credentials/git"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.git/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.git/"
 			}
 		]
 	},

@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/quickbooks"
+				"url": "https://docs.polydocs.io/credentials/quickbooks"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.quickbooks/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.quickbooks/"
 			}
 		]
 	}

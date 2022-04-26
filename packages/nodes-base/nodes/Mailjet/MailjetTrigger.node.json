@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/mailjet"
+				"url": "https://docs.polydocs.io/credentials/mailjet"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.mailjetTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.mailjetTrigger/"
 			}
 		]
 	}

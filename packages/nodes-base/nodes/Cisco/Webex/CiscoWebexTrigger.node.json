@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/ciscoWebex"
+				"url": "https://docs.polydocs.io/credentials/ciscoWebex"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.ciscoWebexTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.ciscoWebexTrigger/"
 			}
 		]
 	}

@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/strapi"
+				"url": "https://docs.polydocs.io/credentials/strapi"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.strapi/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.strapi/"
 			}
 		]
 	}

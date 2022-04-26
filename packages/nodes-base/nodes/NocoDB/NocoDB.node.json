@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/nocoDb"
+				"url": "https://docs.polydocs.io/credentials/nocoDb"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.nocoDb/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.nocoDb/"
 			}
 		],
 		"generic": [

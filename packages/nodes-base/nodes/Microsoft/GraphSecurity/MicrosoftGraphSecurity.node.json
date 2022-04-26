@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/microsoft"
+				"url": "https://docs.polydocs.io/credentials/microsoft"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.microsoftGraphSecurity/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.microsoftGraphSecurity/"
 			}
 		]
 	}

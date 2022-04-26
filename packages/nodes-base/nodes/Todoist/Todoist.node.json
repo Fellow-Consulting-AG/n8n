@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/todoist"
+				"url": "https://docs.polydocs.io/credentials/todoist"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.todoist/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.todoist/"
 			}
 		],
 		"generic": [

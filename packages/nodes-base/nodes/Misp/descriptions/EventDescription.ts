@@ -59,7 +59,7 @@ export const eventFields: INodeProperties[] = [
 		type: 'options',
 		default: '',
 		required: true,
-		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>',
+		description: 'Choose from the list, or specify an ID using an <a href="https://docs.polydocs.io/nodes/expressions.html#expressions">expression</a>',
 		typeOptions: {
 			loadOptionsMethod: 'getOrgs',
 		},
@@ -168,7 +168,7 @@ export const eventFields: INodeProperties[] = [
 				name: 'sharing_group_id',
 				type: 'options',
 				default: '',
-				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>. Use only for when <code>Sharing Group</code> is selected in <code>Distribution</code>',
+				description: 'Choose from the list, or specify an ID using an <a href="https://docs.polydocs.io/nodes/expressions.html#expressions">expression</a>. Use only for when <code>Sharing Group</code> is selected in <code>Distribution</code>',
 				typeOptions: {
 					loadOptionsMethod: 'getSharingGroups',
 				},
@@ -432,7 +432,7 @@ export const eventFields: INodeProperties[] = [
 				name: 'sharing_group_id',
 				type: 'options',
 				default: '',
-				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>. Use only for when <code>Sharing Group</code> is selected in <code>Distribution</code>',
+				description: 'Choose from the list, or specify an ID using an <a href="https://docs.polydocs.io/nodes/expressions.html#expressions">expression</a>. Use only for when <code>Sharing Group</code> is selected in <code>Distribution</code>',
 				typeOptions: {
 					loadOptionsMethod: 'getSharingGroups',
 				},

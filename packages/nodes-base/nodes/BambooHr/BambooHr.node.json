@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/bambooHr/"
+				"url": "https://docs.polydocs.io/credentials/bambooHr/"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.bambooHr/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.bambooHr/"
 			}
 		]
 	}

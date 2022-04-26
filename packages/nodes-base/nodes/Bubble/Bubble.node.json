@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/bubble"
+				"url": "https://docs.polydocs.io/credentials/bubble"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.bubble/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.bubble/"
 			}
 		]
 	}

@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/drift"
+				"url": "https://docs.polydocs.io/credentials/drift"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.drift/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.drift/"
 			}
 		]
 	}
