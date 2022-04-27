@@ -73,15 +73,16 @@ export class ImportInvoice implements INodeType {
                 }]
             };
 
+            let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/document/process_documents';
 
             const options: OptionsWithUri = {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
+                    'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
                 },
                 method: 'POST',
                 body:  formData ,
-                uri: `https://dev.doc2api.cloudintegration.eu/document/process_documents`,
+                uri: uri,
                 json: true,
             };
             

@@ -38,14 +38,14 @@ export class AssignEmployee implements INodeType {
                 default:'',
                 description:'Primary email for the contact',
             },
-            {
-                displayName: 'Invoice Id',
-                name: 'invoiceId',
-                type: 'string',
-                required: true,
-                default:'',
-                description:'Primary email for the contact',
-            },
+            // {
+            //     displayName: 'Invoice Id',
+            //     name: 'invoiceId',
+            //     type: 'string',
+            //     required: true,
+            //     default:'',
+            //     description:'Primary email for the contact',
+            // },
         ],
     };
 
@@ -55,21 +55,21 @@ export class AssignEmployee implements INodeType {
 
         const items = this.getInputData();
 
-        if(items[0].json.status === 'ready_for_validation') {
+        // if(items[0].json.status === 'ready_for_validation') {
 
             const email = this.getNodeParameter('email', 0) as string;
-            const invoiceId = this.getNodeParameter('invoiceId', 0) as string;
+            const invoiceId = items[0].json.doc_id;
     
             const formData = {
                 assign_to : email,
             };
     
-            let uri = 'https://dev.doc2api.cloudintegration.eu/document/assign_with_email/' + `${invoiceId}`;
+            let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/document/assign_with_email/' + `${invoiceId}`;
     
             const options: OptionsWithUri = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
+                    'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
                 },
                 method: 'POST',
                 formData ,
@@ -83,9 +83,9 @@ export class AssignEmployee implements INodeType {
                 console.info(e);
             }
             return [this.helpers.returnJsonArray(responseData)];
-        } else {
-            return [this.helpers.returnJsonArray([{'Messgae' : 'Invalid Document Status'}])];
-        }
+        // } else {
+        //     return [this.helpers.returnJsonArray([{'Messgae' : 'Invalid Document Status'}])];
+        // }
 
     }
 }
