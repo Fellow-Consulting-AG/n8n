@@ -486,6 +486,7 @@
       "dist/nodes/Invoice/ExportInvoiceTrigger.node.js",
       "dist/nodes/Invoice/Extract.node.js",
       "dist/nodes/Invoice/ImportInvoice.node.js",
+      "dist/nodes/Invoice/ApprovalInvoiceTrigger.node.js",
       "dist/nodes/InvoiceNinja/InvoiceNinja.node.js",
       "dist/nodes/InvoiceNinja/InvoiceNinjaTrigger.node.js",
       "dist/nodes/ItemLists/ItemLists.node.js",
