@@ -15,13 +15,13 @@ import {
 
 export async function exportInvoiceApiRequest(this: IExecuteFunctions | IWebhookFunctions | IHookFunctions | ILoadOptionsFunctions, method: string, resource: string, body: any = {}, query: IDataObject = {}, uri?: string, option: IDataObject = {}): Promise<any> { // tslint:disable-line:no-any
 
-    const endpoint = 'https://dev.doc2api.cloudintegration.eu';
+    const endpoint = process.env.APP_N8N_DOC2_SERVICE_URL;
 
 
     const options: OptionsWithUri = {
         headers: {
             'Content-Type': 'application/json',
-            'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
+            'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
         },
         method,
         body,
