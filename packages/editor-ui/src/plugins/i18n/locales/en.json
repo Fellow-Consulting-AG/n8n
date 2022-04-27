@@ -1,5 +1,5 @@
 {
-	"about.aboutN8n": "About n8n",
+	"about.aboutN8n": "About Workflow",
 	"about.close": "Close",
 	"about.license": "License",
 	"about.n8nLicense": "Sustainable Use License",
@@ -244,7 +244,7 @@
 	"genericHelpers.sec": "sec",
 	"genericHelpers.showMessage.message": "This is a read-only version of the workflow. To make changes, either open the original workflow or save it under a new name.",
 	"genericHelpers.showMessage.title": "Workflow cannot be changed",
-	"mainSidebar.aboutN8n": "About n8n",
+	"mainSidebar.aboutN8n": "About Workflow",
 	"mainSidebar.confirmMessage.workflowDelete.cancelButtonText": "",
 	"mainSidebar.confirmMessage.workflowDelete.confirmButtonText": "Yes, delete",
 	"mainSidebar.confirmMessage.workflowDelete.headline": "Delete Workflow?",
