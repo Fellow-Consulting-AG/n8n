@@ -24,7 +24,7 @@ import {
     description: INodeTypeDescription = {
         displayName: 'Approval Invoice Trigger',
         name: 'approvalInvoiceTrigger',
-        icon: 'file:importInvoice.svg',
+        icon: 'file:approvalInvoice.svg',
         group: ['trigger'],
         version: 1,
         subtitle: '={{$parameter["event"]}}',
@@ -56,16 +56,45 @@ import {
 
                 console.info('in checkExists function');
 
-                const reponse = await exportInvoiceApiRequest.call(this, 'GET', '/triggers/get_triggers/', {}, {});
-                for (const exportConf of reponse.data) {
-                    if (exportConf.export_method === 'webhook' && exportConf.export_url === webhookUrl) {
-                        console.info('================================');
-                        console.info('found : ' + exportConf.id);
-                        console.info('=================================');
-                        webhookData.webhookId = exportConf.id;
-                        return true;
-                    }
+                let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/triggers/get_trigger_by_url?url=' + encodeURIComponent(webhookUrl!);
+
+                const options: OptionsWithUri = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
+                    },
+                    method: 'GET',
+                    body:  {},
+                    uri,
+                    json: true,
+                };
+
+                let webhook;
+                try {
+                    webhook = await this.helpers.request(options);
+                } catch(e: any) {
+                    console.info(e);
+                    return false;
                 }
+
+                if(webhook.data && webhook.data.id && webhook.data.trigger_url === webhookUrl) {
+                    console.info('================================');
+                    console.info('found : ' + webhook.data.id);
+                    console.info('=================================');
+                    webhookData.webhookId = webhook.data.id;
+                    return true;
+                }
+
+                // const reponse = await exportInvoiceApiRequest.call(this, 'GET', '/triggers/get_triggers/', {}, {});
+                // for (const exportConf of reponse.data) {
+                //     if (exportConf.data && exportConf.data.id) {
+                //         console.info('================================');
+                //         console.info('found : ' + exportConf.id);
+                //         console.info('=================================');
+                //         webhookData.webhookId = exportConf.id;
+                //         return true;
+                //     }
+                // }
                 return false;
             },
             async create(this: IHookFunctions): Promise<boolean> {
@@ -73,6 +102,8 @@ import {
                 const webhookData = this.getWorkflowStaticData('node');
 
                 console.info('in create function');
+
+                let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/triggers/create_update_trigger';
 
                 const formData = {
                     doc_type: 'INVOICE',
@@ -83,11 +114,12 @@ import {
 
                 const options: OptionsWithUri = {
                     headers: {
-                        'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
                     },
                     method: 'POST',
                     formData ,
-                    uri: `https://dev.doc2api.cloudintegration.eu/triggers/create_update_trigger`,
+                    uri: uri,
                     json: true,
                 };
 
@@ -107,30 +139,37 @@ import {
 
                 console.info('in delete function');
 
-                const formData = {
-                    id: webhookData.webhookId as number,
-                };
-
-                const options: OptionsWithUri = {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'X-API-KEY': '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq',
-                    },
-                    method: 'POST',
-                    formData ,
-                    uri: `https://dev.doc2api.cloudintegration.eu/triggers/remove_trigger`,
-                    json: true,
-                };
-
-                let response;
-                try {
-                    response = await this.helpers.request(options);
-                } catch(e: any) {
-                    console.info(e);
-                    return false;
+                if(webhookData.webhookId) {
+                    let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/triggers/remove_trigger';
+    
+                    const formData = {
+                        id: webhookData.webhookId as number,
+                    };
+    
+                    const options: OptionsWithUri = {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
+                        },
+                        method: 'DELETE',
+                        formData ,
+                        uri: uri,
+                        json: true,
+                    };
+    
+                    let response;
+                    try {
+                        response = await this.helpers.request(options);
+                    } catch(e: any) {
+                        console.info(e);
+                        return false;
+                    }
+    
+                    console.info(response);
+    
+                    delete webhookData.webhookId;
                 }
 
-                delete webhookData.webhookId;
                 return true;
             },
         },
