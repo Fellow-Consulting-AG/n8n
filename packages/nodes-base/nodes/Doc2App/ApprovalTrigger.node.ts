@@ -25,7 +25,7 @@ import {
     description: INodeTypeDescription = {
         displayName: 'Doc2App Approval Trigger',
         name: 'approvalTrigger',
-        icon: 'file:exportInvoice.svg',
+        icon: 'file:approval.svg',
         group: ['trigger'],
         version: 1,
         subtitle: '={{$parameter["event"]}}',
@@ -36,7 +36,12 @@ import {
         },
         inputs: [],
         outputs: ['main'],
-        credentials: [],
+        credentials: [
+            {
+                name: 'Doc2AppApi',
+                required: true,
+            },
+        ],
         webhooks: [
             {
                 name: 'default',
