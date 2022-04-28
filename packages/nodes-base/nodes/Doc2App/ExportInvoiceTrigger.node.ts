@@ -12,7 +12,7 @@ import {
  
  import {
      exportInvoiceApiRequest,
- } from './GenericFunctions';
+ } from './GeneralHelper/GenericFunctions';
  
  import {
     OptionsWithUri,

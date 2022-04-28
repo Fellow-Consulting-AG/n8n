@@ -12,36 +12,30 @@ import {
  
  import {
      exportInvoiceApiRequest,
- } from './GenericFunctions';
+ } from '../GeneralHelper/GenericFunctions';
  
  import {
     OptionsWithUri,
 } from 'request';
 
  
- const server_url = 'https://dev.doc2api.cloudintegration.eu/';
- const api_key = '8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq';
- export class ApprovalTrigger implements INodeType {
+ 
+ export class ApprovalInvoiceTrigger implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Doc2App Approval Trigger',
-        name: 'approvalTrigger',
-        icon: 'file:approval.svg',
+        displayName: 'Approval Invoice Trigger',
+        name: 'approvalInvoiceTrigger',
+        icon: 'file:approvalInvoice.svg',
         group: ['trigger'],
         version: 1,
         subtitle: '={{$parameter["event"]}}',
         description: 'Handle Export Invoice events via webhooks',
         defaults: {
-            name: 'Approval Trigger',
+            name: 'Approval InvoiceTrigger',
             color: '#6ad7b9',
         },
         inputs: [],
         outputs: ['main'],
-        credentials: [
-            {
-                name: 'Doc2AppApi',
-                required: true,
-            },
-        ],
+        credentials: [],
         webhooks: [
             {
                 name: 'default',
@@ -62,12 +56,12 @@ import {
 
                 console.info('in checkExists function');
 
-                let uri = server_url + '/triggers/get_trigger_by_url?url=' + encodeURIComponent(webhookUrl!);
+                let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/triggers/get_trigger_by_url?url=' + encodeURIComponent(webhookUrl!);
 
                 const options: OptionsWithUri = {
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-API-KEY': api_key,
+                        'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
                     },
                     method: 'GET',
                     body:  {},
@@ -90,6 +84,17 @@ import {
                     webhookData.webhookId = webhook.data.id;
                     return true;
                 }
+
+                // const reponse = await exportInvoiceApiRequest.call(this, 'GET', '/triggers/get_triggers/', {}, {});
+                // for (const exportConf of reponse.data) {
+                //     if (exportConf.data && exportConf.data.id) {
+                //         console.info('================================');
+                //         console.info('found : ' + exportConf.id);
+                //         console.info('=================================');
+                //         webhookData.webhookId = exportConf.id;
+                //         return true;
+                //     }
+                // }
                 return false;
             },
             async create(this: IHookFunctions): Promise<boolean> {
@@ -98,7 +103,7 @@ import {
 
                 console.info('in create function');
 
-                let uri = server_url + '/triggers/create_update_trigger';
+                let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/triggers/create_update_trigger';
 
                 const formData = {
                     doc_type: 'INVOICE',
@@ -110,7 +115,7 @@ import {
                 const options: OptionsWithUri = {
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'X-API-KEY': api_key,
+                        'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
                     },
                     method: 'POST',
                     formData ,
@@ -135,7 +140,7 @@ import {
                 console.info('in delete function');
 
                 if(webhookData.webhookId) {
-                    let uri = server_url + '/triggers/remove_trigger';
+                    let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/triggers/remove_trigger';
     
                     const formData = {
                         id: webhookData.webhookId as number,
@@ -144,7 +149,7 @@ import {
                     const options: OptionsWithUri = {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'X-API-KEY': api_key,
+                            'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
                         },
                         method: 'DELETE',
                         formData ,
