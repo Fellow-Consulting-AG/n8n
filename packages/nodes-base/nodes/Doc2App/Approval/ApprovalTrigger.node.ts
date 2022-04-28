@@ -7,35 +7,38 @@ import {
     INodeType,
     INodeTypeDescription,
     IWebhookResponseData,
+    IDataObject,
  } from 'n8n-workflow';
- 
- 
+
  import {
-     exportInvoiceApiRequest,
- } from './GenericFunctions';
+    api,
+} from '../GeneralHelper/Environment';
  
  import {
     OptionsWithUri,
 } from 'request';
 
- 
- 
- export class ApprovalInvoiceTrigger implements INodeType {
+export class ApprovalTrigger implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Approval Invoice Trigger',
-        name: 'approvalInvoiceTrigger',
-        icon: 'file:approvalInvoice.svg',
+        displayName: 'Doc2App Approval Trigger',
+        name: 'approvalTrigger',
+        icon: 'file:approval.svg',
         group: ['trigger'],
         version: 1,
         subtitle: '={{$parameter["event"]}}',
         description: 'Handle Export Invoice events via webhooks',
         defaults: {
-            name: 'Approval InvoiceTrigger',
+            name: 'Approval Trigger',
             color: '#6ad7b9',
         },
         inputs: [],
         outputs: ['main'],
-        credentials: [],
+        credentials: [
+            {
+                name: 'Doc2AppApi',
+                required: true,
+            },
+        ],
         webhooks: [
             {
                 name: 'default',
@@ -53,15 +56,14 @@ import {
             async checkExists(this: IHookFunctions): Promise<boolean> {
                 const webhookData = this.getWorkflowStaticData('node');
                 const webhookUrl = this.getNodeWebhookUrl('default');
+                const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
+                const api_key = credentials.apiKey;
 
-                console.info('in checkExists function');
-
-                let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/triggers/get_trigger_by_url?url=' + encodeURIComponent(webhookUrl!);
-
+                let uri = api.get_trigger_by_url + encodeURIComponent(webhookUrl!);
                 const options: OptionsWithUri = {
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
+                        'X-API-KEY': api_key,
                     },
                     method: 'GET',
                     body:  {},
@@ -78,33 +80,19 @@ import {
                 }
 
                 if(webhook.data && webhook.data.id && webhook.data.trigger_url === webhookUrl) {
-                    console.info('================================');
                     console.info('found : ' + webhook.data.id);
-                    console.info('=================================');
                     webhookData.webhookId = webhook.data.id;
                     return true;
                 }
-
-                // const reponse = await exportInvoiceApiRequest.call(this, 'GET', '/triggers/get_triggers/', {}, {});
-                // for (const exportConf of reponse.data) {
-                //     if (exportConf.data && exportConf.data.id) {
-                //         console.info('================================');
-                //         console.info('found : ' + exportConf.id);
-                //         console.info('=================================');
-                //         webhookData.webhookId = exportConf.id;
-                //         return true;
-                //     }
-                // }
                 return false;
             },
             async create(this: IHookFunctions): Promise<boolean> {
                 const webhookUrl = this.getNodeWebhookUrl('default');
                 const webhookData = this.getWorkflowStaticData('node');
+                const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
+                const api_key = credentials.apiKey;
 
-                console.info('in create function');
-
-                let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/triggers/create_update_trigger';
-
+                let uri = api.create_update_trigger;
                 const formData = {
                     doc_type: 'INVOICE',
                     trigger_url : webhookUrl,
@@ -115,7 +103,7 @@ import {
                 const options: OptionsWithUri = {
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
+                        'X-API-KEY': api_key,
                     },
                     method: 'POST',
                     formData ,
@@ -136,11 +124,11 @@ import {
             },
             async delete(this: IHookFunctions): Promise<boolean> {
                 const webhookData = this.getWorkflowStaticData('node');
-
-                console.info('in delete function');
+                const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
+                const api_key = credentials.apiKey;
 
                 if(webhookData.webhookId) {
-                    let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/triggers/remove_trigger';
+                    let uri = api.remove_trigger;
     
                     const formData = {
                         id: webhookData.webhookId as number,
@@ -149,7 +137,7 @@ import {
                     const options: OptionsWithUri = {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
+                            'X-API-KEY': api_key,
                         },
                         method: 'DELETE',
                         formData ,
@@ -178,8 +166,6 @@ import {
 
     
     async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
-
-        console.info('My webhook worked ');
         const req = this.getRequestObject();
         return {
             workflowData: [
