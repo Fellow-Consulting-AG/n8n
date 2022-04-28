@@ -39,15 +39,7 @@ export async function exportInvoiceApiRequest(this: IExecuteFunctions | IWebhook
     try {
         return await this.helpers.request!(options);
     } catch (error : any) {
-
-        console.info('Some internal error occur. Please try again later');
-        console.info(error);
-
-        // if (error.response) {
-        //     console.info();
-            // const errorMessage = error.response.body.message || error.response.body.description || error.message;
-            // throw new Error(`Autopilot error response [${error.statusCode}]: ${errorMessage}`);
-        // }
-        throw error;
+        console.error(error);
+        throw new Error('Some internal error occur. Please try again later')
     }
 }
