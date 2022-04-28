@@ -22,7 +22,7 @@ export class StatusTrigger implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Doc2App Status Trigger',
         name: 'statusTrigger',
-        icon: 'file:status_event.svg',
+        icon: 'file:events.svg',
         group: ['trigger'],
         version: 1,
         subtitle: '={{$parameter["event"]}}',
