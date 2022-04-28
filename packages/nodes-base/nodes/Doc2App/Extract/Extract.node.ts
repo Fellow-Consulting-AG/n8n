@@ -1,4 +1,3 @@
-import { AnyPtrRecord } from 'dns';
 import {
     IExecuteFunctions,
 } from 'n8n-core';
@@ -9,20 +8,25 @@ import {
     INodeExecutionData,
     INodeType,
     INodeTypeDescription,
+    IDataObject,
 } from 'n8n-workflow';
 
 import {
     OptionsWithUri,
 } from 'request';
 
+import {
+    api,
+} from '../GeneralHelper/Environment';
+
 export class Extract implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Extract Invoice',
+        displayName: 'Doc2App Extract Invoice',
         name: 'extract',
         icon: 'file:extract.svg',
         group: ['transform'],
         version: 1,
-        description: 'Extract Invoice (Input pdf as Binary)',
+        description: 'Send file to server for Extraction',
         defaults: {
             name: 'Extract Invoice',
             color: '#1A82e2',
@@ -30,22 +34,12 @@ export class Extract implements INodeType {
         inputs: ['main'],
         outputs: ['main'],
         credentials: [
-            // {
-            //     name: 'importInvoiceApi',
-            //     required: true,
-            // },
+            {
+                name: 'Doc2AppApi',
+                required: true,
+            },
         ],
         properties: [
-
-            // {
-            //     displayName: 'Email',
-            //     name: 'email',
-            //     type: 'string',
-            //     required: true,
-                
-            //     default:'',
-            //     description:'Primary email for the contact',
-            // },
             {
 				displayName: 'Binary Property',
 				
@@ -70,7 +64,8 @@ export class Extract implements INodeType {
             const binaryData = item[binaryPropertyName] as IBinaryData;
             binaryData.fileName = 'invoice_node.pdf';
             const dataBuffer = (await this.helpers.getBinaryDataBuffer(i, binaryPropertyName));
-
+            const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
+            const api_key = credentials.apiKey;
 
             const formData = {
                 files: [{
@@ -82,12 +77,12 @@ export class Extract implements INodeType {
                 }]
             };
 
-            let uri = process.env.APP_N8N_DOC2_SERVICE_URL + '/document/process_documents';
+            let uri = api.process_documents;
             
             const options: OptionsWithUri = {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'X-API-KEY': process.env.APP_N8N_DOC2_API_KEY,
+                    'X-API-KEY': api_key,
                 },
                 method: 'POST',
                 body:  formData ,
