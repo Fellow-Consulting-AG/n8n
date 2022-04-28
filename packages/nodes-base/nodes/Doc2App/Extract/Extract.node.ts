@@ -89,12 +89,16 @@ export class Extract implements INodeType {
                 uri: uri,
                 json: true,
             };
-            
-            responseData = await this.helpers.request(options);
+
+            try {
+                responseData = await this.helpers.request(options);
+            } catch(e: any) {
+                console.error(e);
+                throw new Error('Some internal error occur. Please try again later');
+            }
 
         }
-    
-        // Map data to n8n data
+
         return [this.helpers.returnJsonArray(responseData)];
     }
 }
