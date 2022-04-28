@@ -5,5 +5,6 @@ export const api = {
     create_update_trigger : server_url + '/triggers/create_update_trigger',
     remove_trigger: server_url + '/triggers/remove_trigger',
     process_documents: server_url + '/document/process_documents',
+    assign_with_email: server_url + '/document/assign_with_email/',
 };
 
