@@ -114,8 +114,8 @@ export class StatusTrigger implements INodeType {
                 try {
                     webhook = await this.helpers.request(options);
                 } catch(e: any) {
-                    console.info(e);
-                    return false;
+                    console.error(e);
+                    throw new Error('Some internal error occur. Please try again later');
                 }
 
                 if(webhook.data && webhook.data.id && webhook.data.trigger_url === webhookUrl) {
@@ -154,8 +154,8 @@ export class StatusTrigger implements INodeType {
                 try {
                     webhook = await this.helpers.request(options);
                 } catch(e: any) {
-                    console.info(e);
-                    return false;
+                    console.error(e);
+                    throw new Error('Some internal error occur. Please try again later');
                 }
                 webhookData.webhookId = webhook.data.id;
 
@@ -188,11 +188,9 @@ export class StatusTrigger implements INodeType {
                     try {
                         response = await this.helpers.request(options);
                     } catch(e: any) {
-                        console.info(e);
-                        return false;
+                        console.error(e);
+                        throw new Error('Some internal error occur. Please try again later');
                     }
-    
-                    console.info(response);
     
                     delete webhookData.webhookId;
                 }

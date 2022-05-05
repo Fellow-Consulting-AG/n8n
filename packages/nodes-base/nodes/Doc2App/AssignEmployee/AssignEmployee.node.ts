@@ -62,8 +62,7 @@ export class AssignEmployee implements INodeType {
         const invoiceId = items[0].json.doc_id;
 
         if (!invoiceId) {
-
-            // TODO Show error to user
+            throw new Error('Invalid Document / Invalid Documnt ID');
         }
     
         const formData = {
@@ -86,7 +85,8 @@ export class AssignEmployee implements INodeType {
         try {
             responseData = await this.helpers.request(options);
         } catch(e: any) {
-            console.info(e);
+            console.error(e);
+            throw new Error('Some internal error occur. Please try again later');
         }
         return [this.helpers.returnJsonArray(responseData)];
     }
