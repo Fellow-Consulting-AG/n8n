@@ -57,5 +57,7 @@ export function filterTemplateNodes(nodes: ITemplatesNode[]) {
 }
 
 export function setPageTitle(title: string) {
+	title = title.replace("n8n -", "");
+	title = title.replace("n8n", "");
 	window.document.title = title;
 }
