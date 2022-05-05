@@ -8,7 +8,7 @@
 	"resources": {
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.switch/"
+				"url": "https://docs.polydocs.io/workflow/integrations/core-nodes/n8n-nodes-base.switch/"
 			}
 		],
 		"generic": [

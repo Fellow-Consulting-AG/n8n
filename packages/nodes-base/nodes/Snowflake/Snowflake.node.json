@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/snowflake"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/snowflake"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.snowflake/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.snowflake/"
 			}
 		]
 	}

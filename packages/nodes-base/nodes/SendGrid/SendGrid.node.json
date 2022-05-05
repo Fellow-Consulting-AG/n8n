@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/sendGrid"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/sendGrid"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.sendGrid/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.sendGrid/"
 			}
 		]
 	}

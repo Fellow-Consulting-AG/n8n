@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/crateDb"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/crateDb"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.crateDb/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.crateDb/"
 			}
 		],
 		"generic": [

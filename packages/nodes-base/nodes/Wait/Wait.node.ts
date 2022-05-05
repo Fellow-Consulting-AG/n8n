@@ -226,7 +226,7 @@ export class Wait implements INodeType {
 			//         resume:webhook
 			// ----------------------------------
 			{
-				displayName: 'The webhook URL will be generated at run time. It can be referenced with the <strong>$resumeWebhookUrl</strong> variable. Send it somewhere before getting to this node. <a href="https://docs.n8n.io/nodes/n8n-nodes-base.wait?utm_source=n8n_app&utm_medium=node_settings_modal-credential_link&utm_campaign=n8n-nodes-base.wait" target="_blank">More info</a>',
+				displayName: 'The webhook URL will be generated at run time. It can be referenced with the <strong>$resumeWebhookUrl</strong> variable. Send it somewhere before getting to this node. <a href="https://docs.polydocs.io/workflow/integrations/core-nodes/n8n-nodes-base.wait?utm_source=n8n_app&utm_medium=node_settings_modal-credential_link&utm_campaign=n8n-nodes-base.wait" target="_blank">More info</a>',
 				name: 'webhookNotice',
 				type: 'notice',
 				displayOptions: {

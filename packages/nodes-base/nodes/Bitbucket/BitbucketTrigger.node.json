@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/bitbucket"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/bitbucket"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.bitbucketTrigger/"
+				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.bitbucketTrigger/"
 			}
 		]
 	}

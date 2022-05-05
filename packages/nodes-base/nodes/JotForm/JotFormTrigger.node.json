@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/jotForm"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/jotForm"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.jotFormTrigger/"
+				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.jotFormTrigger/"
 			}
 		]
 	}

@@ -72,7 +72,7 @@ export const groupDescription: INodeProperties[] = [
 		displayName: 'Group ID',
 		name: 'id',
 		type: 'string',
-		description: 'Group to update. Specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>.',
+		description: 'Group to update. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
 		default: '',
 		required: true,
 		displayOptions: {
@@ -90,7 +90,7 @@ export const groupDescription: INodeProperties[] = [
 		displayName: 'Group ID',
 		name: 'id',
 		type: 'string',
-		description: 'Group to delete. Specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>.',
+		description: 'Group to delete. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
 		default: '',
 		required: true,
 		displayOptions: {
@@ -108,7 +108,7 @@ export const groupDescription: INodeProperties[] = [
 		displayName: 'Group ID',
 		name: 'id',
 		type: 'string',
-		description: 'Group to retrieve. Specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>.',
+		description: 'Group to retrieve. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
 		default: '',
 		required: true,
 		displayOptions: {

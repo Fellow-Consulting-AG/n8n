@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/wekan"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/wekan"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.wekan/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/workflow-nodes-base.wekan/"
 			}
 		]
 	}

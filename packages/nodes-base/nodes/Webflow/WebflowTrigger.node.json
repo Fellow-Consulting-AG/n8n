@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/webflow"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/webflow"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.webflowTrigger/"
+				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.webflowTrigger/"
 			}
 		]
 	}

@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/acuityScheduling"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/acuityScheduling"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.acuitySchedulingTrigger/"
+				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.acuitySchedulingTrigger/"
 			}
 		]
 	}

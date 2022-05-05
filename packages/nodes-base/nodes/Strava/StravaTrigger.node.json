@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/strava"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/strava"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.stravaTrigger/"
+				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.stravaTrigger/"
 			}
 		]
 	}

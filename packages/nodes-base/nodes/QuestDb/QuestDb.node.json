@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/questDb"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/questDb"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.questDb/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.questDb/"
 			}
 		],
 		"generic": [

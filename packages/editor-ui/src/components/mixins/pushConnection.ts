@@ -239,7 +239,7 @@ export const pushConnection = mixins(
 						this.$titleSet(workflow.name as string, 'IDLE');
 						this.$showToast({
 							title: 'Workflow started waiting',
-							message: `${action} <a href="https://docs.n8n.io/nodes/n8n-nodes-base.wait/" target="_blank">More info</a>`,
+							message: `${action} <a href="https://docs.polydocs.io/workflow/integrations/core-nodes/n8n-nodes-base.wait/" target="_blank">More info</a>`,
 							type: 'success',
 							duration: 0,
 							onLinkClick: async (e: HTMLLinkElement) => {

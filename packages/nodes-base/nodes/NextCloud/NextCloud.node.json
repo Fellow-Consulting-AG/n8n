@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/nextCloud"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/nextCloud"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.nextCloud/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.nextCloud/"
 			}
 		]
 	}

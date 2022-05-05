@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/github"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/github"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.github/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.github/"
 			}
 		],
 		"generic": [

@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/gotify"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/gotify"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.gotify/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.gotify/"
 			}
 		]
 	}

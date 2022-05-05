@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/fileMaker"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/fileMaker"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.filemaker/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.filemaker/"
 			}
 		]
 	}

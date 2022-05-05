@@ -96,7 +96,7 @@ export const userDescription: INodeProperties[] = [
 		displayName: 'User ID',
 		name: 'id',
 		type: 'string',
-		description: 'User to update. Specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>.',
+		description: 'User to update. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
 		default: '',
 		required: true,
 		displayOptions: {
@@ -114,7 +114,7 @@ export const userDescription: INodeProperties[] = [
 		displayName: 'User ID',
 		name: 'id',
 		type: 'string',
-		description: 'User to delete. Specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>.',
+		description: 'User to delete. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
 		default: '',
 		required: true,
 		displayOptions: {
@@ -132,7 +132,7 @@ export const userDescription: INodeProperties[] = [
 		displayName: 'User ID',
 		name: 'id',
 		type: 'string',
-		description: 'User to retrieve. Specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>.',
+		description: 'User to retrieve. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
 		default: '',
 		required: true,
 		displayOptions: {
@@ -280,7 +280,7 @@ export const userDescription: INodeProperties[] = [
 				displayName: 'Organization Name/ID',
 				name: 'organization',
 				type: 'options',
-				description: 'Name of the organization to assign to the user. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>.',
+				description: 'Name of the organization to assign to the user. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
 				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'loadOrganizations',
@@ -472,7 +472,7 @@ export const userDescription: INodeProperties[] = [
 				displayName: 'Organization Name/ID',
 				name: 'organization',
 				type: 'options',
-				description: 'Name of the organization to assign to the user. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/nodes/expressions.html#expressions">expression</a>.',
+				description: 'Name of the organization to assign to the user. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
 				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'loadOrganizationNames',

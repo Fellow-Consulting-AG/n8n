@@ -8,13 +8,13 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/onfleet/"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/onfleet/"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.onfleetTrigger/"
+				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.onfleetTrigger/"
 			}
 		]
-	},
+	}
 }

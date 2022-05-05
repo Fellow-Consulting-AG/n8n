@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/egoi"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/egoi"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.egoi/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.egoi/"
 			}
 		]
 	}

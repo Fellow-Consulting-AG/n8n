@@ -358,7 +358,7 @@ export class DateTime implements INodeType {
 						name: 'fromFormat',
 						type: 'string',
 						default: '',
-						description: 'Format for parsing the value as a date. If unrecognized, specify the <a href="https://docs.n8n.io/nodes/n8n-nodes-base.dateTime/#faqs">format</a> for the value.',
+						description: 'Format for parsing the value as a date. If unrecognized, specify the <a href="https://docs.polydocs.io/workflow/integrations/core-nodes/n8n-nodes-base.dateTime/#faqs">format</a> for the value.',
 					},
 				],
 			},

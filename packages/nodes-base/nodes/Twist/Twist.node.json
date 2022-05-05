@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/twist"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/twist"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.twist/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/workflow-nodes-base.twist/"
 			}
 		]
 	}

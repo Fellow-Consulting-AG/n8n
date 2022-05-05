@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/bitwarden"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/bitwarden"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.bitwarden/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.bitwarden/"
 			}
 		]
 	}

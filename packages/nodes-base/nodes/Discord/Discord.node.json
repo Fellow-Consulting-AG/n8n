@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/discord"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/discord"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.discord/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.discord/"
 			}
 		]
 	}

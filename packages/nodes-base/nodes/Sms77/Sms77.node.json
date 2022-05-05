@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.n8n.io/credentials/sms77"
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/sms77"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.n8n.io/nodes/n8n-nodes-base.sms77/"
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.sms77/"
 			}
 		]
 	}
