@@ -12,7 +12,13 @@ import {
 import {
 	OptionsWithUri, OptionsWithUrl,
 } from 'request';
-import { buildOrQuery } from '../Supabase/GenericFunctions';
+
+import { contactfields, contactoperations } from './additionalFields/contactfields';
+import { accountfields, accountoperations } from './additionalFields/accountsfields';
+import { activityfields, activityoperations, activityrequired } from './additionalFields/activityfields';
+import { leadsfields, leadsoperations, leadsrequired } from './additionalFields/leadfields';
+import { deletion } from './general/functions';
+
 
 export class SugarCrm implements INodeType {
 	description: INodeTypeDescription = {
@@ -48,192 +54,33 @@ export class SugarCrm implements INodeType {
 								name: 'Company',
 								value: 'Accounts',
 							},
+							{
+								name: 'Lead',
+								value: 'Leads',
+							},
+							{
+								name: 'Activity',
+								value: 'Activities',
+							},
 					],
 					default: 'Contacts',
 					required: true,
 					description: 'Resource to consume',
 				},
-				{
-					displayName: 'Operation',
-					name: 'operation',
-					type: 'options',
-					displayOptions: {
-						show: {
-							resource: [
-									'Contacts',
-							],
-						},
-					},
-					options: [
-						{
-							name: 'Create',
-							value: 'POST',
-							description: 'Create a contact',
-						},
-						{
-							name: 'Get',
-							value: 'get',
-							description: 'Get Contacts',
-						},
-						{
-							name: 'Delete',
-							value: 'delete',
-							description: 'Delete a contact',
-						},
-					],
-					default: 'get',
-					description: 'The operation to perform.',
-				},
-				{
-					displayName: 'Operation',
-					name: 'operation',
-					type: 'options',
-					displayOptions: {
-						show: {
-							resource: [
-									'Accounts',
-							],
-						},
-					},
-					options: [
-						{
-							name: 'Create',
-							value: 'POST',
-							description: 'Create a organization',
-						},
-						{
-							name: 'Get',
-							value: 'get',
-							description: 'Get organizations',
-						},
-						{
-							name: 'Delete',
-							value: 'delete',
-							description: 'Delete a organization',
-						},
-					],
-					default: 'get',
-					description: 'The operation to perform.',
-				},
-				{
-					displayName: 'Additional Fields',
-					name: 'additionalFields',
-					type: 'collection',
-					placeholder: 'Add Field',
-					default: {},
-					displayOptions: {
-							show: {
-								resource: [
-										'Contacts',
-								],
-								operation: [
-										'POST',
-								],
-							},
-					},
-					options: [
-							{
-								displayName: 'First Name',
-								name: 'first_name',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Last Name',
-								name: 'last_name',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'E-Mail',
-								name: 'email',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Phonenumber',
-								name: 'phone',
-								type: 'string',
-								default: '',
-							},
-					],
-				},
-				{
-					displayName: 'Additional Fields',
-					name: 'additionalFields',
-					type: 'collection',
-					placeholder: 'Add Field',
-					default: {},
-					displayOptions: {
-							show: {
-								resource: [
-										'Accounts',
-								],
-								operation: [
-										'POST',
-								],
-							},
-					},
-					options: [
-							{
-								displayName: 'Name',
-								name: 'name',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Description',
-								name: 'description',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Phonenumber',
-								name: 'phone_office',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Owner',
-								name: 'ownership',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'E-Mail',
-								name: 'email',
-								type: 'string',
-								default: '',
-							},
-					],
-				},
-				{
-					displayName: 'Additional Fields',
-					name: 'additionalFields',
-					type: 'collection',
-					placeholder: 'Add Field',
-					default: {},
-					displayOptions: {
-							show: {
-								resource: [
-										'Contacts',
-										'Accounts'
-								],
-								operation: [
-										'delete',
-								],
-							},
-					},
-					options: [
-							{
-								displayName: 'ID',
-								name: 'id',
-								type: 'string',
-								default: '',
-							},
-					],
-				},
+				...contactoperations,
+				...accountoperations,
+				...leadsoperations,
+				...activityoperations,
 
+				...leadsrequired,
+				...activityrequired,
+
+				...contactfields,
+				...accountfields,
+				...leadsfields,
+				...activityfields,
+
+				...deletion,
 			],
 	};
 
@@ -258,7 +105,7 @@ export class SugarCrm implements INodeType {
 		let uriextention = resource
 		let methods = operation.toUpperCase()
 
-		if (operation == 'POST') {
+		if (operation == 'post') {
 			const additionalFields = this.getNodeParameter('additionalFields', 0) as IDataObject;
 
 			if (resource == 'Contacts') {
@@ -328,12 +175,14 @@ export class SugarCrm implements INodeType {
 	}
 }
 
+// Leads/Activities
 
 
 
 
 
-// full_module_list: {
+
+// full_module_list:
 // 	Home: 'Home',
 // 	Contacts: 'Contacts',
 // 	Accounts: 'Accounts',
@@ -475,5 +324,3 @@ export class SugarCrm implements INodeType {
 // 	DRI_Workflow_Templates: 'DRI_Workflow_Templates',
 // 	CJ_Forms: 'CJ_Forms',
 // 	CJ_WebHooks: 'CJ_WebHooks',
-// 	_hash: '6bf09067050d9fb47ad0a50b1a543fc2'
-// }
