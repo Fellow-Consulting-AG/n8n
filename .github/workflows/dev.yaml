@@ -68,7 +68,7 @@ jobs:
           git config --global user.email "benedikt.liebs@fellow-consulting.de"
           git config --global user.name "FellowFellow"
 
-          git add changelog.md ${{ env.CORE_VERSION_FILE}}
+          git add ${{ env.CORE_VERSION_FILE}}
           git tag ${{ env.NEXT_VERSION }} HEAD
           git commit -m "version update and changelog generation"
           git push
