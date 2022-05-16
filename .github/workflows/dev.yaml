@@ -1,0 +1,259 @@
+on:
+  push:
+    branches:
+       - dev
+    paths-ignore:
+      - version.txt
+      - changelog.md
+
+ 
+env:
+  # Kubernetes Envs
+  KubernetesFile: dev/n8n.yaml
+  
+  # Docker Envs
+  DockerPort: 8080
+  DockerImageName: n8n
+
+  # General Envs
+  CORE_VERSION_FILE: version.txt
+  # Stuff for email-notification if fail
+  MAIL_RECIPIENTS: benedikt.liebs@fellow-consulting.de #, daniel.jordan@fellow-consulting.de, asad.usman@fellow-consulting.de, simone.ernst@fellow-consulting.de
+
+  dryrun: false
+
+  env-file: |
+    ${{ secrets.DEV_ENVS }} 
+
+
+
+
+name: dev-n8n-workflow
+jobs:
+
+  version-update:
+    runs-on: ubuntu-latest
+    name: version-update
+    steps:
+      
+      # get git code
+      - name: Check out source repository
+        id: checkoutsourcerepo
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GitPASSWORD }}
+          branch: dev
+      
+      - name: user controll output versions before version update and change branch
+        run: |
+          echo "core version:"
+          cat ${{ env.CORE_VERSION_FILE}}
+          
+      # Generates the core version based on the core-version file
+      - name: Generate core-versions
+        uses: HardNorth/github-version-generate@v1.1.0
+        with:
+          version-source: file
+          version-file: ${{ env.CORE_VERSION_FILE}}
+          next-version-increment-patch: ${{ contains(env.VERSION_FRAGMENT, 'patch') }}
+          next-version-increment-minor: ${{ contains(env.VERSION_FRAGMENT, 'minor') }}
+          next-version-increment-major: ${{ contains(env.VERSION_FRAGMENT, 'major') }}
+          
+      - name: Update the version files
+        run: |
+          echo ${{ env.NEXT_VERSION }} > ${{ env.CORE_VERSION_FILE}}
+
+      - name: push to git
+        run: |
+          git config --global user.email "benedikt.liebs@fellow-consulting.de"
+          git config --global user.name "FellowFellow"
+
+          git add changelog.md ${{ env.CORE_VERSION_FILE}}
+          git tag ${{ env.NEXT_VERSION }} HEAD
+          git commit -m "version update and changelog generation"
+          git push
+          git push --tags
+      
+
+  build-docker:
+    needs: ["version-update"]
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version: [3.9]
+    name: build-docker
+    steps:
+
+      # gets the branch name and stores it in ${{ env.GIT_BRANCH_NAME }}
+      - name: Git branch name
+        id: git-branch-name
+        uses: EthanSK/git-branch-name-action@v1
+
+      # Get the branches code
+      - name: Check out source repository
+        id: pullcode
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive # checkout all submodules
+          token: ${{ secrets.GitPASSWORD }} # Token needs to have acces to the repo
+      
+      
+
+      # make sure that we are on the main branch
+      - name: submodule checkout main
+        run: |
+          git config --global pull.rebase false 
+          git submodule foreach --recursive git switch main
+          git submodule foreach --recursive git pull
+
+   
+
+      # Generates the core version based on the core-version file
+      - name: Generate core-versions
+        uses: HardNorth/github-version-generate@v1.1.0
+        with:
+          version-source: file
+          version-file: ${{ env.CORE_VERSION_FILE}}
+          next-version-increment-patch: ${{ contains(env.VERSION_FRAGMENT, 'patch') }}
+          next-version-increment-minor: ${{ contains(env.VERSION_FRAGMENT, 'minor') }}
+          next-version-increment-major: ${{ contains(env.VERSION_FRAGMENT, 'major') }}
+
+      - name: update-version file
+        run: echo ${{ env.NEXT_VERSION }} > ${{ env.CORE_VERSION_FILE}}
+
+      # installs docker doctl (auto login) kubectl (auto connect)
+      - name: install required packages
+        uses: ./.github/helper/actions/install-required-packages
+        with:
+          DigitalOceanAccessToken: ${{ secrets.DigitalOceanAccessToken }}
+          KubernetesTag: ${{ secrets.KubernetesTag }}
+
+      # Install python3-venv and create new venv - install requirements.txt
+      - name: install python & create venv
+        uses: ./.github/helper/actions/setup-python
+      
+      # Create the env-file which we use to run the docker
+      - name: create .env
+        run : echo "${{ env.env-file }}" > .env
+
+      ##################
+      ### docker build with cache
+      ##################
+
+      # So now you can use Actions' own caching!
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      # build docker with buildx to use the cache and create a new one as well
+      - name: Build
+        run: |
+          which docker
+          docker buildx create --use
+          echo "---"
+          docker buildx build --tag ${{ env.DockerImageName }}:${{ env.NEXT_VERSION }} --output type=docker --cache-from type=local,src=/tmp/.buildx-cache --cache-to type=local,dest=/tmp/.buildx-cache-new .
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+      # Push the docker image to doctl container-registry
+      - name: push to doctl
+        env:
+          Version: ${{ env.NEXT_VERSION }}
+        uses: ./.github/helper/actions/push-docker-image
+
+      # print the docker logs (on fail) to check if it ran correctly
+      - name: error handling
+        if: ${{ failure() }}
+        run: |
+          echo "------------------ DOCKER LOGS ------------------" >> logs.log
+          docker logs -t "$( cat containerid )" >> logs.log
+
+  update-kubernetes-cluster:
+    needs: ['build-docker']
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version: [3.9]
+    name: update-kubernetes-cluster
+    steps:
+    
+      # gets the branch name and stores it in ${{ env.GIT_BRANCH_NAME }}
+      - name: Git branch name
+        id: git-branch-name
+        uses: EthanSK/git-branch-name-action@v1
+
+      # Get the branches code
+      - name: Check out source repository
+        id: pullcode
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive # checkout all submodules
+          token: ${{ secrets.GitPASSWORD }} # Token needs to have acces to the repo
+
+      # make sure that we are on the main branch
+      - name: submodule checkout main
+        run: |
+          git config --global pull.rebase false 
+          git submodule foreach --recursive git switch main
+          git submodule foreach --recursive git pull
+
+      # Generates the core version based on the core-version file
+      - name: Generate core-versions
+        uses: HardNorth/github-version-generate@v1.1.0
+        with:
+          version-source: file
+          version-file: ${{ env.CORE_VERSION_FILE}}
+          next-version-increment-patch: ${{ contains(env.VERSION_FRAGMENT, 'patch') }}
+          next-version-increment-minor: ${{ contains(env.VERSION_FRAGMENT, 'minor') }}
+          next-version-increment-major: ${{ contains(env.VERSION_FRAGMENT, 'major') }}
+      
+      # installs docker doctl (auto login) kubectl (auto connect)
+      - name: install required packages
+        uses: ./.github/helper/actions/install-required-packages
+        with:
+          DigitalOceanAccessToken: ${{ secrets.DigitalOceanAccessToken }}
+          KubernetesTag: ${{ secrets.KubernetesTag }}
+
+      # Install python3-venv and create new venv - install requirements.txt
+      - name: install python & create venv
+        uses: ./.github/helper/actions/setup-python
+
+      - name: install python package - packaging
+        run: |
+          source venv/bin/activate
+          pip install packaging
+          pip install PyYaml
+      
+      # Create the env-file which we use to run the docker
+      - name: create .env
+        run : echo "${{ env.env-file }}" > .env
+      
+      # Deploy on Kubernetes
+      - name: get-kubernetes-files and deploy
+        env:
+          Version: ${{ env.NEXT_VERSION }}
+        uses: ./.github/helper/actions/deploy-on-kubernetes
+        with:
+          dryrun: ${{ env.dryrun }}
+
+      - name: commit changes into kubernetes_hints submodule
+        uses: ./.github/helper/actions/commit-deployment-files
+        with:
+          dryrun: ${{ env.dryrun }}
+        continue-on-error: true
+
+      - name: delete old versions
+        env: 
+          Version: ${{ env.NEXT_VERSION }}
+        run: |
+          source venv/bin/activate
+          python3 .github/helper/scripts/delete_old_tags.py
+      
+

@@ -1,0 +1,6 @@
+[submodule ".github/helper"]
+	path = .github/helper
+	url = https://github.com/Fellow-Consulting-AG/deployment-helper
+[submodule ".github/kubernetes_hints"]
+	path = .github/kubernetes_hints
+	url = https://github.com/Fellow-Consulting-AG/kuberneties_hints
