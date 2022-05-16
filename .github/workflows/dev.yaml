@@ -155,7 +155,7 @@ jobs:
           which docker
           docker buildx create --use
           echo "---"
-          docker buildx build --tag ${{ env.DockerImageName }}:${{ env.NEXT_VERSION }} --output type=docker --cache-from type=local,src=/tmp/.buildx-cache --cache-to type=local,dest=/tmp/.buildx-cache-new .
+          docker buildx build --tag ${{ env.DockerImageName }}:${{ env.NEXT_VERSION }} -f docker/images/n8n-custom/Dockerfile --output type=docker --cache-from type=local,src=/tmp/.buildx-cache --cache-to type=local,dest=/tmp/.buildx-cache-new .
 
       - name: Move cache
         run: |
