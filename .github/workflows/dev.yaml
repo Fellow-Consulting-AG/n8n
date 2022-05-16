@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.GitPASSWORD }}
-          branch: dev
+          ref: dev
       
       - name: user controll output versions before version update and change branch
         run: |
