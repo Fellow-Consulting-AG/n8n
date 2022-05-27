@@ -120,6 +120,11 @@
 					<span slot="title" class="item-title-root">{{ $locale.baseText('settings') }}</span>
 				</n8n-menu-item>
 
+				<n8n-menu-item index="apps" v-if="currentUser">
+					<img :src="basePath + 'apps.svg'" class="icon" alt="apps" style="width:21px;"/>&nbsp;
+					<span slot="title" class="item-title-root">Apps</span> 
+				</n8n-menu-item>
+
 				<el-submenu index="help" class="help-menu" title="Help" popperClass="sidebar-popper">
 					<template slot="title">
 						<font-awesome-icon icon="question"/>&nbsp;
@@ -577,6 +582,8 @@ export default mixins(
 					else {
 						this.$router.push('/settings/personal');
 					}
+				} else if (key === 'apps') {
+					window.open(process.env.VUE_APP_DOC2_APPS_URL);
 				}
 			},
 		},
