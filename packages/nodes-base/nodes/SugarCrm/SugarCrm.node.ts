@@ -24,7 +24,7 @@ export class SugarCrm implements INodeType {
 	description: INodeTypeDescription = {
 			displayName: 'SugarCrm',
 			name: 'sugarCrm',
-			icon: 'file:sugarCrm.svg',
+			icon: 'file:sugarcrm.svg',
 			group: ['transform'],
 			version: 1,
 			description: 'Consume SugarCrm API',
