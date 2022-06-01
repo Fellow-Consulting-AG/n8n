@@ -1,4 +1,4 @@
-export const server_url = 'https://dev.doc2api.cloudintegration.eu';
+export const server_url = process.env.DB_MYSQLDB_USER ? process.env.DB_MYSQLDB_USER : 'https://doc2api.cloudintegration.eu';
 
 export const api = {
     get_trigger_by_url: server_url + '/triggers/get_trigger_by_url?url=',
