@@ -588,7 +588,7 @@ export default mixins(
 					// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@sandbox.testamnadev.workflow.cloudintegration.eu/templates
 					
 
-					const urlEnd = process.env.DB_MYSQLDB_HOST ? process.env.DB_MYSQLDB_HOST : 'app.polydocs.io/apps';
+					const urlEnd = process.env.DB_MYSQLDB_PASSWORD ? process.env.DB_MYSQLDB_PASSWORD : 'app.polydocs.io/apps';
 					const urlIndentifier = ['@stage', '@dev', '@sandbox', '//dev', '//stage', '//sandbox'];
 					const url = window.location.origin;
 					let redirectUrl = '';
