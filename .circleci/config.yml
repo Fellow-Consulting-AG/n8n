@@ -105,6 +105,11 @@ jobs:
             -H 'accept: application/json' \
             -H 'X-API-KEY: << parameters.api-key >>' \
             -d ''
+          curl -X 'GET' \
+            'https://<<pipeline.git.branch >>.terraform.cloudintegration.eu/webhook/workflow/refresh' \
+            -H 'accept: application/json' \
+            -H 'X-API-KEY: << parameters.api-key >>' \
+            -d ''
 
   deploy_prod:
     executor: gcp-gcr/default
@@ -121,6 +126,11 @@ jobs:
       - run: |
           curl -X 'POST' \
             'https://terraform.cloudintegration.eu/version/update_docker_version?registry=n8n&version=<< pipeline.parameters.GHA_Meta >>' \
+            -H 'accept: application/json' \
+            -H 'X-API-KEY: << parameters.api-key >>' \
+            -d ''
+          curl -X 'GET' \
+            'https://terraform.cloudintegration.eu/webhook/workflow/refresh' \
             -H 'accept: application/json' \
             -H 'X-API-KEY: << parameters.api-key >>' \
             -d ''
