@@ -8,5 +8,5 @@ a docker image.
 
 Execute the following in the n8n root folder:
 ```bash
-docker build -t n8n-custom -f docker/images/n8n-custom/Dockerfile .
+docker build -f docker/images/n8n-custom/Dockerfile . -t registry.digitalocean.com/cloudintegration/n8n:sandbox-quickfix
 ```
