@@ -152,55 +152,40 @@ workflows:
             - GitHub
           tag: << pipeline.parameters.GHA_Meta >>
           image: cloudintegration/n8n
-
-  deploy-dev:
-    when:
-      and: 
-        - equal: [ "dev", << pipeline.git.branch >> ]
-        - equal: [ "CircleCI", << pipeline.parameters.GHA_Action >> ]
-
-    jobs: 
+ 
       - deploy:
           tag: << pipeline.parameters.GHA_Meta >>
           api-key: G3u0D4Mv8GtstkHIV7nUcA8WmgBUuXbdV7LdcdXBVc3zNioE9Phm3b3cy8mBGEIITkpIfB4STos9g8jqTr67sGFNigy8EnjHkoYtpHyTO3DYQDFpDqbJadN2wr8Q5pKG
           requires:
             - build-and-push
+          filter:
+            branches:
+              only: dev
 
-  deploy-stage:
-    when:
-      and: 
-        - equal: [ "stage", << pipeline.git.branch >> ]
-        - equal: [ "CircleCI", << pipeline.parameters.GHA_Action >> ]
-        
-    jobs: 
       - deploy:
           tag: << pipeline.parameters.GHA_Meta >>
           api-key: UMkgUNzDoZNmlWBEBOELOGtEmd5w66UleOZIUM9JfGrM4OeAH3dDkhO1BwJhYeJ9SDMV7Ul94P4eRSK3uk4DWr42ly7aVehbwwOm6Mu0hVHzI0utlaQZqpKtLS0hBGop
           requires:
             - build-and-push
+          filter:
+            branches:
+              only: stage
 
-  deploy-sandbox:
-    when:
-      and: 
-        - equal: [ "sandbox", << pipeline.git.branch >> ]
-        - equal: [ "CircleCI", << pipeline.parameters.GHA_Action >> ]
-        
-    jobs: 
       - deploy:
           tag: << pipeline.parameters.GHA_Meta >>
           api-key: hMQ1Qdc9hAMWGiiwlgVBvW6wbaB148Zq9f4j8fMdfLHFDUqACnCRbyCRgCFvP5uFHpLFAEplIANeJkNeeuFDBaLkM2HEvEcaZ0a3kk0lfkqfPd58l8G6LE10vyyOOj6N
           requires:
             - build-and-push
+          filter:
+            branches:
+              only: sandbox
 
-  deploy-prod:
-    when:
-      and: 
-        - equal: [ "prod", << pipeline.git.branch >> ]
-        - equal: [ "CircleCI", << pipeline.parameters.GHA_Action >> ]
-        
-    jobs: 
       - deploy_prod:
           tag: << pipeline.parameters.GHA_Meta >>
           api-key: hMQ1Qdc9hAMWGiiwlgVBvW6wbaB148Zq9f4j8fMdfLHFDUqACnCRbyCRgCFvP5uFHpLFAEplIANeJkNeeuFDBaLkM2HEvEcaZ0a3kk0lfkqfPd58l8G6LE10vyyOOj6N
           requires:
             - build-and-push
+          filter:
+            branches:
+              only: prod
+
