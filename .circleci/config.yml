@@ -70,19 +70,13 @@ jobs:
           image: << parameters.image >>
           registry: << parameters.registry >>
           tag: << pipeline.parameters.GHA_Meta >>
-          dockerfile: dockerfile
+          dockerfile: docker/images/n8n-custom/Dockerfile
           use-buildkit: true
           cache_from: "<< parameters.registry >>/<< parameters.image >>:latest"
           extra_build_args: "--build-arg BUILDKIT_INLINE_CACHE=1"
       - run: docker tag << parameters.registry >>/<< parameters.image >>:<< pipeline.parameters.GHA_Meta >> << parameters.registry >>/<< parameters.image >>:<< pipeline.git.branch >>-latest
 
       - run: git clone https://FellowFellow:$TOKEN@github.com/Fellow-Consulting-AG/envs /home/circleci/project/envs
-      - run: docker run --env-file /home/circleci/project/envs/<< pipeline.git.branch >>/n8n.env --entrypoint="/db-upgrade.sh" << parameters.registry >>/<< parameters.image >>:<< pipeline.parameters.GHA_Meta >>
-
-      - run:
-          name: Docker logs
-          when: on_fail
-          command: docker logs $(docker ps -q) 
     
       - docker/push:
           image: << parameters.image >>
@@ -111,7 +105,7 @@ jobs:
             -H 'accept: application/json' \
             -H 'X-API-KEY: << parameters.api-key >>' \
             -d ''
-            
+
   deploy_prod:
     executor: gcp-gcr/default
     parameters:
