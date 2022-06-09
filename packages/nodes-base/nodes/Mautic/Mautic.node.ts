@@ -625,6 +625,7 @@ export class Mautic implements INodeType {
 							body.company = this.getNodeParameter('company', i) as string;
 							body.position = this.getNodeParameter('position', i) as string;
 							body.title = this.getNodeParameter('title', i) as string;
+							body.optin_status = this.getNodeParameter('optin_status', i) as string;
 						} else {
 							const json = validateJSON(this.getNodeParameter('bodyJson', i) as string);
 							if (json !== undefined) {

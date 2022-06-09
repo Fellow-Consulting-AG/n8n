@@ -1,0 +1,104 @@
+# on push or trigger -> if contatiner tag is allready there -> hotfix or on dev version update
+on:
+  push:
+    branches: 
+      - dev
+      - stage
+      - sandbox
+      - prod
+    paths-ignore:
+      - version.txt
+
+
+name: devops-workflow
+jobs:
+
+  version:
+    runs-on: ubuntu-latest
+    name: version
+    outputs:
+      new-version: ${{ steps.output.outputs.new-version }}
+    steps:
+
+      - name: Turnstyle
+        uses: softprops/turnstyle@v1
+        with:
+          abort-after-seconds: 60
+        env:
+          GITHUB_TOKEN: ${{ secrets.GitPASSWORD }}
+
+      # gets the branch name and stores it in ${{ env.GIT_BRANCH_NAME }}
+      - name: Git branch name
+        id: git-branch-name
+        uses: EthanSK/git-branch-name-action@v1
+
+      # get git code
+      - name: Check out source repository
+        id: checkoutsourcerepo
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GitPASSWORD }}
+          ref: ${{ github.ref }} #makes sure it always checksout newest code on the branch
+
+      # this script checks if the branch name is dev -> version update at patch 
+      # if a docker tag is allready been pushed a hotfix is requested
+      # if no docker tag is found then dont version update
+      - name: check what version action needs to be made 
+        id: check-action
+        run: |
+          echo $GITHUB_REF_NAME
+
+          export ACTION=pass
+          if echo $GITHUB_REF_NAME | grep -q "^dev$"; then
+            echo "branch is dev version update required!"
+            export ACTION=patch
+          else
+            if git ls-remote --tags origin | grep -q "$GITHUB_REF_NAME-$(cat version.txt)$"; then
+                echo "-> hotfix required"
+                export ACTION=hotfix
+            else
+                echo "-> no version update required"
+            fi
+          fi
+
+          echo "::set-output name=version-action::$ACTION"
+
+      # Generates the core version based on the core-version file
+      - name: Generate core-versions
+        id: generate_num
+        if: ${{ steps.check-action.outputs.version-action != 'pass' }}
+        env:
+          ACTION: ${{ steps.check-action.outputs.version-action }}
+        run: |
+          sudo apt install python3 >> /dev/null
+          echo "::set-output name=old-version::$GITHUB_REF_NAME-$(cat version.txt)"
+
+          python3 .github/version.py
+
+      - name: set-output
+        id: output
+        run: |
+          echo "::set-output name=new-version::$GITHUB_REF_NAME-$(cat version.txt)"
+          echo "new-version = $GITHUB_REF_NAME-$(cat version.txt)"
+
+      - name: push to git
+        run: |
+          git config --global user.email "benedikt.liebs@fellow-consulting.de"
+          git config --global user.name "FellowFellow"
+
+          git tag "${{ steps.output.outputs.new-version }}" HEAD
+          git push --tags
+          if [[  ${{ steps.check-action.outputs.version-action }} != 'pass' ]]; then
+            echo "executing push"
+            git add version.txt
+            git commit -m "[ci skip] version update"
+            git push
+          fi
+        
+      - name: Trigger CircleCI
+        id: CircleCI
+        uses: CircleCI-Public/trigger-circleci-pipeline-action@v1.0.4
+        with:
+          GHA_Meta: ${{ steps.output.outputs.new-version }}
+        env:
+          CCI_TOKEN: 24ca132d8b9103a1646f8e8e349431f7d7f0595e

@@ -1,4 +1,19 @@
-export const server_url = 'https://dev.doc2api.cloudintegration.eu';
+export function getServerURL() {
+    const urlIndentifier = ['stage', 'dev', 'sandbox'];
+    let prefix = process.env.DB_MYSQLDB_USER ? process.env.DB_MYSQLDB_USER : 'prod';
+    let serverUrl = '';
+
+    Array.from(urlIndentifier).forEach((value: string, index: number) => {
+        if (prefix === value && value !== 'prod') {
+            prefix = prefix + '.';
+        }
+    });
+
+    serverUrl = 'https://' + prefix +'doc2api.cloudintegration.eu';
+    return serverUrl;
+}
+
+export const server_url = getServerURL();
 
 export const api = {
     get_trigger_by_url: server_url + '/triggers/get_trigger_by_url?url=',

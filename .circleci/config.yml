@@ -1,0 +1,230 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@1.5.0
+  k8s: digitalocean/k8s@0.1.1
+  gcp-gcr: circleci/gcp-gcr@0.7.1
+  kubernetes: circleci/kubernetes@0.11.0
+  digitalocean: digitalocean/cli@0.1.1
+  semantic-release: proxyco/semantic-release@4.0.0
+  docker: circleci/docker@2.1.1
+  slack: circleci/slack@4.4.4
+
+parameters:
+  GHA_Actor:
+    type: string
+    default: ""
+  GHA_Action:
+    type: string
+    default: ""
+  GHA_Event:
+    type: string
+    default: ""
+  GHA_Meta:
+    type: string
+    default: ""
+
+
+jobs: 
+  empty:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - run: echo << pipeline.parameters.GHA_Meta >>
+
+# Build and push Docker image to Registry
+  build-and-push:
+    executor: docker/docker
+    parameters:
+      tag:
+        description: |
+          Tag to use for image.
+        type: string
+      registry:
+        description: |
+          Registry to use for image.
+        type: string
+        default: registry.digitalocean.com
+      image:
+        description: |
+          Image name.
+        type: string
+    environment:
+      GIT_TOKEN: TOKEN
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+          version: 20.10.11
+
+      - checkout
+      - run: echo << pipeline.parameters.GHA_Meta >>  
+      - attach_workspace:
+          at: /home/circleci/project
+
+      - digitalocean/install
+      - digitalocean/initialize:
+          digitalocean-access-token: DIGITALOCEAN_ACCESS_TOKEN
+      - run: doctl registry login
+
+      - docker/build:
+          image: << parameters.image >>
+          registry: << parameters.registry >>
+          tag: << pipeline.parameters.GHA_Meta >>
+          dockerfile: docker/images/n8n-custom/Dockerfile
+          use-buildkit: true
+          cache_from: "<< parameters.registry >>/<< parameters.image >>:latest"
+          extra_build_args: "--build-arg BUILDKIT_INLINE_CACHE=1"
+      - run: docker tag << parameters.registry >>/<< parameters.image >>:<< pipeline.parameters.GHA_Meta >> << parameters.registry >>/<< parameters.image >>:<< pipeline.git.branch >>-latest
+
+      - run: git clone https://FellowFellow:$TOKEN@github.com/Fellow-Consulting-AG/envs /home/circleci/project/envs
+    
+      - docker/push:
+          image: << parameters.image >>
+          registry: << parameters.registry >>
+          tag: << pipeline.parameters.GHA_Meta >>
+      - docker/push:
+          image: << parameters.image >>
+          registry: << parameters.registry >>
+          tag: << pipeline.git.branch >>-latest
+
+  deploy:
+    executor: gcp-gcr/default
+    parameters:
+
+      tag:
+        description: Tag to use for image.
+        type: string
+      api-key:
+        description: api-key
+        type: string
+
+    steps:
+      - run: |
+          curl -X 'POST' \
+            'https://<<pipeline.git.branch >>.terraform.cloudintegration.eu/version/update_docker_version?registry=n8n&version=<< pipeline.parameters.GHA_Meta >>' \
+            -H 'accept: application/json' \
+            -H 'X-API-KEY: << parameters.api-key >>' \
+            -d ''
+          curl -X 'GET' \
+            'https://<<pipeline.git.branch >>.terraform.cloudintegration.eu/webhook/workflow/refresh' \
+            -H 'accept: application/json' \
+            -H 'X-API-KEY: << parameters.api-key >>' \
+            -d ''
+
+  deploy_prod:
+    executor: gcp-gcr/default
+    parameters:
+
+      tag:
+        description: Tag to use for image.
+        type: string
+      api-key:
+        description: api-key
+        type: string
+
+    steps:
+      - run: |
+          curl -X 'POST' \
+            'https://terraform.cloudintegration.eu/version/update_docker_version?registry=n8n&version=<< pipeline.parameters.GHA_Meta >>' \
+            -H 'accept: application/json' \
+            -H 'X-API-KEY: << parameters.api-key >>' \
+            -d ''
+          curl -X 'GET' \
+            'https://terraform.cloudintegration.eu/webhook/workflow/refresh' \
+            -H 'accept: application/json' \
+            -H 'X-API-KEY: << parameters.api-key >>' \
+            -d ''
+workflows:
+  version: 2
+  display:
+    jobs:
+      - empty
+  dev:
+    when:
+      and: 
+        - or: 
+          - equal: [ "dev", << pipeline.git.branch >> ]
+        - equal: [ "CircleCI", << pipeline.parameters.GHA_Action >> ]
+    jobs: 
+    
+      # Build and push Docker image to Digitalocean Registry
+      - build-and-push:
+          context: 
+            - Digitalocean
+            - GitHub
+          tag: << pipeline.parameters.GHA_Meta >>
+          image: cloudintegration/n8n
+ 
+      - deploy:
+          tag: << pipeline.parameters.GHA_Meta >>
+          api-key: G3u0D4Mv8GtstkHIV7nUcA8WmgBUuXbdV7LdcdXBVc3zNioE9Phm3b3cy8mBGEIITkpIfB4STos9g8jqTr67sGFNigy8EnjHkoYtpHyTO3DYQDFpDqbJadN2wr8Q5pKG
+          requires:
+            - build-and-push
+
+  stage:
+    when:
+      and: 
+        - or: 
+          - equal: [ "stage", << pipeline.git.branch >> ]
+        - equal: [ "CircleCI", << pipeline.parameters.GHA_Action >> ]
+    jobs: 
+    
+      # Build and push Docker image to Digitalocean Registry
+      - build-and-push:
+          context: 
+            - Digitalocean
+            - GitHub
+          tag: << pipeline.parameters.GHA_Meta >>
+          image: cloudintegration/n8n
+ 
+      - deploy:
+          tag: << pipeline.parameters.GHA_Meta >>
+          api-key: UMkgUNzDoZNmlWBEBOELOGtEmd5w66UleOZIUM9JfGrM4OeAH3dDkhO1BwJhYeJ9SDMV7Ul94P4eRSK3uk4DWr42ly7aVehbwwOm6Mu0hVHzI0utlaQZqpKtLS0hBGop
+          requires:
+            - build-and-push
+
+  sandbox:
+    when:
+      and: 
+        - or: 
+          - equal: [ "sandbox", << pipeline.git.branch >> ]
+        - equal: [ "CircleCI", << pipeline.parameters.GHA_Action >> ]
+    jobs: 
+    
+      # Build and push Docker image to Digitalocean Registry
+      - build-and-push:
+          context: 
+            - Digitalocean
+            - GitHub
+          tag: << pipeline.parameters.GHA_Meta >>
+          image: cloudintegration/n8n
+ 
+      - deploy:
+          tag: << pipeline.parameters.GHA_Meta >>
+          api-key: hMQ1Qdc9hAMWGiiwlgVBvW6wbaB148Zq9f4j8fMdfLHFDUqACnCRbyCRgCFvP5uFHpLFAEplIANeJkNeeuFDBaLkM2HEvEcaZ0a3kk0lfkqfPd58l8G6LE10vyyOOj6N
+          requires:
+            - build-and-push
+
+  prod:
+    when:
+      and: 
+        - or: 
+          - equal: [ "prod", << pipeline.git.branch >> ]
+        - equal: [ "CircleCI", << pipeline.parameters.GHA_Action >> ]
+    jobs: 
+    
+      # Build and push Docker image to Digitalocean Registry
+      - build-and-push:
+          context: 
+            - Digitalocean
+            - GitHub
+          tag: << pipeline.parameters.GHA_Meta >>
+          image: cloudintegration/n8n
+ 
+      - deploy_prod:
+          tag: << pipeline.parameters.GHA_Meta >>
+          api-key: hMQ1Qdc9hAMWGiiwlgVBvW6wbaB148Zq9f4j8fMdfLHFDUqACnCRbyCRgCFvP5uFHpLFAEplIANeJkNeeuFDBaLkM2HEvEcaZ0a3kk0lfkqfPd58l8G6LE10vyyOOj6N
+          requires:
+            - build-and-push
+
+

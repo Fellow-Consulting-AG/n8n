@@ -17,3 +17,4 @@ packages/*/package-lock.json
 
 k8s/*
 env.txt
+.lh

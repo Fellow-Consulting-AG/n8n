@@ -50,6 +50,8 @@ services:
       - NODE_ENV=production
       - N8N_PATH
       - WEBHOOK_URL=https://${DOMAIN_NAME}${N8N_PATH}
+      - VUE_APP_DOC2_APPS_URL=https://${DOMAIN_NAME}doc2app.cloudintegration.eu/apps
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${DATA_FOLDER}/.n8n:/home/node/.n8n
+

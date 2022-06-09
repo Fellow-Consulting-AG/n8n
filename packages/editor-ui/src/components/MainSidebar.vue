@@ -583,7 +583,32 @@ export default mixins(
 						this.$router.push('/settings/personal');
 					}
 				} else if (key === 'apps') {
-					window.open(process.env.VUE_APP_DOC2_APPS_URL);
+					// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@stage.testamnadev.workflow.cloudintegration.eu/templates
+					// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@dev.testamnadev.workflow.cloudintegration.eu/templates
+					// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@sandbox.testamnadev.workflow.cloudintegration.eu/templates
+					
+
+					const urlEnd = process.env.DB_MYSQLDB_PASSWORD ? process.env.DB_MYSQLDB_PASSWORD : 'app.polydocs.io/apps';
+					const urlIndentifier = ['@stage', '@dev', '@sandbox', '//dev', '//stage', '//sandbox'];
+					const url = window.location.origin;
+					let redirectUrl = '';
+					let prefix = '';
+					Array.from(urlIndentifier).forEach((value: string, index: number) => {
+						if (url.includes(value)) {
+							value.replace('@', '').replace('//', '');
+							prefix = value + '.';
+						}
+					});
+
+					redirectUrl = 'https://' + prefix + urlEnd;
+					/* eslint-disable no-console */
+					console.log('redirect url',redirectUrl);
+					if (!redirectUrl) {
+						/* eslint-disable no-console */
+						console.log('redirect  url is not correct',redirectUrl);
+						return;
+					}
+					window.open(redirectUrl);
 				}
 			},
 		},
