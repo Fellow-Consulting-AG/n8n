@@ -227,6 +227,26 @@ export const contactFields: INodeProperties[] = [
 		description: 'Contact parameters',
 	},
 	{
+		displayName: 'Status',
+		name: 'optin_status',
+		type: 'string',
+		displayOptions: {
+			show: {
+				resource: [
+					'contact',
+				],
+				operation: [
+					'create',
+				],
+				jsonParameters: [
+					false,
+				],
+			},
+		},
+		default: 'Unbekannt',
+		description: 'Optin Status',
+	},
+	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
 		type: 'collection',
