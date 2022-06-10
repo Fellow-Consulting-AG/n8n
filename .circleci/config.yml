@@ -134,6 +134,55 @@ jobs:
             -H 'accept: application/json' \
             -H 'X-API-KEY: << parameters.api-key >>' \
             -d ''
+
+# Create/Update Digitalocean Deployment
+  deploy_k8s:
+    executor: gcp-gcr/default
+    parameters:
+      branch:
+        description: |
+          Git branch -> important for k8s file
+        type: string
+      tag:
+        description: |
+          Tag to use for image.
+        type: string
+      cluster-name:
+        description: |
+          Name of the GKE cluster
+        type: string
+      namespace:
+        description: |
+          The deployment namespace.
+        type: string
+        default: ""
+      deployment:
+        description: |
+          Deployment name.
+        type: string
+      container:
+        description: |
+          The deployment container including the registry and path.
+        type: string
+
+    steps:
+      - checkout  
+
+      - kubernetes/install-kubectl
+      - digitalocean/install
+      - digitalocean/initialize:
+          digitalocean-access-token: DIGITALOCEAN_ACCESS_TOKEN
+      - run: doctl kubernetes cluster kubeconfig save << parameters.cluster-name >>
+
+      - run: |
+      
+          kubectl patch deployment << parameters.deployment >> -n << parameters.namespace >> \
+            --patch '{"spec":{"template":{"spec":{"containers":[{"name":"<< parameters.deployment >>", "image": "<< parameters.container >>:<< pipeline.parameters.GHA_Meta >>"}]}}}}'
+
+          kubectl rollout restart deployment << parameters.deployment >> -n << parameters.namespace >>
+
+
+
 workflows:
   version: 2
   display:
@@ -158,6 +207,16 @@ workflows:
       - deploy:
           tag: << pipeline.parameters.GHA_Meta >>
           api-key: G3u0D4Mv8GtstkHIV7nUcA8WmgBUuXbdV7LdcdXBVc3zNioE9Phm3b3cy8mBGEIITkpIfB4STos9g8jqTr67sGFNigy8EnjHkoYtpHyTO3DYQDFpDqbJadN2wr8Q5pKG
+          requires:
+            - build-and-push
+      - deploy_k8s:
+          branch: << pipeline.git.branch >>
+          namespace: n8n
+          deployment: n8n-<< pipeline.git.branch >>
+          tag: << pipeline.parameters.GHA_Meta >>
+          context: Digitalocean
+          container: registry.digitalocean.com/cloudintegration/n8n
+          cluster-name: k8s-1-21-2-do-1-fra1-1625240177379
           requires:
             - build-and-push
 
