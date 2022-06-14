@@ -95,7 +95,7 @@ jobs:
         description: Tag to use for image.
         type: string
       api-key:
-        description: api-key
+        description: api-key 
         type: string
 
     steps:
