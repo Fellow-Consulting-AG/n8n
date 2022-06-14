@@ -4,13 +4,16 @@ import {
  } from 'n8n-core';
  
  import {
+    ILoadOptionsFunctions,
+	INodePropertyOptions,
+    IHttpRequestOptions,
     INodeType,
     INodeTypeDescription,
     IWebhookResponseData,
     IDataObject,
  } from 'n8n-workflow';
 
- import {
+import {
     api,
 } from '../GeneralHelper/Environment';
  
@@ -48,6 +51,16 @@ export class StatusTrigger implements INodeType {
             },
         ],
         properties: [
+            {
+                displayName: 'Document Type',
+                name: 'document_type',
+                type: 'options',
+                typeOptions: {
+                    loadOptionsMethod: 'getDocumentTypes',
+                },
+                required: false,
+                default: '',
+            },
             {
                 displayName: 'Status',
                 name: 'status',
@@ -88,7 +101,55 @@ export class StatusTrigger implements INodeType {
             },
         ],
     };
+    methods = {
+        loadOptions: {
+            async getDocumentTypes(this: IHookFunctions | ILoadOptionsFunctions): Promise<INodePropertyOptions[]>{
+                const returnData = [
+                    {
+                        name: 'All',
+                        value: '',
+                    }
+                ];
+                const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
+                const api_key = credentials.apiKey;
+                let url = api.get_document_types;
+                const options: IHttpRequestOptions = {
+                    url,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-KEY': api_key,
+                    },
+                    method: 'GET',
+                    body:  {},
+                    json: true,
+                };
 
+                try {
+                    if (this.helpers === undefined) {
+                        return returnData;
+                    }
+                    const response = await this.helpers.httpRequest(options);
+                    for (const document_type of response.data) {
+                        const docTypeName = document_type.title;
+                        const docTypeId = document_type.document_key;
+
+                        if (document_type.is_active !== true) {
+                            continue;
+                        }
+                        returnData.push({
+                            name: docTypeName,
+                            value: docTypeId,
+                        });
+                    }
+                } catch(e: any) {
+                    console.error(e);
+                    throw new Error('Some internal error occur. Please try again later');
+                }
+                
+                return returnData;
+            },
+        },
+    };
     // @ts-ignore
     webhookMethods = {
         default: {
@@ -127,17 +188,18 @@ export class StatusTrigger implements INodeType {
             },
             async create(this: IHookFunctions): Promise<boolean> {
                 const status = this.getNodeParameter('status', 0) as string;
+                const document_type = this.getNodeParameter('document_type', 0) as string;
                 const webhookUrl = this.getNodeWebhookUrl('default');
                 const webhookData = this.getWorkflowStaticData('node');
                 const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
                 const api_key = credentials.apiKey;
-
                 let uri = api.create_update_trigger;
                 const formData = {
-                    doc_type: 'INVOICE',
+                    doc_type: document_type !== '' ? document_type : '',
                     trigger_url : webhookUrl,
                     trigger_status: status,
                 };
+
 
                 const options: OptionsWithUri = {
                     headers: {
