@@ -27,7 +27,7 @@ parameters:
 
 jobs: 
   empty:
-    docker:
+    docker: 
       - image: cimg/base:2021.04
     steps:
       - run: echo << pipeline.parameters.GHA_Meta >>
