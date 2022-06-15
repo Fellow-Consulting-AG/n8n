@@ -105,6 +105,7 @@ jobs:
             -H 'accept: application/json' \
             -H 'X-API-KEY: << parameters.api-key >>' \
             -d ''
+          sleep 5
           curl -X 'GET' \
             'https://<<pipeline.git.branch >>.terraform.cloudintegration.eu/webhook/workflow/refresh' \
             -H 'accept: application/json' \
