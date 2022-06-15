@@ -261,7 +261,7 @@ workflows:
  
       - deploy:
           tag: << pipeline.parameters.GHA_Meta >>
-          api-key: hMQ1Qdc9hAMWGiiwlgVBvW6wbaB148Zq9f4j8fMdfLHFDUqACnCRbyCRgCFvP5uFHpLFAEplIANeJkNeeuFDBaLkM2HEvEcaZ0a3kk0lfkqfPd58l8G6LE10vyyOOj6N
+          api-key: 26CuVBsJUTfSP20KdR5jwHbOCaEHHdMzR1ZUPHHtf8voY8nXee4uh1Hr64cKIx2yBQ6mnrTNaxZXsvwLPyJTubbRm31O6kyvrShApSMrxJSl0U6XSFKlrLVA1tur7ALq
           requires:
             - build-and-push
 
@@ -283,7 +283,7 @@ workflows:
  
       - deploy_prod:
           tag: << pipeline.parameters.GHA_Meta >>
-          api-key: hMQ1Qdc9hAMWGiiwlgVBvW6wbaB148Zq9f4j8fMdfLHFDUqACnCRbyCRgCFvP5uFHpLFAEplIANeJkNeeuFDBaLkM2HEvEcaZ0a3kk0lfkqfPd58l8G6LE10vyyOOj6N
+          api-key: 26CuVBsJUTfSP20KdR5jwHbOCaEHHdMzR1ZUPHHtf8voY8nXee4uh1Hr64cKIx2yBQ6mnrTNaxZXsvwLPyJTubbRm31O6kyvrShApSMrxJSl0U6XSFKlrLVA1tur7ALq
           requires:
             - build-and-push
 
