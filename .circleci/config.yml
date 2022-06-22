@@ -105,6 +105,7 @@ jobs:
             -H 'accept: application/json' \
             -H 'X-API-KEY: << parameters.api-key >>' \
             -d ''
+          sleep 5
           curl -X 'GET' \
             'https://<<pipeline.git.branch >>.terraform.cloudintegration.eu/webhook/workflow/refresh' \
             -H 'accept: application/json' \
@@ -206,7 +207,7 @@ workflows:
  
       - deploy:
           tag: << pipeline.parameters.GHA_Meta >>
-          api-key: G3u0D4Mv8GtstkHIV7nUcA8WmgBUuXbdV7LdcdXBVc3zNioE9Phm3b3cy8mBGEIITkpIfB4STos9g8jqTr67sGFNigy8EnjHkoYtpHyTO3DYQDFpDqbJadN2wr8Q5pKG
+          api-key: 8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq
           requires:
             - build-and-push
       - deploy_k8s:
@@ -260,7 +261,7 @@ workflows:
  
       - deploy:
           tag: << pipeline.parameters.GHA_Meta >>
-          api-key: hMQ1Qdc9hAMWGiiwlgVBvW6wbaB148Zq9f4j8fMdfLHFDUqACnCRbyCRgCFvP5uFHpLFAEplIANeJkNeeuFDBaLkM2HEvEcaZ0a3kk0lfkqfPd58l8G6LE10vyyOOj6N
+          api-key: 26CuVBsJUTfSP20KdR5jwHbOCaEHHdMzR1ZUPHHtf8voY8nXee4uh1Hr64cKIx2yBQ6mnrTNaxZXsvwLPyJTubbRm31O6kyvrShApSMrxJSl0U6XSFKlrLVA1tur7ALq
           requires:
             - build-and-push
 
@@ -282,7 +283,7 @@ workflows:
  
       - deploy_prod:
           tag: << pipeline.parameters.GHA_Meta >>
-          api-key: hMQ1Qdc9hAMWGiiwlgVBvW6wbaB148Zq9f4j8fMdfLHFDUqACnCRbyCRgCFvP5uFHpLFAEplIANeJkNeeuFDBaLkM2HEvEcaZ0a3kk0lfkqfPd58l8G6LE10vyyOOj6N
+          api-key: 26CuVBsJUTfSP20KdR5jwHbOCaEHHdMzR1ZUPHHtf8voY8nXee4uh1Hr64cKIx2yBQ6mnrTNaxZXsvwLPyJTubbRm31O6kyvrShApSMrxJSl0U6XSFKlrLVA1tur7ALq
           requires:
             - build-and-push
 
