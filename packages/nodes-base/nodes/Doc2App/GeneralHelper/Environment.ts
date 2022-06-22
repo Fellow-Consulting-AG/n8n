@@ -1,6 +1,6 @@
 export function getServerURL() {
     const urlIndentifier = ['stage', 'dev', 'sandbox'];
-    let prefix = process.env.DB_MYSQLDB_USER ? process.env.DB_MYSQLDB_USER : '';
+    let prefix = process.env.DB_MYSQLDB_USER && process.env.DB_MYSQLDB_USER  !== 'prod' ? process.env.DB_MYSQLDB_USER : '';
     let serverUrl = '';
 
     Array.from(urlIndentifier).forEach((value: string, index: number) => {
