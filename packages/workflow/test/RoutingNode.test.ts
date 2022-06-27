@@ -17,7 +17,7 @@ import {
 	INodeCredentialDescription,
 } from '../src';
 
-import * as Helpers from './Helpers';
+import * as Helpers from './Helpers'; 
 
 const postReceiveFunction1 = async function (
 	this: IExecuteSingleFunctions,
