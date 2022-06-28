@@ -27,6 +27,7 @@ parameters:
 
 jobs: 
   empty:
+    resource_class: small
     docker: 
       - image: cimg/base:2021.04
     steps:
@@ -35,6 +36,7 @@ jobs:
 # Build and push Docker image to Registry
   build-and-push:
     executor: docker/docker
+    resource_class: medium
     parameters:
       tag:
         description: |
@@ -89,6 +91,7 @@ jobs:
 
   deploy:
     executor: gcp-gcr/default
+    resource_class: small
     parameters:
 
       tag:
