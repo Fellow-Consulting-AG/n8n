@@ -143,7 +143,7 @@ export class StatusTrigger implements INodeType {
                     }
                 } catch(e: any) {
                     console.error(e);
-                    throw new Error('Some internal error occur. Please try again later');
+                    // throw new Error('Some internal error occur. Please try again later');
                 }
                 
                 return returnData;
