@@ -16,7 +16,7 @@ import {
 import {
 	worklogOperations,
 	worklogFields,
-} from './Worklog';
+} from './WorkLog';
 
 
 export class Tempo implements INodeType {
