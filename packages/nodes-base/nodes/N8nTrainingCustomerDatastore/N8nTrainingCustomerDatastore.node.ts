@@ -54,13 +54,13 @@ const data = [
 
 export class N8nTrainingCustomerDatastore implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Customer Datastore (n8n training)',
+		displayName: 'Customer Datastore (workflow training)',
 		name: 'n8nTrainingCustomerDatastore',
 		icon: 'file:n8nTrainingCustomerDatastore.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
-		description: 'Dummy node used for n8n training',
+		description: 'Dummy node used for workflow training',
 		defaults: {
 			name: 'Customer Datastore',
 		},
