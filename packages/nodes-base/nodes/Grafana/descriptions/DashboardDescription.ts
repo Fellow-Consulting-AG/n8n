@@ -92,11 +92,7 @@ export const dashboardFields: INodeProperties[] = [
 				name: 'folderId',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'Folder to create the dashboard in - if the folder is unspecified, the dashboard will be saved to the General folder. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Folder to create the dashboard in - if the folder is unspecified, the dashboard will be saved to the General folder. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getFolders',
 				},
@@ -263,11 +259,7 @@ export const dashboardFields: INodeProperties[] = [
 				name: 'folderId',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'Folder to move the dashboard into - if the folder is unspecified, the dashboard will be saved to the General folder. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Folder to move the dashboard into - if the folder is unspecified, the dashboard will be saved to the General folder. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getFolders',
 				},

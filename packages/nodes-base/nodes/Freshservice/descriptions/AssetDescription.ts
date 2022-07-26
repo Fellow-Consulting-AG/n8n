@@ -76,11 +76,7 @@ export const assetFields: INodeProperties[] = [
 		displayName: 'Asset Type Name or ID',
 		name: 'assetTypeId',
 		type: 'options',
-<<<<<<< HEAD
-		description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		required: true,
 		default: '',
 		typeOptions: {
@@ -254,11 +250,7 @@ export const assetFields: INodeProperties[] = [
 				name: 'agent_id',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'ID of the agent by whom the asset is managed. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'ID of the agent by whom the asset is managed. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgents',
 				},
@@ -275,11 +267,7 @@ export const assetFields: INodeProperties[] = [
 				name: 'asset_type_id',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'ID of the asset type to filter by. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'ID of the asset type to filter by. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAssetTypes',
 				},
@@ -289,11 +277,7 @@ export const assetFields: INodeProperties[] = [
 				name: 'department_id',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'ID of the department to which the asset belongs. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'ID of the department to which the asset belongs. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -303,11 +287,7 @@ export const assetFields: INodeProperties[] = [
 				name: 'location_id',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'ID of the location to filter by. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'ID of the location to filter by. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getLocations',
 				},

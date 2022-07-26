@@ -115,11 +115,7 @@ export const userFields: INodeProperties[] = [
 				name: 'invited_by',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'Choose from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>',
-=======
 				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getUsers',
 				},
@@ -128,11 +124,7 @@ export const userFields: INodeProperties[] = [
 				displayName: 'Organization Name or ID',
 				name: 'org_id',
 				type: 'options',
-<<<<<<< HEAD
-				description: 'Choose from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>',
-=======
 				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'getOrgs',
@@ -280,11 +272,7 @@ export const userFields: INodeProperties[] = [
 				displayName: 'Inviter Name or ID',
 				name: 'invited_by',
 				type: 'options',
-<<<<<<< HEAD
-				description: 'Choose from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>',
-=======
 				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'getUsers',
@@ -294,11 +282,7 @@ export const userFields: INodeProperties[] = [
 				displayName: 'Organization Name or ID',
 				name: 'org_id',
 				type: 'options',
-<<<<<<< HEAD
-				description: 'Choose from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>',
-=======
 				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'getOrgs',

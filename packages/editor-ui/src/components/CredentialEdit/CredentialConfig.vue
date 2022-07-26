@@ -173,13 +173,9 @@ export default mixins(restApi).extend({
 				return type.documentationUrl;
 			}
 
-<<<<<<< HEAD
-			return `https://docs.polydocs.io/workflow/integrations/credentials/${type.documentationUrl}/?utm_source=n8n_app&utm_medium=left_nav_menu&utm_campaign=create_new_credentials_modal`;
-=======
 			return  isCommunityNode ?
 				'' : // Don't show documentation link for community nodes if the URL is not an absolute path
 				`https://docs.n8n.io/credentials/${type.documentationUrl}/?utm_source=n8n_app&utm_medium=left_nav_menu&utm_campaign=create_new_credentials_modal`;
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		},
 		isGoogleOAuthType(): boolean {
 			return this.credentialTypeName === 'googleOAuth2Api' || this.parentTypes.includes('googleOAuth2Api');

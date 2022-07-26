@@ -103,22 +103,14 @@ export const agentGroupFields: INodeProperties[] = [
 				typeOptions: {
 					loadOptionsMethod: 'getAgents',
 				},
-<<<<<<< HEAD
-				description: 'ID of the user to whom an escalation email is sent if a ticket in this group is unassigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'ID of the user to whom an escalation email is sent if a ticket in this group is unassigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 			},
 			{
 				displayName: 'Member Names or IDs',
 				name: 'members',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'Comma-separated IDs of agents who are members of this group. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Comma-separated IDs of agents who are members of this group. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgents',
 				},
@@ -128,11 +120,7 @@ export const agentGroupFields: INodeProperties[] = [
 				name: 'observers',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'Comma-separated agent IDs who are observers of this group. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Comma-separated agent IDs who are observers of this group. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgents',
 				},
@@ -318,11 +306,7 @@ export const agentGroupFields: INodeProperties[] = [
 				name: 'escalate_to',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'ID of the agent to whom an escalation email is sent if a ticket in this group is unassigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'ID of the agent to whom an escalation email is sent if a ticket in this group is unassigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgents',
 				},
@@ -332,11 +316,7 @@ export const agentGroupFields: INodeProperties[] = [
 				name: 'members',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'Comma-separated IDs of agents who are members of this group. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Comma-separated IDs of agents who are members of this group. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgents',
 				},
@@ -352,11 +332,7 @@ export const agentGroupFields: INodeProperties[] = [
 				name: 'observers',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'Comma-separated agent user IDs who are observers of this group. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Comma-separated agent user IDs who are observers of this group. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgents',
 				},

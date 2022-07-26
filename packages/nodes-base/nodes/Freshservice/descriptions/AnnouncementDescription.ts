@@ -168,11 +168,7 @@ export const announcementFields: INodeProperties[] = [
 				name: 'departments',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'Comma-separated IDs of departments that may view this announcement. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Comma-separated IDs of departments that may view this announcement. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -339,11 +335,7 @@ export const announcementFields: INodeProperties[] = [
 				name: 'departments',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'Comma-separated IDs of departments that may view this announcement. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Comma-separated IDs of departments that may view this announcement. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},

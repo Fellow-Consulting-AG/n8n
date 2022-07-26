@@ -98,11 +98,7 @@ export const assetTypeFields: INodeProperties[] = [
 			{
 				displayName: 'Parent Asset Type Name or ID',
 				name: 'parent_asset_type_id',
-<<<<<<< HEAD
-				description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				type: 'options',
 				default: '',
 				typeOptions: {

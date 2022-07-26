@@ -46,11 +46,7 @@ export const teamMemberFields: INodeProperties[] = [
 	{
 		displayName: 'User Name or ID',
 		name: 'userId',
-<<<<<<< HEAD
-		description: 'User to add to a team. Choose a name from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'User to add to a team. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		type: 'options',
 		required: true,
 		default: '',
@@ -71,11 +67,7 @@ export const teamMemberFields: INodeProperties[] = [
 	{
 		displayName: 'Team Name or ID',
 		name: 'teamId',
-<<<<<<< HEAD
-		description: 'Team to add the user to. Choose a name from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Team to add the user to. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		type: 'options',
 		required: true,
 		default: '',
@@ -100,11 +92,7 @@ export const teamMemberFields: INodeProperties[] = [
 	{
 		displayName: 'User Name or ID',
 		name: 'memberId',
-<<<<<<< HEAD
-		description: 'User to remove from the team. Choose a name from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'User to remove from the team. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		type: 'options',
 		required: true,
 		default: '',
@@ -125,11 +113,7 @@ export const teamMemberFields: INodeProperties[] = [
 	{
 		displayName: 'Team Name or ID',
 		name: 'teamId',
-<<<<<<< HEAD
-		description: 'Team to remove the user from. Choose a name from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Team to remove the user from. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		type: 'options',
 		required: true,
 		default: '',
@@ -154,11 +138,7 @@ export const teamMemberFields: INodeProperties[] = [
 	{
 		displayName: 'Team Name or ID',
 		name: 'teamId',
-<<<<<<< HEAD
-		description: 'Team to retrieve all members from. Choose a name from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Team to retrieve all members from. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		typeOptions: {
 			loadOptionsMethod: 'getTeams',
 		},

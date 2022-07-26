@@ -123,11 +123,7 @@ export const agentFields: INodeProperties[] = [
 					{
 						displayName: 'Role Name or ID',
 						name: 'role',
-<<<<<<< HEAD
-						description: 'Name of the role to assign to the agent. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 						description: 'Name of the role to assign to the agent. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 						type: 'options',
 						typeOptions: {
 							loadOptionsMethod: 'getAgentRoles',
@@ -164,11 +160,7 @@ export const agentFields: INodeProperties[] = [
 					{
 						displayName: 'Group Names or IDs',
 						name: 'groups',
-<<<<<<< HEAD
-						description: 'Groups in which the permissions granted by the role apply. Required only when Scope is Specified Groups - ignored otherwise. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 						description: 'Groups in which the permissions granted by the role apply. Required only when Scope is Specified Groups - ignored otherwise. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 						type: 'multiOptions',
 						typeOptions: {
 							loadOptionsMethod: 'getAgentGroups',
@@ -213,11 +205,7 @@ export const agentFields: INodeProperties[] = [
 				name: 'department_ids',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'IDs of the departments to which the agent belongs. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'IDs of the departments to which the agent belongs. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -246,11 +234,7 @@ export const agentFields: INodeProperties[] = [
 				name: 'location_id',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getLocations',
 				},
@@ -261,11 +245,7 @@ export const agentFields: INodeProperties[] = [
 				name: 'member_of',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'Comma-separated IDs of the groups that the agent is a member of. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Comma-separated IDs of the groups that the agent is a member of. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},
@@ -282,11 +262,7 @@ export const agentFields: INodeProperties[] = [
 				name: 'observer_of',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'Comma-separated IDs of the groups that the agent is an observer of. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Comma-separated IDs of the groups that the agent is an observer of. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},
@@ -459,11 +435,7 @@ export const agentFields: INodeProperties[] = [
 				name: 'department_id',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'ID of the department to which the agent belongs. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'ID of the department to which the agent belongs. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -505,11 +477,7 @@ export const agentFields: INodeProperties[] = [
 				name: 'location_id',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Choose from the list or specify an ID. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getLocations',
 				},
@@ -584,11 +552,7 @@ export const agentFields: INodeProperties[] = [
 				name: 'department_ids',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'IDs of the departments to which the agent belongs. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'IDs of the departments to which the agent belongs. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -630,11 +594,7 @@ export const agentFields: INodeProperties[] = [
 				name: 'location_id',
 				type: 'options',
 				default: '',
-<<<<<<< HEAD
-				description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Choose from the list or specify an ID. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getLocations',
 				},
@@ -645,11 +605,7 @@ export const agentFields: INodeProperties[] = [
 				name: 'member_of',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'Comma-separated IDs of the groups that the agent is a member of. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Comma-separated IDs of the groups that the agent is a member of. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},
@@ -666,11 +622,7 @@ export const agentFields: INodeProperties[] = [
 				name: 'observer_of',
 				type: 'multiOptions',
 				default: [],
-<<<<<<< HEAD
-				description: 'Comma-separated IDs of the groups that the agent is an observer of. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Comma-separated IDs of the groups that the agent is an observer of. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},

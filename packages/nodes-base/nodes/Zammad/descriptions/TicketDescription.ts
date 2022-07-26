@@ -76,11 +76,7 @@ export const ticketDescription: INodeProperties[] = [
 			loadOptionsMethod: 'loadGroupNames',
 		},
 		placeholder: 'First-Level Helpdesk',
-<<<<<<< HEAD
-		description: 'Group that will own the ticket to create. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Group that will own the ticket to create. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		default: '',
 		required: true,
 		displayOptions: {
@@ -101,11 +97,7 @@ export const ticketDescription: INodeProperties[] = [
 		typeOptions: {
 			loadOptionsMethod: 'loadCustomerEmails',
 		},
-<<<<<<< HEAD
-		description: 'Email address of the customer concerned in the ticket to create. Choose from the list or specify an email using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Email address of the customer concerned in the ticket to create. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		default: '',
 		placeholder: 'hello@n8n.io',
 		required: true,
@@ -124,11 +116,7 @@ export const ticketDescription: INodeProperties[] = [
 		displayName: 'Ticket ID',
 		name: 'id',
 		type: 'string',
-<<<<<<< HEAD
-		description: 'Ticket to retrieve. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Ticket to retrieve. Specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		default: '',
 		required: true,
 		displayOptions: {
@@ -147,11 +135,7 @@ export const ticketDescription: INodeProperties[] = [
 		name: 'id',
 		type: 'string',
 		default: '',
-<<<<<<< HEAD
-		description: 'Ticket to delete. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Ticket to delete. Specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		required: true,
 		displayOptions: {
 			show: {

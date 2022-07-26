@@ -1,7 +1,4 @@
 {
-<<<<<<< HEAD
-	"about.aboutN8n": "About Workflow",
-=======
 	"_reusableBaseText.cancel": "Cancel",
 	"_reusableBaseText.name": "Name",
 	"_reusableBaseText.save": "Save",
@@ -22,7 +19,6 @@
 	"generic.copiedToClipboard": "Copied to clipboard",
 	"generic.beta": "beta",
 	"about.aboutN8n": "About n8n",
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 	"about.close": "Close",
 	"about.license": "License",
 	"about.n8nLicense": "Sustainable Use License",

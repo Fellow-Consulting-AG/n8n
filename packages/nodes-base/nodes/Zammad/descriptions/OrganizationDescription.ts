@@ -77,11 +77,7 @@ export const organizationDescription: INodeProperties[] = [
 		displayName: 'Organization ID',
 		name: 'id',
 		type: 'string',
-<<<<<<< HEAD
-		description: 'Organization to update. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Organization to update. Specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		default: '',
 		required: true,
 		displayOptions: {
@@ -99,11 +95,7 @@ export const organizationDescription: INodeProperties[] = [
 		displayName: 'Organization ID',
 		name: 'id',
 		type: 'string',
-<<<<<<< HEAD
-		description: 'Organization to delete. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Organization to delete. Specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		default: '',
 		required: true,
 		displayOptions: {
@@ -121,11 +113,7 @@ export const organizationDescription: INodeProperties[] = [
 		displayName: 'Organization ID',
 		name: 'id',
 		type: 'string',
-<<<<<<< HEAD
-		description: 'Organization to retrieve. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Organization to retrieve. Specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		default: '',
 		required: true,
 		displayOptions: {

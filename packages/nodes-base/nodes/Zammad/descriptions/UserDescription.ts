@@ -102,11 +102,7 @@ export const userDescription: INodeProperties[] = [
 		displayName: 'User ID',
 		name: 'id',
 		type: 'string',
-<<<<<<< HEAD
-		description: 'User to update. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'User to update. Specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		default: '',
 		required: true,
 		displayOptions: {
@@ -124,11 +120,7 @@ export const userDescription: INodeProperties[] = [
 		displayName: 'User ID',
 		name: 'id',
 		type: 'string',
-<<<<<<< HEAD
-		description: 'User to delete. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'User to delete. Specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		default: '',
 		required: true,
 		displayOptions: {
@@ -146,11 +138,7 @@ export const userDescription: INodeProperties[] = [
 		displayName: 'User ID',
 		name: 'id',
 		type: 'string',
-<<<<<<< HEAD
-		description: 'User to retrieve. Specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'User to retrieve. Specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		default: '',
 		required: true,
 		displayOptions: {
@@ -299,11 +287,7 @@ export const userDescription: INodeProperties[] = [
 				displayName: 'Organization Name or ID',
 				name: 'organization',
 				type: 'options',
-<<<<<<< HEAD
-				description: 'Name of the organization to assign to the user. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Name of the organization to assign to the user. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'loadOrganizations',
@@ -495,11 +479,7 @@ export const userDescription: INodeProperties[] = [
 				displayName: 'Organization Name or ID',
 				name: 'organization',
 				type: 'options',
-<<<<<<< HEAD
-				description: 'Name of the organization to assign to the user. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Name of the organization to assign to the user. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'loadOrganizationNames',

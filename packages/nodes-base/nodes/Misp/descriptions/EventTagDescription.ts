@@ -56,11 +56,7 @@ export const eventTagFields: INodeProperties[] = [
 	{
 		displayName: 'Tag Name or ID',
 		name: 'tagId',
-<<<<<<< HEAD
-		description: 'Choose from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>',
-=======
 		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		type: 'options',
 		required: true,
 		default: '',
@@ -103,11 +99,7 @@ export const eventTagFields: INodeProperties[] = [
 	{
 		displayName: 'Tag Name or ID',
 		name: 'tagId',
-<<<<<<< HEAD
-		description: 'Choose from the list, or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>',
-=======
 		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		type: 'options',
 		required: true,
 		default: '',

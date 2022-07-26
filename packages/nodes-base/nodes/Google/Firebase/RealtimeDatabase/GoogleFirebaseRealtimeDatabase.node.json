@@ -13,11 +13,7 @@
 		],
 		"primaryDocumentation": [
 			{
-<<<<<<< HEAD:packages/nodes-base/nodes/Google/Firebase/RealtimeDatabase/RealtimeDatabase.node.json
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.googleCloudRealtimeDatabase/"
-=======
 				"url": "https://docs.n8n.io/integrations/nodes/n8n-nodes-base.googlecloudrealtimedatabase/"
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745:packages/nodes-base/nodes/Google/Firebase/RealtimeDatabase/GoogleFirebaseRealtimeDatabase.node.json
 			}
 		],
 		"generic": [

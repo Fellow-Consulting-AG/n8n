@@ -59,11 +59,7 @@ export const productFields: INodeProperties[] = [
 		displayName: 'Asset Type Name or ID',
 		name: 'assetTypeId',
 		type: 'options',
-<<<<<<< HEAD
-		description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		required: true,
 		default: '',
 		typeOptions: {
@@ -300,11 +296,7 @@ export const productFields: INodeProperties[] = [
 				displayName: 'Asset Type Name or ID',
 				name: 'asset_type_id',
 				type: 'options',
-<<<<<<< HEAD
-				description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
-=======
 				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
->>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'getAssetTypes',
