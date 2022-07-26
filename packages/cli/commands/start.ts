@@ -33,7 +33,7 @@ import {
 } from '../src';
 
 import { getLogger } from '../src/Logger';
-import { RESPONSE_ERROR_MESSAGES } from '../src/constants';
+import { getAllInstalledPackages } from '../src/CommunityNodes/packageModel';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
 const open = require('open');
@@ -60,6 +60,10 @@ export class Start extends Command {
 		tunnel: flags.boolean({
 			description:
 				'runs the webhooks via a hooks.n8n.cloud tunnel server. Use only for testing and development!',
+		}),
+		reinstallMissingPackages: flags.boolean({
+			description:
+				'Attempts to self heal n8n if packages with nodes are missing. Might drastically increase startup times.',
 		}),
 	};
 
@@ -173,9 +177,6 @@ export class Start extends Command {
 					// If we don't have a JWT secret set, generate
 					// one based and save to config.
 					const encryptionKey = await UserSettings.getEncryptionKey();
-					if (!encryptionKey) {
-						throw new Error('Fatal error setting up user management: no encryption key set.');
-					}
 
 					// For a key off every other letter from encryption key
 					// CAREFUL: do not change this or it breaks all existing tokens.
@@ -210,17 +211,66 @@ export class Start extends Command {
 				// Wait till the database is ready
 				await startDbInitPromise;
 
-				const encryptionKey = await UserSettings.getEncryptionKey();
+				const installedPackages = await getAllInstalledPackages();
+				const missingPackages = new Set<{
+					packageName: string;
+					version: string;
+				}>();
+				installedPackages.forEach((installedpackage) => {
+					installedpackage.installedNodes.forEach((installedNode) => {
+						if (!loadNodesAndCredentials.nodeTypes[installedNode.type]) {
+							// Leave the list ready for installing in case we need.
+							missingPackages.add({
+								packageName: installedpackage.packageName,
+								version: installedpackage.installedVersion,
+							});
+						}
+					});
+				});
 
-				if (!encryptionKey) {
-					throw new Error(RESPONSE_ERROR_MESSAGES.NO_ENCRYPTION_KEY);
-				}
+				await UserSettings.getEncryptionKey();
 
 				// Load settings from database and set them to config.
-				const databaseSettings = await Db.collections.Settings!.find({ loadOnStartup: true });
+				const databaseSettings = await Db.collections.Settings.find({ loadOnStartup: true });
 				databaseSettings.forEach((setting) => {
 					config.set(setting.key, JSON.parse(setting.value));
 				});
+
+				config.set('nodes.packagesMissing', '');
+				if (missingPackages.size) {
+					LoggerProxy.error(
+						'n8n detected that some packages are missing. For more information, visit https://docs.n8n.io/integrations/community-nodes/troubleshooting/',
+					);
+
+					if (flags.reinstallMissingPackages || process.env.N8N_REINSTALL_MISSING_PACKAGES) {
+						LoggerProxy.info('Attempting to reinstall missing packages', { missingPackages });
+						try {
+							// Optimistic approach - stop if any installation fails
+							// eslint-disable-next-line no-restricted-syntax
+							for (const missingPackage of missingPackages) {
+								// eslint-disable-next-line no-await-in-loop
+								void (await loadNodesAndCredentials.loadNpmModule(
+									missingPackage.packageName,
+									missingPackage.version,
+								));
+								missingPackages.delete(missingPackage);
+							}
+							LoggerProxy.info(
+								'Packages reinstalled successfully. Resuming regular intiailization.',
+							);
+						} catch (error) {
+							LoggerProxy.error('n8n was unable to install the missing packages.');
+						}
+					}
+				}
+				if (missingPackages.size) {
+					config.set(
+						'nodes.packagesMissing',
+						Array.from(missingPackages)
+							.map((missingPackage) => `${missingPackage.packageName}@${missingPackage.version}`)
+							.join(' '),
+					);
+				}
 
 				if (config.getEnv('executions.mode') === 'queue') {
 					const redisHost = config.getEnv('queue.bull.redis.host');
@@ -277,6 +327,7 @@ export class Start extends Command {
 						if (error.toString().includes('ECONNREFUSED') === true) {
 							logger.warn('Redis unavailable - trying to reconnect...');
 						} else {
+							// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 							logger.warn('Error with Redis: ', error);
 						}
 					});
@@ -287,8 +338,8 @@ export class Start extends Command {
 				if (dbType === 'sqlite') {
 					const shouldRunVacuum = config.getEnv('database.sqlite.executeVacuumOnStartup');
 					if (shouldRunVacuum) {
-						// eslint-disable-next-line @typescript-eslint/no-floating-promises, @typescript-eslint/no-non-null-assertion
-						await Db.collections.Execution!.query('VACUUM;');
+						// eslint-disable-next-line @typescript-eslint/no-floating-promises
+						await Db.collections.Execution.query('VACUUM;');
 					}
 				}
 
@@ -365,6 +416,7 @@ export class Start extends Command {
 					process.stdin.setRawMode(true);
 					process.stdin.resume();
 					process.stdin.setEncoding('utf8');
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
 					let inputText = '';
 
 					if (flags.open) {
