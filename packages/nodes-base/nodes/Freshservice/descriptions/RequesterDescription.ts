@@ -8,6 +8,7 @@ export const requesterOperations: INodeProperties[] = [
 		displayName: 'Operation',
 		name: 'operation',
 		type: 'options',
+		noDataExpression: true,
 		displayOptions: {
 			show: {
 				resource: [
@@ -20,26 +21,31 @@ export const requesterOperations: INodeProperties[] = [
 				name: 'Create',
 				value: 'create',
 				description: 'Create a requester',
+				action: 'Create a requester',
 			},
 			{
 				name: 'Delete',
 				value: 'delete',
 				description: 'Delete a requester',
+				action: 'Delete a requester',
 			},
 			{
 				name: 'Get',
 				value: 'get',
 				description: 'Retrieve a requester',
+				action: 'Get a requester',
 			},
 			{
 				name: 'Get All',
 				value: 'getAll',
 				description: 'Retrieve all requesters',
+				action: 'Get all requesters',
 			},
 			{
 				name: 'Update',
 				value: 'update',
 				description: 'Update a requester',
+				action: 'Update a requester',
 			},
 		],
 		default: 'create',
@@ -113,11 +119,15 @@ export const requesterFields: INodeProperties[] = [
 				default: '',
 			},
 			{
-				displayName: 'Department Names/IDs',
+				displayName: 'Department Names or IDs',
 				name: 'department_ids',
 				type: 'multiOptions',
 				default: [],
+<<<<<<< HEAD
 				description: 'Comma-separated IDs of the departments associated with the requester. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'Comma-separated IDs of the departments associated with the requester. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -142,9 +152,13 @@ export const requesterFields: INodeProperties[] = [
 				default: '',
 			},
 			{
-				displayName: 'Location ID',
+				displayName: 'Location Name or ID',
 				name: 'location_id',
+<<<<<<< HEAD
 				description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				type: 'options',
 				default: '',
 				typeOptions: {
@@ -258,7 +272,7 @@ export const requesterFields: INodeProperties[] = [
 		name: 'limit',
 		type: 'number',
 		default: 50,
-		description: 'How many results to return',
+		description: 'Max number of results to return',
 		typeOptions: {
 			minValue: 1,
 		},
@@ -294,9 +308,13 @@ export const requesterFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'Department Name/ID',
+				displayName: 'Department Name or ID',
 				name: 'department_id',
+<<<<<<< HEAD
 				description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				type: 'options',
 				default: '',
 				typeOptions: {
@@ -329,10 +347,14 @@ export const requesterFields: INodeProperties[] = [
 				default: '',
 			},
 			{
-				displayName: 'Location Name/ID',
+				displayName: 'Location Name or ID',
 				name: 'location_id',
 				type: 'options',
+<<<<<<< HEAD
 				description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'getLocations',
@@ -410,11 +432,15 @@ export const requesterFields: INodeProperties[] = [
 				default: '',
 			},
 			{
-				displayName: 'Department Names/IDs',
+				displayName: 'Department Names or IDs',
 				name: 'department_ids',
 				type: 'multiOptions',
 				default: [],
+<<<<<<< HEAD
 				description: 'Comma-separated IDs of the departments associated with the requester. Choose from the list or specify an ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'Comma-separated IDs of the departments associated with the requester. Choose from the list or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -445,11 +471,15 @@ export const requesterFields: INodeProperties[] = [
 				default: '',
 			},
 			{
-				displayName: 'Location Name/ID',
+				displayName: 'Location Name or ID',
 				name: 'location_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getLocations',
 				},

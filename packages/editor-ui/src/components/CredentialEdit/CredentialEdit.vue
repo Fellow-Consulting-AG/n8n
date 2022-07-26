@@ -24,10 +24,10 @@
 				<div :class="$style.credActions">
 					<n8n-icon-button
 						v-if="currentCredential"
-						size="small"
 						:title="$locale.baseText('credentialEdit.credentialEdit.delete')"
 						icon="trash"
-						type="text"
+						size="medium"
+						type="tertiary"
 						:disabled="isSaving"
 						:loading="isDeleting"
 						@click="deleteCredential"
@@ -112,6 +112,7 @@ import {
 	INodeParameters,
 	INodeProperties,
 	INodeTypeDescription,
+	ITelemetryTrackProperties,
 	NodeHelpers,
 } from 'n8n-workflow';
 import CredentialIcon from '../CredentialIcon.vue';
@@ -299,9 +300,17 @@ export default mixins(showMessage, nodeHelpers).extend({
 		},
 		isOAuthType(): boolean {
 			return !!this.credentialTypeName && (
-				['oAuth1Api', 'oAuth2Api'].includes(this.credentialTypeName) ||
-				this.parentTypes.includes('oAuth1Api') ||
-				this.parentTypes.includes('oAuth2Api')
+				(
+					(
+						this.credentialTypeName === 'oAuth2Api' ||
+						this.parentTypes.includes('oAuth2Api')
+					) && this.credentialData.grantType === 'authorizationCode'
+				)
+				||
+				(
+					this.credentialTypeName === 'oAuth1Api' ||
+					this.parentTypes.includes('oAuth1Api')
+				)
 			);
 		},
 		isOAuthConnected(): boolean {
@@ -395,6 +404,7 @@ export default mixins(showMessage, nodeHelpers).extend({
 				this.credentialData as INodeParameters,
 				parameter,
 				'',
+				null,
 			);
 		},
 		getCredentialProperties(name: string): INodeProperties[] {
@@ -598,6 +608,7 @@ export default mixins(showMessage, nodeHelpers).extend({
 				this.credentialData as INodeParameters,
 				false,
 				false,
+				null,
 			);
 
 			const credentialDetails: ICredentialsDecrypted = {
@@ -610,7 +621,9 @@ export default mixins(showMessage, nodeHelpers).extend({
 
 			let credential;
 
-			if (this.mode === 'new' && !this.credentialId) {
+			const isNewCredential = this.mode === 'new' && !this.credentialId;
+
+			if (isNewCredential) {
 				credential = await this.createCredential(
 					credentialDetails,
 				);
@@ -626,9 +639,10 @@ export default mixins(showMessage, nodeHelpers).extend({
 
 				if (this.isCredentialTestable) {
 					this.isTesting = true;
-
 					// Add the full data including defaults for testing
 					credentialDetails.data = this.credentialData;
+
+					credentialDetails.id = this.credentialId;
 
 					await this.testCredential(credentialDetails);
 					this.isTesting = false;
@@ -637,6 +651,30 @@ export default mixins(showMessage, nodeHelpers).extend({
 					this.authError = '';
 					this.testedSuccessfully = false;
 				}
+
+				const trackProperties: ITelemetryTrackProperties = {
+					credential_type: credentialDetails.type,
+					workflow_id: this.$store.getters.workflowId,
+					credential_id: credential.id,
+					is_complete: !!this.requiredPropertiesFilled,
+					is_new: isNewCredential,
+				};
+
+				if (this.isOAuthType) {
+					trackProperties.is_valid = !!this.isOAuthConnected;
+				} else if (this.isCredentialTestable) {
+					trackProperties.is_valid = !!this.testedSuccessfully;
+				}
+
+				if (this.$store.getters.activeNode) {
+					trackProperties.node_type = this.$store.getters.activeNode.type;
+				}
+
+				if (this.authError && this.authError !== '') {
+					trackProperties.authError = this.authError;
+				}
+
+				this.$telemetry.track('User saved credentials', trackProperties);
 			}
 
 			return credential;
@@ -846,6 +884,8 @@ export default mixins(showMessage, nodeHelpers).extend({
 }
 
 .credActions {
+	display: flex;
+	align-items: flex-start;
 	margin-right: var(--spacing-xl);
 	> * {
 		margin-left: var(--spacing-2xs);

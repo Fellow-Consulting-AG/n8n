@@ -7,6 +7,7 @@ export const releaseOperations: INodeProperties[] = [
 		displayName: 'Operation',
 		name: 'operation',
 		type: 'options',
+		noDataExpression: true,
 		displayOptions: {
 			show: {
 				resource: [
@@ -19,26 +20,31 @@ export const releaseOperations: INodeProperties[] = [
 				name: 'Create',
 				value: 'create',
 				description: 'Create a release',
+				action: 'Create a release',
 			},
 			{
 				name: 'Delete',
 				value: 'delete',
 				description: 'Delete a release',
+				action: 'Delete a release',
 			},
 			{
 				name: 'Get',
 				value: 'get',
 				description: 'Retrieve a release',
+				action: 'Get a release',
 			},
 			{
 				name: 'Get All',
 				value: 'getAll',
 				description: 'Retrieve all releases',
+				action: 'Get all releases',
 			},
 			{
 				name: 'Update',
 				value: 'update',
 				description: 'Update a release',
+				action: 'Update a release',
 			},
 		],
 		default: 'create',
@@ -149,6 +155,7 @@ export const releaseFields: INodeProperties[] = [
 				],
 			},
 		},
+		// eslint-disable-next-line n8n-nodes-base/node-param-options-type-unsorted-items
 		options: [
 			{
 				name: 'Open',
@@ -224,11 +231,15 @@ export const releaseFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'Department Name/ID',
+				displayName: 'Department Name or ID',
 				name: 'department_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the department initiating the release. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the department initiating the release. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -241,11 +252,15 @@ export const releaseFields: INodeProperties[] = [
 				default: '',
 			},
 			{
-				displayName: 'Group Name/ID',
+				displayName: 'Group Name or ID',
 				name: 'group_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the agent group to which the release is assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the agent group to which the release is assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},
@@ -322,7 +337,7 @@ export const releaseFields: INodeProperties[] = [
 		name: 'limit',
 		type: 'number',
 		default: 50,
-		description: 'How many results to return',
+		description: 'Max number of results to return',
 		typeOptions: {
 			minValue: 1,
 		},
@@ -380,11 +395,15 @@ export const releaseFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'Department Name/ID',
+				displayName: 'Department Name or ID',
 				name: 'department_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the department initiating the release. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the department initiating the release. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -397,11 +416,15 @@ export const releaseFields: INodeProperties[] = [
 				description: 'HTML supported',
 			},
 			{
-				displayName: 'Group Name/ID',
+				displayName: 'Group Name or ID',
 				name: 'group_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the agent group to which the release is assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the agent group to which the release is assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},
@@ -459,6 +482,7 @@ export const releaseFields: INodeProperties[] = [
 				name: 'status',
 				type: 'options',
 				default: 1,
+				// eslint-disable-next-line n8n-nodes-base/node-param-options-type-unsorted-items
 				options: [
 					{
 						name: 'Open',

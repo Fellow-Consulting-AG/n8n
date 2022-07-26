@@ -8,7 +8,11 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
+<<<<<<< HEAD
 				"url": "https://docs.polydocs.io/workflow/integrations/credentials/facebookGraphApp"
+=======
+				"url": "https://docs.n8n.io/integrations/credentials/facebookapp/"
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 			}
 		],
 		"primaryDocumentation": [

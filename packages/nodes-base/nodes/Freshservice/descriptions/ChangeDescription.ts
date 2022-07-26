@@ -7,6 +7,7 @@ export const changeOperations: INodeProperties[] = [
 		displayName: 'Operation',
 		name: 'operation',
 		type: 'options',
+		noDataExpression: true,
 		displayOptions: {
 			show: {
 				resource: [
@@ -19,26 +20,31 @@ export const changeOperations: INodeProperties[] = [
 				name: 'Create',
 				value: 'create',
 				description: 'Create a change',
+				action: 'Create a change',
 			},
 			{
 				name: 'Delete',
 				value: 'delete',
 				description: 'Delete a change',
+				action: 'Delete a change',
 			},
 			{
 				name: 'Get',
 				value: 'get',
 				description: 'Retrieve a change',
+				action: 'Get a change',
 			},
 			{
 				name: 'Get All',
 				value: 'getAll',
 				description: 'Retrieve all changes',
+				action: 'Get all changes',
 			},
 			{
 				name: 'Update',
 				value: 'update',
 				description: 'Update a change',
+				action: 'Update a change',
 			},
 		],
 		default: 'create',
@@ -50,9 +56,14 @@ export const changeFields: INodeProperties[] = [
 	//              change: create
 	// ----------------------------------------
 	{
-		displayName: 'Requester Name/ID',
+		displayName: 'Requester Name or ID',
 		name: 'requesterId',
+<<<<<<< HEAD
 		description: 'ID of the requester of the change. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+		// eslint-disable-next-line n8n-nodes-base/node-param-description-wrong-for-dynamic-options
+		description: 'ID of the requester of the change. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 		type: 'options',
 		required: true,
 		default: '',
@@ -139,11 +150,15 @@ export const changeFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'Agent Name/ID',
+				displayName: 'Agent Name or ID',
 				name: 'agent_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the agent to whom the change is assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the agent to whom the change is assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgents',
 				},
@@ -173,11 +188,15 @@ export const changeFields: INodeProperties[] = [
 				],
 			},
 			{
-				displayName: 'Department Name/ID',
+				displayName: 'Department Name or ID',
 				name: 'department_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the department requesting the change. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the department requesting the change. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -190,11 +209,15 @@ export const changeFields: INodeProperties[] = [
 				description: 'HTML supported',
 			},
 			{
-				displayName: 'Group Name/ID',
+				displayName: 'Group Name or ID',
 				name: 'group_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the agent group to which the change is assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the agent group to which the change is assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},
@@ -272,6 +295,7 @@ export const changeFields: INodeProperties[] = [
 				name: 'status',
 				type: 'options',
 				default: 1,
+				// eslint-disable-next-line n8n-nodes-base/node-param-options-type-unsorted-items
 				options: [
 					{
 						name: 'Open',
@@ -377,7 +401,7 @@ export const changeFields: INodeProperties[] = [
 		name: 'limit',
 		type: 'number',
 		default: 50,
-		description: 'How many results to return',
+		description: 'Max number of results to return',
 		typeOptions: {
 			minValue: 1,
 		},
@@ -504,11 +528,15 @@ export const changeFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'Agent Name/ID',
+				displayName: 'Agent Name or ID',
 				name: 'agent_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the agent to whom the change is assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the agent to whom the change is assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgents',
 				},
@@ -538,11 +566,15 @@ export const changeFields: INodeProperties[] = [
 				],
 			},
 			{
-				displayName: 'Department Name/ID',
+				displayName: 'Department Name or ID',
 				name: 'department_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the department requesting the change. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the department requesting the change. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -555,11 +587,15 @@ export const changeFields: INodeProperties[] = [
 				description: 'HTML supported',
 			},
 			{
-				displayName: 'Group Name/ID',
+				displayName: 'Group Name or ID',
 				name: 'group_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the agent group to which the change is assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the agent group to which the change is assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},
@@ -610,11 +646,15 @@ export const changeFields: INodeProperties[] = [
 				],
 			},
 			{
-				displayName: 'Requester Name/ID',
+				displayName: 'Requester Name or ID',
 				name: 'requester_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the requester of the change. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the requester of the change. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getRequesters',
 				},
@@ -648,6 +688,7 @@ export const changeFields: INodeProperties[] = [
 				name: 'status',
 				type: 'options',
 				default: 1,
+				// eslint-disable-next-line n8n-nodes-base/node-param-options-type-unsorted-items
 				options: [
 					{
 						name: 'Open',

@@ -20,7 +20,7 @@ let testDbName = '';
 let globalOwnerRole: Role;
 
 beforeAll(async () => {
-	app = utils.initTestServer({ endpointGroups: ['owner'], applyAuth: true });
+	app = await utils.initTestServer({ endpointGroups: ['owner'], applyAuth: true });
 	const initResult = await testDb.init();
 	testDbName = initResult.testDbName;
 
@@ -30,6 +30,10 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+	config.set('userManagement.isInstanceOwnerSetUp', false);
+});
+
+afterEach(async () => {
 	await testDb.truncate(['User'], testDbName);
 });
 
@@ -62,6 +66,7 @@ test('POST /owner should create owner and enable isInstanceOwnerSetUp', async ()
 		password,
 		resetPasswordToken,
 		isPending,
+		apiKey,
 	} = response.body.data;
 
 	expect(validator.isUUID(id)).toBe(true);
@@ -74,8 +79,9 @@ test('POST /owner should create owner and enable isInstanceOwnerSetUp', async ()
 	expect(resetPasswordToken).toBeUndefined();
 	expect(globalRole.name).toBe('owner');
 	expect(globalRole.scope).toBe('global');
+	expect(apiKey).toBeUndefined();
 
-	const storedOwner = await Db.collections.User!.findOneOrFail(id);
+	const storedOwner = await Db.collections.User.findOneOrFail(id);
 	expect(storedOwner.password).not.toBe(newOwnerData.password);
 	expect(storedOwner.email).toBe(newOwnerData.email);
 	expect(storedOwner.firstName).toBe(newOwnerData.firstName);
@@ -86,6 +92,30 @@ test('POST /owner should create owner and enable isInstanceOwnerSetUp', async ()
 
 	const isInstanceOwnerSetUpSetting = await utils.isInstanceOwnerSetUp();
 	expect(isInstanceOwnerSetUpSetting).toBe(true);
+});
+
+test('POST /owner should create owner with lowercased email', async () => {
+	const ownerShell = await testDb.createUserShell(globalOwnerRole);
+	const authOwnerAgent = utils.createAgent(app, { auth: true, user: ownerShell });
+
+	const newOwnerData = {
+		email: randomEmail().toUpperCase(),
+		firstName: randomName(),
+		lastName: randomName(),
+		password: randomValidPassword(),
+	};
+
+	const response = await authOwnerAgent.post('/owner').send(newOwnerData);
+
+	expect(response.statusCode).toBe(200);
+
+	const { id, email } = response.body.data;
+
+	expect(id).toBe(ownerShell.id);
+	expect(email).toBe(newOwnerData.email.toLowerCase());
+
+	const storedOwner = await Db.collections.User.findOneOrFail(id);
+	expect(storedOwner.email).toBe(newOwnerData.email.toLowerCase());
 });
 
 test('POST /owner should fail with invalid inputs', async () => {
@@ -111,7 +141,7 @@ test('POST /owner/skip-setup should persist skipping setup to the DB', async () 
 	const skipConfig = config.getEnv('userManagement.skipInstanceOwnerSetup');
 	expect(skipConfig).toBe(true);
 
-	const { value } = await Db.collections.Settings!.findOneOrFail({
+	const { value } = await Db.collections.Settings.findOneOrFail({
 		key: 'userManagement.skipInstanceOwnerSetup',
 	});
 	expect(value).toBe('true');

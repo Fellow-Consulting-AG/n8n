@@ -14,7 +14,11 @@
 		],
 		"primaryDocumentation": [
 			{
+<<<<<<< HEAD
 				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.koBoToolbox/"
+=======
+				"url": "https://docs.n8n.io/integrations/nodes/n8n-nodes-base.kobotoolbox/"
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 			}
 		]
 	}

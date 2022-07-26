@@ -7,6 +7,7 @@ export const ticketOperations: INodeProperties[] = [
 		displayName: 'Operation',
 		name: 'operation',
 		type: 'options',
+		noDataExpression: true,
 		displayOptions: {
 			show: {
 				resource: [
@@ -19,26 +20,31 @@ export const ticketOperations: INodeProperties[] = [
 				name: 'Create',
 				value: 'create',
 				description: 'Create a ticket',
+				action: 'Create a ticket',
 			},
 			{
 				name: 'Delete',
 				value: 'delete',
 				description: 'Delete a ticket',
+				action: 'Delete a ticket',
 			},
 			{
 				name: 'Get',
 				value: 'get',
 				description: 'Retrieve a ticket',
+				action: 'Get a ticket',
 			},
 			{
 				name: 'Get All',
 				value: 'getAll',
 				description: 'Retrieve all tickets',
+				action: 'Get all tickets',
 			},
 			{
 				name: 'Update',
 				value: 'update',
 				description: 'Update a ticket',
+				action: 'Update a ticket',
 			},
 		],
 		default: 'create',
@@ -54,6 +60,7 @@ export const ticketFields: INodeProperties[] = [
 		name: 'email',
 		description: 'Email address of the ticket author',
 		type: 'string',
+		placeholder: 'name@email.com',
 		required: true,
 		default: '',
 		displayOptions: {
@@ -193,21 +200,29 @@ export const ticketFields: INodeProperties[] = [
 				description: 'Comma-separated email addresses to add in the CC field of the ticket email',
 			},
 			{
-				displayName: 'Department Name/ID',
+				displayName: 'Department Name or ID',
 				name: 'department_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the department to which this ticket belongs. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the department to which this ticket belongs. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
 			},
 			{
-				displayName: 'Group Name/ID',
+				displayName: 'Group Name or ID',
 				name: 'group_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the group to which the ticket has been assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the group to which the ticket has been assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},
@@ -240,10 +255,14 @@ export const ticketFields: INodeProperties[] = [
 				description: 'Name of the ticket author',
 			},
 			{
-				displayName: 'Requester Name/ID',
+				displayName: 'Requester Name or ID',
 				name: 'requester_id',
 				type: 'options',
+<<<<<<< HEAD
 				description: 'Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'getRequesters',
@@ -321,7 +340,7 @@ export const ticketFields: INodeProperties[] = [
 		name: 'limit',
 		type: 'number',
 		default: 50,
-		description: 'How many results to return',
+		description: 'Max number of results to return',
 		typeOptions: {
 			minValue: 1,
 		},
@@ -357,21 +376,29 @@ export const ticketFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'Agent Name/ID',
+				displayName: 'Agent Name or ID',
 				name: 'agent_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the agent to whom the tickets have been assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the agent to whom the tickets have been assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgents',
 				},
 			},
 			{
-				displayName: 'Group Name/ID',
+				displayName: 'Group Name or ID',
 				name: 'group_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the group to which the tickets have been assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the group to which the tickets have been assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},
@@ -500,11 +527,15 @@ export const ticketFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'Department Name/ID',
+				displayName: 'Department Name or ID',
 				name: 'department_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the department to which this ticket has been assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the department to which this ticket has been assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getDepartments',
 				},
@@ -520,15 +551,20 @@ export const ticketFields: INodeProperties[] = [
 				displayName: 'Email',
 				name: 'email',
 				type: 'string',
+				placeholder: 'name@email.com',
 				default: '',
 				description: 'Email address of the ticket author',
 			},
 			{
-				displayName: 'Group Name/ID',
+				displayName: 'Group Name or ID',
 				name: 'group_id',
 				type: 'options',
 				default: '',
+<<<<<<< HEAD
 				description: 'ID of the group to which the ticket has been assigned. Choose from the list or specify an ID. You can also specify the ID using an <a href="https://docs.polydocs.io/workflow/code-examples/expressions/">expression</a>.',
+=======
+				description: 'ID of the group to which the ticket has been assigned. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 				typeOptions: {
 					loadOptionsMethod: 'getAgentGroups',
 				},

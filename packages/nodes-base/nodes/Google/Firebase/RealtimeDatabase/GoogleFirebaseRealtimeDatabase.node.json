@@ -1,0 +1,31 @@
+{
+	"node": "n8n-nodes-base.googleFirebaseRealtimeDatabase",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": [
+		"Data & Storage"
+	],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://docs.polydocs.io/workflow/integrations/credentials/google"
+			}
+		],
+		"primaryDocumentation": [
+			{
+<<<<<<< HEAD:packages/nodes-base/nodes/Google/Firebase/RealtimeDatabase/RealtimeDatabase.node.json
+				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.googleCloudRealtimeDatabase/"
+=======
+				"url": "https://docs.n8n.io/integrations/nodes/n8n-nodes-base.googlecloudrealtimedatabase/"
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745:packages/nodes-base/nodes/Google/Firebase/RealtimeDatabase/GoogleFirebaseRealtimeDatabase.node.json
+			}
+		],
+		"generic": [
+			{
+				"label": "15 Google apps you can combine and automate to increase productivity",
+				"icon": "💡",
+				"url": "https://n8n.io/blog/automate-google-apps-for-productivity/"
+			}
+		]
+	}
+}

@@ -7,6 +7,7 @@ export const chatMessageOperations: INodeProperties[] = [
 		displayName: 'Operation',
 		name: 'operation',
 		type: 'options',
+		noDataExpression: true,
 		displayOptions: {
 			show: {
 				resource: [
@@ -19,20 +20,22 @@ export const chatMessageOperations: INodeProperties[] = [
 				name: 'Create',
 				value: 'create',
 				description: 'Create a message',
+				action: 'Create a chat message',
 			},
 			{
 				name: 'Get',
 				value: 'get',
 				description: 'Get a message',
+				action: 'Get a chat message',
 			},
 			{
 				name: 'Get All',
 				value: 'getAll',
 				description: 'Get all messages',
+				action: 'Get all chat messages',
 			},
 		],
 		default: 'create',
-		description: 'The operation to perform.',
 	},
 ];
 
@@ -42,10 +45,11 @@ export const chatMessageFields: INodeProperties[] = [
 	/*                                 chatMessage:create                         */
 	/* -------------------------------------------------------------------------- */
 	{
-		displayName: 'Chat ID',
+		displayName: 'Chat Name or ID',
 		name: 'chatId',
 		required: true,
 		type: 'options',
+		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
 		typeOptions: {
 			loadOptionsMethod: 'getChats',
 		},
@@ -61,7 +65,6 @@ export const chatMessageFields: INodeProperties[] = [
 			},
 		},
 		default: '',
-		description: 'Chat ID',
 	},
 	{
 		displayName: 'Message Type',
@@ -88,7 +91,7 @@ export const chatMessageFields: INodeProperties[] = [
 				],
 			},
 		},
-		default: '',
+		default: 'text',
 		description: 'The type of the content',
 	},
 	{
@@ -110,7 +113,7 @@ export const chatMessageFields: INodeProperties[] = [
 			},
 		},
 		default: '',
-		description: 'The content of the item.',
+		description: 'The content of the item',
 	},
 
 	/* -------------------------------------------------------------------------- */
@@ -137,10 +140,11 @@ export const chatMessageFields: INodeProperties[] = [
 	/*                                 chatMessage:getAll                         */
 	/* -------------------------------------------------------------------------- */
 	{
-		displayName: 'Chat ID',
+		displayName: 'Chat Name or ID',
 		name: 'chatId',
 		required: true,
 		type: 'options',
+		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>',
 		typeOptions: {
 			loadOptionsMethod: 'getChats',
 		},
@@ -155,7 +159,6 @@ export const chatMessageFields: INodeProperties[] = [
 			},
 		},
 		default: '',
-		description: 'Chat ID',
 	},
 	{
 		displayName: 'Return All',
@@ -172,7 +175,7 @@ export const chatMessageFields: INodeProperties[] = [
 			},
 		},
 		default: false,
-		description: 'If all results should be returned or only up to a given limit.',
+		description: 'Whether to return all results or only up to a given limit',
 	},
 	{
 		displayName: 'Limit',
@@ -195,7 +198,7 @@ export const chatMessageFields: INodeProperties[] = [
 			minValue: 1,
 			maxValue: 500,
 		},
-		default: 100,
-		description: 'How many results to return.',
+		default: 50,
+		description: 'Max number of results to return',
 	},
 ];

@@ -8,7 +8,11 @@
 	"resources": {
 		"primaryDocumentation": [
 			{
+<<<<<<< HEAD
 				"url": "https://docs.polydocs.io/workflow/integrations/core-nodes/n8n-nodes-base.executeWorkflow/"
+=======
+				"url": "https://docs.n8n.io/integrations/core-nodes/n8n-nodes-base.workflowtrigger/"
+>>>>>>> deb510a8e0057280da43f3b3e72d8acca5829745
 			}
 		]
 	},

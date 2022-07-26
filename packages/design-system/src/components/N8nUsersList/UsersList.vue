@@ -12,6 +12,7 @@
 					v-if="!user.isOwner"
 					placement="bottom"
 					:actions="getActions(user)"
+					theme="dark"
 					@action="(action) => onUserAction(user, action)"
 				/>
 			</div>
@@ -20,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { IUser } from '../../Interface';
+import { IUser } from '../../types';
 import Vue from 'vue';
 import N8nActionToggle from '../N8nActionToggle';
 import N8nBadge from '../N8nBadge';
