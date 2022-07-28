@@ -487,6 +487,7 @@
       "dist/nodes/Intercom/Intercom.node.js",
       "dist/nodes/Interval/Interval.node.js",
       "dist/nodes/Doc2App/AssignEmployee/AssignEmployee.node.js",
+      "dist/nodes/Doc2App/Classification/Classification.node.js",
       "dist/nodes/Doc2App/Extract/Extract.node.js",
       "dist/nodes/Doc2App/Status/StatusTrigger.node.js",
       "dist/nodes/InvoiceNinja/InvoiceNinja.node.js",
