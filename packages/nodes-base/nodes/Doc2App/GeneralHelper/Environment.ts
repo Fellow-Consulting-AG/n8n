@@ -22,6 +22,7 @@ export const api = {
     process_documents: server_url + '/document/process_documents',
     assign_with_email: server_url + '/document/assign_with_email/',
     get_document_types: server_url + '/document_type/get_document_types',
+    classify_document: server_url + '/document/classify_document',
 };
 
 

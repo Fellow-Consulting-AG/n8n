@@ -264,10 +264,21 @@ export default mixins(
 				'isTemplatesEnabled',
 			]),
 			canUserAccessSettings(): boolean {
-				return this.canUserAccessRouteByName(VIEWS.PERSONAL_SETTINGS) || this.canUserAccessRouteByName(VIEWS.USERS_SETTINGS);
+				const accessibleRoute = this.findFirstAccessibleSettingsRoute();
+				return accessibleRoute !== null;
 			},
 			helpMenuItems (): object[] {
 				return [
+					{
+						id: 'quickstart',
+						type: 'link',
+						properties: {
+							href: 'https://www.youtube.com/watch?v=RpjQTGKm-ok',
+							title: this.$locale.baseText('mainSidebar.helpMenuItems.quickstart'),
+							icon: 'video',
+							newWindow: true,
+						},
+					},
 					{
 						id: 'docs',
 						type: 'link',
@@ -486,9 +497,20 @@ export default mixins(
 					if (data.id && typeof data.id === 'string') {
 						data.id = parseInt(data.id, 10);
 					}
-					const blob = new Blob([JSON.stringify(data, null, 2)], {
+
+					const exportData: IWorkflowDataUpdate = {
+						...data,
+						tags: (tags || []).map(tagId => {
+							const {usageCount, ...tag} = this.$store.getters["tags/getTagById"](tagId);
+
+							return tag;
+						}),
+					};
+
+					const blob = new Blob([JSON.stringify(exportData, null, 2)], {
 						type: 'application/json;charset=utf-8',
 					});
+
 
 					let workflowName = this.$store.getters.workflowName || 'unsaved_workflow';
 
@@ -576,11 +598,10 @@ export default mixins(
 				} else if (key === 'executions') {
 					this.$store.dispatch('ui/openModal', EXECUTIONS_MODAL_KEY);
 				} else if (key === 'settings') {
-					if ((this.currentUser as IUser).isDefaultUser) {
-						this.$router.push('/settings/users');
-					}
-					else {
-						this.$router.push('/settings/personal');
+					const defaultRoute = this.findFirstAccessibleSettingsRoute();
+					if (defaultRoute) {
+						const routeProps = this.$router.resolve({ name: defaultRoute });
+						this.$router.push(routeProps.route.path);
 					}
 				} else if (key === 'apps') {
 					// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@stage.testamnadev.workflow.cloudintegration.eu/templates
@@ -610,6 +631,22 @@ export default mixins(
 					}
 					window.open(redirectUrl);
 				}
+			},
+			findFirstAccessibleSettingsRoute() {
+				// Get all settings rotes by filtering them by pageCategory property
+				const settingsRoutes = this.$router.getRoutes().filter(
+					category => category.meta.telemetry &&
+						category.meta.telemetry.pageCategory === 'settings',
+				).map(route => route.name || '');
+				let defaultSettingsRoute = null;
+
+				for (const route of settingsRoutes) {
+					if (this.canUserAccessRouteByName(route)) {
+						defaultSettingsRoute = route;
+						break;
+					}
+				}
+				return defaultSettingsRoute;
 			},
 		},
 	});

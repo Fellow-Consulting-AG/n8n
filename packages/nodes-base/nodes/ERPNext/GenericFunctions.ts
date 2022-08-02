@@ -12,7 +12,6 @@ import {
 	IHookFunctions,
 	IWebhookFunctions,
 	NodeApiError,
-	NodeOperationError
 } from 'n8n-workflow';
 
 export async function erpNextApiRequest(
@@ -27,21 +26,17 @@ export async function erpNextApiRequest(
 	const credentials = await this.getCredentials('erpNextApi') as ERPNextApiCredentials;
 	const baseUrl = getBaseUrl(credentials);
 
-	if (credentials === undefined) {
-		throw new NodeOperationError(this.getNode(), 'No credentials got returned!');
-	}
-
 	let options: OptionsWithUri = {
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
-			Authorization: `token ${credentials.apiKey}:${credentials.apiSecret}`,
 		},
 		method,
 		body,
 		qs: query,
 		uri: uri || `${baseUrl}${resource}`,
 		json: true,
+		rejectUnauthorized: !credentials.allowUnauthorizedCerts as boolean,
 	};
 
 	options = Object.assign({}, options, option);
@@ -54,7 +49,7 @@ export async function erpNextApiRequest(
 		delete options.qs;
 	}
 	try {
-		return await this.helpers.request!(options);
+		return await this.helpers.requestWithAuthentication.call(this, 'erpNextApi',options);
 	} catch (error) {
 		if (error.statusCode === 403) {
 			throw new NodeApiError(this.getNode(), { message: 'DocType unavailable.' });
@@ -109,4 +104,5 @@ type ERPNextApiCredentials = {
 	environment: 'cloudHosted' | 'selfHosted';
 	subdomain?: string;
 	domain?: string;
+	allowUnauthorizedCerts?: boolean;
 };

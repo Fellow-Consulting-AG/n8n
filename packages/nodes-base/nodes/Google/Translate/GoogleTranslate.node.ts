@@ -24,9 +24,10 @@ export class GoogleTranslate implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Google Translate',
 		name: 'googleTranslate',
+		// eslint-disable-next-line n8n-nodes-base/node-class-description-icon-not-svg
 		icon: 'file:googletranslate.png',
 		group: ['input', 'output'],
-		version: 1,
+		version: [1, 2],
 		description: 'Translate data using Google Translate',
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		defaults: {
@@ -74,11 +75,42 @@ export class GoogleTranslate implements INodeType {
 					},
 				],
 				default: 'serviceAccount',
+				displayOptions: {
+					show: {
+						'@version': [
+							1,
+						],
+					},
+				},
+			},
+			{
+				displayName: 'Authentication',
+				name: 'authentication',
+				type: 'options',
+				options: [
+					{
+						name: 'OAuth2 (Recommended)',
+						value: 'oAuth2',
+					},
+					{
+						name: 'Service Account',
+						value: 'serviceAccount',
+					},
+				],
+				default: 'oAuth2',
+				displayOptions: {
+					show: {
+						'@version': [
+							2,
+						],
+					},
+				},
 			},
 			{
 				displayName: 'Resource',
 				name: 'resource',
 				type: 'options',
+				noDataExpression: true,
 				options: [
 					{
 						name: 'Language',
@@ -86,12 +118,12 @@ export class GoogleTranslate implements INodeType {
 					},
 				],
 				default: 'language',
-				description: 'The operation to perform',
 			},
 			{
 				displayName: 'Operation',
 				name: 'operation',
 				type: 'options',
+				noDataExpression: true,
 				displayOptions: {
 					show: {
 						resource: [
@@ -104,10 +136,10 @@ export class GoogleTranslate implements INodeType {
 						name: 'Translate',
 						value: 'translate',
 						description: 'Translate data',
+						action: 'Translate a language',
 					},
 				],
 				default: 'translate',
-				description: 'The operation to perform',
 			},
 			// ----------------------------------
 			//         All
@@ -128,6 +160,7 @@ export class GoogleTranslate implements INodeType {
 				},
 			},
 			{
+				// eslint-disable-next-line n8n-nodes-base/node-param-display-name-wrong-for-dynamic-options
 				displayName: 'Translate To',
 				name: 'translateTo',
 				type: 'options',
@@ -135,7 +168,7 @@ export class GoogleTranslate implements INodeType {
 					loadOptionsMethod: 'getLanguages',
 				},
 				default: '',
-				description: 'The language to use for translation of the input text, set to one of the language codes listed in <a href="https://cloud.google.com/translate/docs/languages">Language Support</a>',
+				description: 'The language to use for translation of the input text, set to one of the language codes listed in <a href="https://cloud.google.com/translate/docs/languages">Language Support</a>. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
 				required: true,
 				displayOptions: {
 					show: {
@@ -172,7 +205,7 @@ export class GoogleTranslate implements INodeType {
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
-		const length = items.length as unknown as number;
+		const length = items.length;
 
 		const resource = this.getNodeParameter('resource', 0) as string;
 		const operation = this.getNodeParameter('operation', 0) as string;

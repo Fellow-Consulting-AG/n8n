@@ -35,7 +35,7 @@ export class Function implements INodeType {
 				},
 				type: 'string',
 				default: `// Code here will run only once, no matter how many input items there are.
-// More info and help: https://docs.polydocs.io/workflow/integrations/core-nodes/n8n-nodes-base.function
+// More info and help: https://docs.polydocs.io/workflow/integrations/core-nodes/workflow-nodes-base.function
 // Tip: You can use luxon for dates and $jmespath for querying JSON structures
 
 // Loop over inputs and add a new field called 'myNewField' to the JSON of each one
@@ -47,7 +47,7 @@ for (item of items) {
 console.log('Done!');
 
 return items;`,
-				description: 'The JavaScript code to execute.',
+				description: 'The JavaScript code to execute',
 				noDataExpression: true,
 			},
 		],

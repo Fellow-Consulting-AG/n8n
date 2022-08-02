@@ -36,7 +36,7 @@ export class FunctionItem implements INodeType {
 				},
 				type: 'string',
 				default: `// Code here will run once per input item.
-// More info and help: https://docs.polydocs.io/workflow/integrations/core-nodes/n8n-nodes-base.functionItem
+// More info and help: https://docs.polydocs.io/workflow/integrations/core-nodes/workflow-nodes-base.functionItem
 // Tip: You can use luxon for dates and $jmespath for querying JSON structures
 
 // Add a new field called 'myNewField' to the JSON of the item
@@ -46,7 +46,7 @@ item.myNewField = 1;
 console.log('Done!');
 
 return item;`,
-				description: 'The JavaScript code to execute for each item.',
+				description: 'The JavaScript code to execute for each item',
 				noDataExpression: true,
 			},
 		],
@@ -56,7 +56,7 @@ return item;`,
 		const items = this.getInputData();
 
 		const returnData: INodeExecutionData[] = [];
-		const length = items.length as unknown as number;
+		const length = items.length;
 		let item: INodeExecutionData;
 
 		const cleanupData = (inputData: IDataObject): IDataObject => {
@@ -163,6 +163,9 @@ return item;`,
 
 				const returnItem: INodeExecutionData = {
 					json: cleanupData(jsonData),
+					pairedItem: {
+						item: itemIndex,
+					},
 				};
 
 				if (item.binary) {
@@ -172,7 +175,14 @@ return item;`,
 				returnData.push(returnItem);
 			} catch (error) {
 				if (this.continueOnFail()) {
-					returnData.push({json:{ error: error.message }});
+					returnData.push({
+						json: {
+							error: error.message,
+						},
+						pairedItem: {
+							item: itemIndex,
+						},
+					});
 					continue;
 				}
 				throw error;

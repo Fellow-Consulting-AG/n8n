@@ -91,6 +91,19 @@ import ColorCircles from './ColorCircles.vue';
 	</Story>
 </Canvas>
 
+## Neutral
+
+<Canvas>
+	<Story name="neutral">
+		{{
+			template: `<color-circles :colors="['--color-neutral']" />`,
+			components: {
+				ColorCircles,
+			},
+		}}
+	</Story>
+</Canvas>
+
 ## Text
 
 <Canvas>
@@ -166,3 +179,17 @@ import ColorCircles from './ColorCircles.vue';
 		}}
 	</Story>
 </Canvas>
+
+## Sticky
+
+<Canvas>
+	<Story name="sticky">
+		{{
+			template: `<color-circles :colors="['--color-sticky-default-background', '--color-sticky-default-border']" />`,
+			components: {
+				ColorCircles,
+			},
+		}}
+	</Story>
+</Canvas>
+
