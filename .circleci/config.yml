@@ -91,7 +91,7 @@ jobs:
 
   deploy:
     executor: gcp-gcr/default
-    resource_class: small
+    # resource_class: small
     parameters:
 
       tag:
