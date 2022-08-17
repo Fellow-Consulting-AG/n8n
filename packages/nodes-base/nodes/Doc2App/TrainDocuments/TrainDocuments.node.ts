@@ -46,12 +46,31 @@ export class TrainDocuments implements INodeType {
         ],
         properties: [
             {
+				displayName: 'Label',
+				name: 'label',
+				type: 'string',
+				default: 'Test_Label',
+				description: 'Lable of the Document',
+				required: true,
+			},
+            {
 				displayName: 'Binary Property',
 				name: 'binaryPropertyName',
 				type: 'string',
 				default: 'data',
 				description: 'Object property name which holds binary data.',
 				required: true,
+			},
+            {
+				displayName: 'Tags',
+				name: 'tags',
+				type: 'string',
+				typeOptions: {
+					multipleValues: true,
+					multipleValueButtonText: 'Add Tag',
+				},
+				default: [],
+				description: 'Unique identifiers added to document.',
 			},
         ],
     };
@@ -61,24 +80,31 @@ export class TrainDocuments implements INodeType {
             let responseData;
             const items = this.getInputData();
             const binaryPropertyName = this.getNodeParameter('binaryPropertyName', 0) as string;
+
+
+            let tags = this.getNodeParameter('tags', 0) as string[];
             const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
             const api_key = credentials.apiKey;
 
             // should throw error if error
             const document_label = this.getNodeParameter('label', 0) as string ?? 'Test_Label';
-
-
             const formData = {
                 files: [] as UploadFile[],
                 label: document_label as string,
-                tags: [],
+                tags: tags,
             };
+
 
             for (let i = 0; i < items.length; i++) {
                 const item = items[i].binary as IBinaryKeyData;
 
+                const item_tags = items[i].json.tags as string[];
+                if (item_tags && Array.isArray(item_tags)) {
+                    formData.tags = formData.tags.concat(item_tags);
+                }
+
                 const binaryData = item[binaryPropertyName] as IBinaryData;
-                binaryData.fileName = i + 'classification_document.pdf';
+                binaryData.fileName = (i + 1)  + 'train_document.pdf';
                 const dataBuffer = (await this.helpers.getBinaryDataBuffer(i, binaryPropertyName));
             
                 const file = {

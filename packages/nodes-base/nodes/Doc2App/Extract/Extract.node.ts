@@ -71,7 +71,7 @@ export class Extract implements INodeType {
                 const item = items[i].binary as IBinaryKeyData;
 
                 const binaryData = item[binaryPropertyName] as IBinaryData;
-                binaryData.fileName = i + 'extract_document.pdf';
+                binaryData.fileName = (i + 1) + 'extract_document.pdf';
                 const dataBuffer = (await this.helpers.getBinaryDataBuffer(i, binaryPropertyName));
                 
                 const file = {
@@ -94,7 +94,7 @@ export class Extract implements INodeType {
                 uri: uri,
                 json: true,
             };
-        
+
             responseData = await this.helpers.request(options);
             return [this.helpers.returnJsonArray(responseData)];
         } catch(e: any) {
