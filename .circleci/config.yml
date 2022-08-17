@@ -215,12 +215,12 @@ workflows:
             - build-and-push
       - deploy_k8s:
           branch: << pipeline.git.branch >>
-          namespace: n8n
-          deployment: n8n-<< pipeline.git.branch >>
+          namespace: dev
+          deployment: workflow
           tag: << pipeline.parameters.GHA_Meta >>
           context: Digitalocean
           container: registry.digitalocean.com/cloudintegration/n8n
-          cluster-name: k8s-1-21-2-do-1-fra1-1625240177379
+          cluster-name: polydocs
           requires:
             - build-and-push
 
