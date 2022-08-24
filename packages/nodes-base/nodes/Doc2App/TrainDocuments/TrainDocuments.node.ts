@@ -129,6 +129,8 @@ export class TrainDocuments implements INodeType {
                 json: true,
             };
             responseData = await this.helpers.request(options);
+
+            console.log('TrainDocuments',options);
             return [this.helpers.returnJsonArray(responseData)];
         } catch(e: any) {
             console.error(e);
