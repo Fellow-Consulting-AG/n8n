@@ -84,7 +84,7 @@ export class Extract implements INodeType {
 						type: 'string',
 						default: '',
 						description: 'Set document sourcename',
-						required: true,
+						required: false,
 					},
       	],
     	};
