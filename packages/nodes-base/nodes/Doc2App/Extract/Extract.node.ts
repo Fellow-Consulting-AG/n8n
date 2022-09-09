@@ -54,7 +54,7 @@ export class Extract implements INodeType {
 						displayName: 'Label',
 						name: 'label',
 						type: 'string',
-						default: 'Test_Label',
+						default: 'Document.pdf',
 						description: 'Lable of the Document',
 						required: false,
 					},
@@ -79,37 +79,12 @@ export class Extract implements INodeType {
 						required: false,
 					},
 					{
-						displayName: 'Documentsubtype',
-						name: 'doc_sub_type',
-						type: 'options',
-						displayOptions: {
-							show: {
-								doc_type: [
-									'INVOICE'
-								]
-							},
-						},
-						options: [
-							{
-								name: 'All',
-								value: ''
-							},
-							{
-								name: 'Warenrechnung',
-								value: 'GOODS_INVOICE'
-							},
-							{
-								name: 'Kostenrechnung',
-								value: 'COST_INVOICE'
-							},
-							{
-								name: 'Frachtrechnung',
-								value: 'FREIGHT_INVOICE'
-							},
-						],
+						displayName: 'Documentsource',
+						name: 'source',
+						type: 'string',
 						default: '',
-						description: 'Set document subtype',
-						required: true,
+						description: 'Set document sourcename',
+						required: false,
 					},
       	],
     	};
@@ -170,13 +145,13 @@ export class Extract implements INodeType {
             const binaryPropertyName = this.getNodeParameter('binaryPropertyName', 0) as string;
             const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
 						let doc_type = this.getNodeParameter('doc_type', 0) as string;
-						let doc_sub_type = this.getNodeParameter('doc_sub_type', 0) as string;
+						let source = this.getNodeParameter('source', 0) as string;
 						const document_label = this.getNodeParameter('label', 0) as string ?? 'Test_Label';
             const api_key = credentials.apiKey;
             const formData = {
                 files: [] as UploadFile[],
 								doc_type: doc_type,
-								doc_sub_type: doc_sub_type,
+								source: source,
 								label: document_label as string,
             };
 
