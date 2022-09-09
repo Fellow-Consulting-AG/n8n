@@ -46,14 +46,97 @@ export class Extract implements INodeType {
         properties: [
             {
 				displayName: 'Binary Property',
-				
+
 				name: 'binaryPropertyName',
 				type: 'string',
 				default: 'data',
 				description: 'Object property name which holds binary data.',
 				required: true,
 			},
-        ],
+			{
+				displayName: 'Documenttype',
+				name: 'doc_type',
+				type: 'options',
+				options: [
+					{
+						name: 'All',
+						value: ''
+					},
+					{
+						name: 'Invoice',
+						value: 'INVOICE'
+					},
+					{
+						name: 'Credit Note',
+						value: 'CREDIT_NOTE'
+					},
+					{
+						name: 'Delivery Note',
+						value: 'DELIVERYNOTE'
+					},
+					{
+						name: 'Medical Receipt',
+						value: 'MEDICAL_RECEIPT'
+					},
+					{
+						name: 'Patient Form',
+						value: 'PATIENT_FORM'
+					},
+					{
+						name: 'Process Form',
+						value: 'PROCESS_FORM'
+					},
+					{
+						name: 'Order Confirmation',
+						value: 'ORDER_CONFIRMATION'
+					},
+					{
+						name: 'Order',
+						value: 'ORDER'
+					},
+					{
+						name: 'ZUGFeRD',
+						value: 'XML_INVOICE'
+					},
+				],
+				default: '',
+				description: 'Set documenttype for extraction',
+				required: false,
+			},
+			{
+				displayName: 'Documentsubtype',
+				name: 'doc_sub_type',
+				type: 'options',
+				displayOptions: {
+					show: {
+						doc_type: [
+							'INVOICE'
+						]
+					},
+				},
+				options: [
+					{
+						name: 'All',
+						value: ''
+					},
+					{
+						name: 'Warenrechnung',
+						value: 'GOODS_INVOICE'
+					},
+					{
+						name: 'Kostenrechnung',
+						value: 'COST_INVOICE'
+					},
+					{
+						name: 'Frachtrechnung',
+						value: 'FREIGHT_INVOICE'
+					},
+				],
+				default: '',
+				description: 'Set document subtype',
+				required: true,
+			},
+      ],
     };
 
     async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
@@ -73,7 +156,7 @@ export class Extract implements INodeType {
                 const binaryData = item[binaryPropertyName] as IBinaryData;
                 binaryData.fileName = (i + 1) + 'extract_document.pdf';
                 const dataBuffer = (await this.helpers.getBinaryDataBuffer(i, binaryPropertyName));
-                
+
                 const file = {
                     value: dataBuffer,
                     options: {
