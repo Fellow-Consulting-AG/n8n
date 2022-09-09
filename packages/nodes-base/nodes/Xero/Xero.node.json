@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/xero"
+				"url": "https://docs.polydocs.io/credentials/xero"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/workflow-nodes-base.xero/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.xero/"
 			}
 		]
 	}

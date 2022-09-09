@@ -64,7 +64,8 @@ class LoadNodesAndCredentialsClass {
 		LoggerProxy.init(this.logger);
 
 		// Make sure the imported modules can resolve dependencies fine.
-		process.env.NODE_PATH = module.paths.join(':');
+		const delimiter = process.platform === 'win32' ? ';' : ':';
+		process.env.NODE_PATH = module.paths.join(delimiter);
 		// @ts-ignore
 		module.constructor._initPaths();
 
@@ -94,6 +95,9 @@ class LoadNodesAndCredentialsClass {
 			// In case "n8n" package is the root and the packages are
 			// in the "node_modules" folder underneath it.
 			path.join(__dirname, '..', '..', 'node_modules', 'n8n-workflow'),
+			// In case "n8n" package is installed using npm/yarn workspaces
+			// the node_modules folder is in the root of the workspace.
+			path.join(__dirname, '..', '..', '..', '..', 'node_modules', 'n8n-workflow'),
 		];
 		for (const checkPath of checkPaths) {
 			try {
@@ -197,7 +201,7 @@ class LoadNodesAndCredentialsClass {
 			// Add serializer method "toJSON" to the class so that authenticate method (if defined)
 			// gets mapped to the authenticate attribute before it is sent to the client.
 			// The authenticate property is used by the client to decide whether or not to
-			// include the credential type in the predifined credentials (HTTP node)
+			// include the credential type in the predefined credentials (HTTP node)
 			// eslint-disable-next-line func-names
 			tempModule[credentialName].prototype.toJSON = function () {
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -289,7 +293,7 @@ class LoadNodesAndCredentialsClass {
 	): Promise<InstalledPackages> {
 		const downloadFolder = UserSettings.getUserN8nFolderDowloadedNodesPath();
 
-		const command = `npm update ${packageName}`;
+		const command = `npm i ${packageName}@latest`;
 
 		try {
 			await executeCommand(command);
@@ -422,7 +426,7 @@ class LoadNodesAndCredentialsClass {
 			return;
 		}
 
-		// Check if the node should be skiped
+		// Check if the node should be skipped
 		if (this.excludeNodes !== undefined && this.excludeNodes.includes(fullNodeName)) {
 			return;
 		}

@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/stripe"
+				"url": "https://docs.polydocs.io/credentials/stripe"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.stripeTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.stripeTrigger/"
 			}
 		],
 		"generic": [

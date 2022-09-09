@@ -1,0 +1,13 @@
+n8n-nodes-base:build: cache hit, replaying output [2me1b65868449f3fc6[0m
+[36mn8n-nodes-base:build: [0m
+[36mn8n-nodes-base:build: [0m> n8n-nodes-base@0.191.3 build
+[36mn8n-nodes-base:build: [0m> tsc && gulp build:icons && gulp build:translations
+[36mn8n-nodes-base:build: [0m
+[36mn8n-nodes-base:build: [0m[11:02:33] Using gulpfile ~/dev/n8n-master/packages/nodes-base/gulpfile.js
+[36mn8n-nodes-base:build: [0m[11:02:33] Starting 'build:icons'...
+[36mn8n-nodes-base:build: [0m[11:02:34] Finished 'build:icons' after 260 ms
+[36mn8n-nodes-base:build: [0m[11:02:34] Using gulpfile ~/dev/n8n-master/packages/nodes-base/gulpfile.js
+[36mn8n-nodes-base:build: [0m[11:02:34] Starting 'build:translations'...
+[36mn8n-nodes-base:build: [0mDefault locale set to: [35men[0m
+[36mn8n-nodes-base:build: [0mNo translation required - Skipping translations build...
+[36mn8n-nodes-base:build: [0m[11:02:35] Finished 'build:translations' after 1.91 ms

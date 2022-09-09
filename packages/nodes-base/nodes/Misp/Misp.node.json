@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/misp"
+				"url": "https://docs.polydocs.io/credentials/misp"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.misp/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.misp/"
 			}
 		]
 	}

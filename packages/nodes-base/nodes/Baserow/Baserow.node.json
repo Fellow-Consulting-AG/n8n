@@ -6,12 +6,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/baserow"
+				"url": "https://docs.polydocs.io/credentials/baserow"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.baserow/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.baserow/"
 			}
 		],
 		"generic": []

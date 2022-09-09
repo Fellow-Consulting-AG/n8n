@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/paddle"
+				"url": "https://docs.polydocs.io/credentials/paddle"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.paddle/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.paddle/"
 			}
 		]
 	}

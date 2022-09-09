@@ -112,7 +112,7 @@ export abstract class ICredentials {
 }
 
 // Defines which nodes are allowed to access the credentials and
-// when that access got grented from which user
+// when that access got granted from which user
 export interface ICredentialNodeAccess {
 	nodeType: string;
 	user?: string;
@@ -447,7 +447,7 @@ export interface IGetExecuteWebhookFunctions {
 
 export interface ISourceDataConnections {
 	// Key for each input type and because there can be multiple inputs of the same type it is an array
-	// null is also allowed because if we still need data for a later while executing the workflow set teompoary to null
+	// null is also allowed because if we still need data for a later while executing the workflow set temporary to null
 	// the nodes get as input TaskDataConnections which is identical to this one except that no null is allowed.
 	[key: string]: Array<ISourceData[] | null>;
 }
@@ -823,6 +823,7 @@ export interface INodeCredentials {
 }
 
 export interface INode {
+	id: string;
 	name: string;
 	typeVersion: number;
 	type: string;
@@ -842,7 +843,7 @@ export interface INode {
 }
 
 export interface IPinData {
-	[nodeName: string]: IDataObject[];
+	[nodeName: string]: INodeExecutionData[];
 }
 
 export interface INodes {
@@ -1004,7 +1005,9 @@ export interface ITriggerResponse {
 
 export interface INodeType {
 	description: INodeTypeDescription;
-	execute?(this: IExecuteFunctions): Promise<INodeExecutionData[][] | null>;
+	execute?(
+		this: IExecuteFunctions,
+	): Promise<INodeExecutionData[][] | NodeExecutionWithMetadata[][] | null>;
 	executeSingle?(this: IExecuteSingleFunctions): Promise<INodeExecutionData>;
 	poll?(this: IPollFunctions): Promise<INodeExecutionData[][] | null>;
 	trigger?(this: ITriggerFunctions): Promise<ITriggerResponse | undefined>;
@@ -1017,7 +1020,7 @@ export interface INodeType {
 			[key: string]: (this: ILoadOptionsFunctions) => Promise<INodePropertyOptions[]>;
 		};
 		credentialTest?: {
-			// Contains a group of functins that test credentials.
+			// Contains a group of functions that test credentials.
 			[functionName: string]: ICredentialTestFunction;
 		};
 	};
@@ -1110,6 +1113,7 @@ export type PostReceiveAction =
 			response: IN8nHttpFullResponse,
 	  ) => Promise<INodeExecutionData[]>)
 	| IPostReceiveBinaryData
+	| IPostReceiveLimit
 	| IPostReceiveRootProperty
 	| IPostReceiveSet
 	| IPostReceiveSetKeyValue
@@ -1136,6 +1140,7 @@ export interface INodeRequestSend {
 
 export interface IPostReceiveBase {
 	type: string;
+	enabled?: boolean | string;
 	properties: {
 		[key: string]: string | number | IDataObject;
 	};
@@ -1146,6 +1151,13 @@ export interface IPostReceiveBinaryData extends IPostReceiveBase {
 	type: 'binaryData';
 	properties: {
 		destinationProperty: string;
+	};
+}
+
+export interface IPostReceiveLimit extends IPostReceiveBase {
+	type: 'limit';
+	properties: {
+		maxResults: number | string;
 	};
 }
 
@@ -1359,10 +1371,10 @@ export interface ISourceData {
 	previousNodeRun?: number; // If undefined "0" gets used
 }
 
-// The data for all the different kind of connectons (like main) and all the indexes
+// The data for all the different kind of connections (like main) and all the indexes
 export interface ITaskDataConnections {
 	// Key for each input type and because there can be multiple inputs of the same type it is an array
-	// null is also allowed because if we still need data for a later while executing the workflow set teompoary to null
+	// null is also allowed because if we still need data for a later while executing the workflow set temporary to null
 	// the nodes get as input TaskDataConnections which is identical to this one except that no null is allowed.
 	[key: string]: Array<INodeExecutionData[] | null>;
 }
@@ -1378,7 +1390,7 @@ export interface IWaitingForExecution {
 
 export interface ITaskDataConnectionsSource {
 	// Key for each input type and because there can be multiple inputs of the same type it is an array
-	// null is also allowed because if we still need data for a later while executing the workflow set teompoary to null
+	// null is also allowed because if we still need data for a later while executing the workflow set temporary to null
 	// the nodes get as input TaskDataConnections which is identical to this one except that no null is allowed.
 	[key: string]: Array<ISourceData | null>;
 }
@@ -1427,10 +1439,14 @@ export interface IWorkflowExecuteAdditionalData {
 	executeWorkflow: (
 		workflowInfo: IExecuteWorkflowInfo,
 		additionalData: IWorkflowExecuteAdditionalData,
-		inputData?: INodeExecutionData[],
-		parentExecutionId?: string,
-		loadedWorkflowData?: IWorkflowBase,
-		loadedRunData?: any,
+		options?: {
+			parentWorkflowId?: string;
+			inputData?: INodeExecutionData[];
+			parentExecutionId?: string;
+			loadedWorkflowData?: IWorkflowBase;
+			loadedRunData?: any;
+			parentWorkflowSettings?: IWorkflowSettings;
+		},
 	) => Promise<any>;
 	// hooks?: IWorkflowExecuteHooks;
 	executionId?: string;
@@ -1541,6 +1557,7 @@ export interface INoteGraphItem {
 }
 
 export interface INodeGraphItem {
+	id: string;
 	type: string;
 	resource?: string;
 	operation?: string;
@@ -1552,6 +1569,8 @@ export interface INodeGraphItem {
 	credential_type?: string; // HTTP Request node v2
 	credential_set?: boolean; // HTTP Request node v2
 	method?: string; // HTTP Request node v2
+	src_node_id?: string;
+	src_instance_id?: string;
 }
 
 export interface INodeNameIndex {
@@ -1614,3 +1633,7 @@ export type PublicInstalledNode = {
 	latestVersion: string;
 	package: PublicInstalledPackage;
 };
+
+export interface NodeExecutionWithMetadata extends INodeExecutionData {
+	pairedItem: IPairedItemData | IPairedItemData[];
+}

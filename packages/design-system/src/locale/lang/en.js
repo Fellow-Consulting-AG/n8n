@@ -18,5 +18,5 @@ export default {
 		config.minimum > 1 ? 's' : ''
 	}`),
 	"formInput.validator.defaultPasswordRequirements": "8+ characters, at least 1 number and 1 capital letter",
-	"sticky.markdownHint": `You can style with <a href="https://docs.n8n.io/workflows/sticky-notes/" target="_blank">Markdown</a>`,
+	"sticky.markdownHint": `You can style with <a href="https://docs.polydocs.ioworkflows/sticky-notes/" target="_blank">Markdown</a>`,
 };

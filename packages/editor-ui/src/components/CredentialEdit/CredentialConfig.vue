@@ -38,12 +38,14 @@
 			@click="$emit('retest')"
 		/>
 
-		<n8n-info-tip v-if="documentationUrl && credentialProperties.length">
+		<n8n-notice v-if="documentationUrl && credentialProperties.length" theme="warning">
 			{{ $locale.baseText('credentialEdit.credentialConfig.needHelpFillingOutTheseFields') }}
-			<n8n-link :to="documentationUrl" size="small" :bold="true" @click="onDocumentationUrlClick">
-				{{ $locale.baseText('credentialEdit.credentialConfig.openDocs') }}
-			</n8n-link>
-		</n8n-info-tip>
+			<span class="ml-4xs">
+				<n8n-link :to="documentationUrl" size="small" bold @click="onDocumentationUrlClick">
+					{{ $locale.baseText('credentialEdit.credentialConfig.openDocs') }}
+				</n8n-link>
+			</span>
+		</n8n-notice>
 
 		<CopyInput
 			v-if="isOAuthType && credentialProperties.length"
@@ -51,8 +53,7 @@
 			:value="oAuthCallbackUrl"
 			:copyButtonText="$locale.baseText('credentialEdit.credentialConfig.clickToCopy')"
 			:hint="$locale.baseText('credentialEdit.credentialConfig.subtitle', { interpolate: { appName } })"
-			:toastTitle="$locale.baseText('credentialEdit.credentialEdit.showMessage.title')"
-			:toastMessage="$locale.baseText('credentialEdit.credentialConfig.redirectUrlCopiedToClipboard')"
+			:toastTitle="$locale.baseText('credentialEdit.credentialConfig.redirectUrlCopiedToClipboard')"
 		/>
 
 		<CredentialInputs
@@ -73,10 +74,9 @@
 </template>
 
 <script lang="ts">
-import { ICredentialType, INodeTypeDescription } from 'n8n-workflow';
+import { ICredentialType } from 'n8n-workflow';
 import { getAppNameFromCredType, isCommunityPackageName } from '../helpers';
 
-import Vue from 'vue';
 import Banner from '../Banner.vue';
 import CopyInput from '../CopyInput.vue';
 import CredentialInputs from './CredentialInputs.vue';
@@ -84,7 +84,6 @@ import OauthButton from './OauthButton.vue';
 import { restApi } from '@/components/mixins/restApi';
 import { addCredentialTranslation } from '@/plugins/i18n';
 import mixins from 'vue-typed-mixins';
-import { NPM_PACKAGE_DOCS_BASE_URL } from '@/constants';
 
 export default mixins(restApi).extend({
 	name: 'CredentialConfig',
@@ -175,7 +174,7 @@ export default mixins(restApi).extend({
 
 			return  isCommunityNode ?
 				'' : // Don't show documentation link for community nodes if the URL is not an absolute path
-				`https://docs.polydocs.io/example/export-to-gdrive/configure-doc2-status-trigger/`;
+				`https://docs.polydocs.io/credentials/${type.documentationUrl}/?utm_source=n8n_app&utm_medium=left_nav_menu&utm_campaign=create_new_credentials_modal`;
 		},
 		isGoogleOAuthType(): boolean {
 			return this.credentialTypeName === 'googleOAuth2Api' || this.parentTypes.includes('googleOAuth2Api');
@@ -193,16 +192,6 @@ export default mixins(restApi).extend({
 		},
 	},
 	methods: {
-		/**
-		 * Get the current version for a node type.
-		 */
-		async getCurrentNodeVersion(targetNodeType: string) {
-			const { allNodeTypes }: { allNodeTypes: INodeTypeDescription[] } = this.$store.getters;
-			const found = allNodeTypes.find(nodeType => nodeType.name === targetNodeType);
-
-			return found ? found.version : 1;
-		},
-
 		onDataChange (event: { name: string; value: string | number | boolean | Date | null }): void {
 			this.$emit('change', event);
 		},
@@ -227,6 +216,7 @@ export default mixins(restApi).extend({
 
 <style lang="scss" module>
 .container {
+	--notice-margin: 0;
 	> * {
 		margin-bottom: var(--spacing-l);
 	}

@@ -113,7 +113,7 @@ You can find additional information and example workflows on the [n8n.io](https:
 
 ## Create Custom Nodes
 
-You can create custom nodes for n8n. Follow the instructions mentioned in the documentation to create your node: [Creating nodes](https://docs.polydocs.io/workflow/integrations/creating-nodes/code/create-first-node/)
+You can create custom nodes for n8n. Follow the instructions mentioned in the documentation to create your node: [Creating nodes](https://docs.polydocs.io/nodes/creating-nodes/create-node.html)
 
 ## Contributing
 
@@ -123,7 +123,7 @@ You can create custom nodes for n8n. Follow the instructions mentioned in the do
 
 The [CONTRIBUTING guide](https://github.com/n8n-io/n8n/blob/master/CONTRIBUTING.md) will help you set up your development environment.
 
-You can find more information on how you can contribute to the project on our documentation: [How can I contribute?](https://docs.n8n.io/reference/contributing.html)
+You can find more information on how you can contribute to the project on our documentation: [How can I contribute?](https://docs.polydocs.ioreference/contributing.html)
 
 ## What does n8n mean, and how do you pronounce it?
 
@@ -143,7 +143,7 @@ If you are interested in working at n8n and building the project, check out the 
 
 ## Upgrading
 
-Before you upgrade to the latest version, make sure to check the changelogs: [Changelog](https://docs.n8n.io/reference/changelog.html)
+Before you upgrade to the latest version, make sure to check the changelogs: [Changelog](https://docs.polydocs.ioreference/changelog.html)
 
 You can also find breaking changes here: [Breaking Changes](./BREAKING-CHANGES.md)
 
@@ -151,4 +151,4 @@ You can also find breaking changes here: [Breaking Changes](./BREAKING-CHANGES.m
 
 n8n is [fair-code](http://faircode.io) distributed under the [**Sustainable Use License**](https://github.com/n8n-io/n8n/blob/master/packages/cli/LICENSE.md).
 
-Additional information on the license can be found in the [FAQ](https://docs.n8n.io/reference/faq.html#license)
+Additional information about the license can be found in the [docs](https://docs.polydocs.ioreference/license/).
