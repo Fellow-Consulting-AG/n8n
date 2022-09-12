@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/google"
+				"url": "https://docs.polydocs.io/credentials/google"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.googleDrive/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.googleDrive/"
 			}
 		],
 		"generic": [

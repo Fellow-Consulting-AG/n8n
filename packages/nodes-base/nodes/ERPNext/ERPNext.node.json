@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/erpnext"
+				"url": "https://docs.polydocs.io/credentials/erpnext"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.erpNext/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.erpNext/"
 			}
 		]
 	}

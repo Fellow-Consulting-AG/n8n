@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/agileCrm"
+				"url": "https://docs.polydocs.io/credentials/agileCrm"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.agileCrm/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.agileCrm/"
 			}
 		]
 	}

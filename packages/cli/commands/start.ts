@@ -239,7 +239,7 @@ export class Start extends Command {
 				config.set('nodes.packagesMissing', '');
 				if (missingPackages.size) {
 					LoggerProxy.error(
-						'n8n detected that some packages are missing. For more information, visit https://docs.n8n.io/integrations/community-nodes/troubleshooting/',
+						'n8n detected that some packages are missing. For more information, visit https://docs.polydocs.iointegrations/community-nodes/troubleshooting/',
 					);
 
 					if (flags.reinstallMissingPackages || process.env.N8N_REINSTALL_MISSING_PACKAGES) {
@@ -256,7 +256,7 @@ export class Start extends Command {
 								missingPackages.delete(missingPackage);
 							}
 							LoggerProxy.info(
-								'Packages reinstalled successfully. Resuming regular intiailization.',
+								'Packages reinstalled successfully. Resuming regular initialization.',
 							);
 						} catch (error) {
 							LoggerProxy.error('n8n was unable to install the missing packages.');

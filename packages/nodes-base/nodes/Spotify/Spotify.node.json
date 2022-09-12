@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/spotify"
+				"url": "https://docs.polydocs.io/credentials/spotify"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/workflow-nodes-base.spotify/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.spotify/"
 			}
 		]
 	},

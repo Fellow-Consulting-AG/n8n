@@ -1,10 +1,6 @@
-import {
-	INodeProperties,
-} from 'n8n-workflow';
+import { INodeProperties } from 'n8n-workflow';
 
-import {
-	getPagingParameters
-} from '../GenericFunctions';
+import { getPagingParameters } from '../GenericFunctions';
 
 export const spaceOperations: INodeProperties[] = [
 	{
@@ -14,9 +10,7 @@ export const spaceOperations: INodeProperties[] = [
 		type: 'options',
 		displayOptions: {
 			show: {
-				resource: [
-					'space',
-				],
+				resource: ['space'],
 			},
 		},
 		options: [
@@ -27,7 +21,7 @@ export const spaceOperations: INodeProperties[] = [
 				action: 'Get a space',
 			},
 			{
-				name: 'Get All',
+				name: 'Get Many',
 				value: 'getAll',
 				description: 'Get all spaces the caller is a member of',
 				action: 'Get all spaces',
@@ -48,12 +42,8 @@ export const spaceFields: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				resource: [
-					'space',
-				],
-				operation: [
-					'get',
-				],
+				resource: ['space'],
+				operation: ['get'],
 			},
 		},
 		default: '',

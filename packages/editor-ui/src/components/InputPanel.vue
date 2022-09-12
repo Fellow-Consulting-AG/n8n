@@ -16,7 +16,9 @@
 		paneType="input"
 		@linkRun="onLinkRun"
 		@unlinkRun="onUnlinkRun"
-		@runChange="onRunIndexChange">
+		@runChange="onRunIndexChange"
+		@tableMounted="$emit('tableMounted', $event)"
+		>
 		<template v-slot:header>
 			<div :class="$style.titleSection">
 				<n8n-select v-if="parentNodes.length" :popper-append-to-body="true" size="small" :value="currentNodeName" @input="onSelect" :no-data-text="$locale.baseText('ndv.input.noNodesFound')" :placeholder="$locale.baseText('ndv.input.parentNodes')" filterable>
@@ -50,7 +52,7 @@
 				<n8n-text tag="div" :bold="true" color="text-dark" size="large">{{ $locale.baseText('ndv.input.notConnected.title') }}</n8n-text>
 				<n8n-text tag="div">
 					{{ $locale.baseText('ndv.input.notConnected.message') }}
-					<a href="https://docs.n8n.io/workflows/connections/" target="_blank" @click="onConnectionHelpClick">
+					<a href="https://docs.polydocs.ioworkflows/connections/" target="_blank" @click="onConnectionHelpClick">
 						{{$locale.baseText('ndv.input.notConnected.learnMore')}}
 					</a>
 				</n8n-text>

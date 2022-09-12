@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/vonage"
+				"url": "https://docs.polydocs.io/credentials/vonage"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/workflow-nodes-base.vonage/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.vonage/"
 			}
 		],
 		"generic": [

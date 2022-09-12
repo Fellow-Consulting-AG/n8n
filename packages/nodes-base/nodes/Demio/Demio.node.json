@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/demio"
+				"url": "https://docs.polydocs.io/credentials/demio"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.demio/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.demio/"
 			}
 		]
 	}

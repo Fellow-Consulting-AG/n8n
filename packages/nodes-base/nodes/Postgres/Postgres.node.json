@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/postgres"
+				"url": "https://docs.polydocs.io/credentials/postgres"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.postgres/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.postgres/"
 			}
 		],
 		"generic": [

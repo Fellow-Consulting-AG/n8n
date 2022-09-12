@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/uProc"
+				"url": "https://docs.polydocs.io/credentials/uProc"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/workflow-nodes-base.uproc/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.uproc/"
 			}
 		],
 		"generic": [

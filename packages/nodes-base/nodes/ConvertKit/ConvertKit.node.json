@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/convertKit"
+				"url": "https://docs.polydocs.io/credentials/convertKit"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.convertKit/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.convertKit/"
 			}
 		]
 	}
