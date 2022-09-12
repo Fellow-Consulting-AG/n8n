@@ -208,11 +208,11 @@ workflows:
           tag: << pipeline.parameters.GHA_Meta >>
           image: cloudintegration/n8n
 
-      # - deploy:
-      #     tag: << pipeline.parameters.GHA_Meta >>
-      #     api-key: 8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq
-      #     requires:
-      #       - build-and-push
+      - deploy:
+          tag: << pipeline.parameters.GHA_Meta >>
+          api-key: 8atbbjpdZJTR7s669S7si851bFayy5MhdNE21T2wqazvZhz8MBm6vzQGdxpeuLAIvgqncf1UZ6X51n31QnZprQdC5weJTv102lRSqM2iv5TZ9Pkihm3iVc9B12lZknaq
+          requires:
+            - build-and-push
       - deploy_k8s:
           branch: << pipeline.git.branch >>
           namespace: dev

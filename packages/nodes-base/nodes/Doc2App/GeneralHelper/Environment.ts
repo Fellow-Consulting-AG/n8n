@@ -24,7 +24,8 @@ export const api = {
     get_document_types: server_url + '/document_type/get_document_types',
     classify_document: server_url + '/document/classify_document',
     test_classification: server_url + '/custom_classifier/test_classification',
-    train_document: server_url + '/custom_classifier/train_document', 
+    train_document: server_url + '/custom_classifier/train_document',
+		get_groups: server_url + '/groups/get_groups'
 };
 
 
