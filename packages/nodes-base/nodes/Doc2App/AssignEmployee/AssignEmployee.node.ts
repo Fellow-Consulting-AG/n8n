@@ -127,9 +127,6 @@ export class AssignEmployee implements INodeType {
 										const groupname = groups.name;
 										const group_id = groups.id;
 
-										if (groups.is_active !== true) {
-												continue;
-										}
 										returnData.push({
 												name: groupname,
 												value: group_id,
