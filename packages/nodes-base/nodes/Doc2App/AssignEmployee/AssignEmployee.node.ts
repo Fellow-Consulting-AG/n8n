@@ -124,8 +124,8 @@ export class AssignEmployee implements INodeType {
 								}
 								const response = await this.helpers.httpRequest(options);
 								for (const groups of response.data) {
-										const groupname = groups.title;
-										const group_id = groups.group_key;
+										const groupname = groups.name;
+										const group_id = groups.id;
 
 										if (groups.is_active !== true) {
 												continue;
