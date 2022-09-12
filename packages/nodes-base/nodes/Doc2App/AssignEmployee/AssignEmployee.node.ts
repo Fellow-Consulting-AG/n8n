@@ -123,14 +123,14 @@ export class AssignEmployee implements INodeType {
 										return returnData;
 								}
 								const response = await this.helpers.httpRequest(options);
-								for (const groups of response.data) {
-										const groupname = groups.name;
-										const group_id = groups.id;
+								for (const groups of response) {
+									const groupname = groups.name;
+									const group_id = groups.id;
 
-										returnData.push({
-												name: groupname,
-												value: group_id,
-										});
+									returnData.push({
+											name: groupname,
+											value: group_id,
+									});
 								}
 						} catch(e: any) {
 								console.error(e);
