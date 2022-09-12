@@ -1,5 +1,7 @@
 import {
-    IExecuteFunctions,
+	IHookFunctions,
+	IWebhookFunctions,
+	IExecuteFunctions
 } from 'n8n-core';
 
 import {
@@ -9,10 +11,11 @@ import {
     INodeType,
     INodeTypeDescription,
     IDataObject,
-		IHookFunctions,
 		ILoadOptionsFunctions,
 		INodePropertyOptions,
-		IHttpRequestOptions
+    IHttpRequestOptions,
+    IWebhookResponseData,
+		NodeOperationError
 } from 'n8n-workflow';
 
 import {
@@ -52,16 +55,17 @@ export class Extract implements INodeType {
 						displayName: 'Label',
 						name: 'label',
 						type: 'string',
-						default: 'Test_Label',
-						description: 'Label of the Document',
+						default: 'Document.pdf',
+						description: 'Lable of the Document',
 						required: false,
 					},
-          {
+					{
 						displayName: 'Binary Property',
+
 						name: 'binaryPropertyName',
 						type: 'string',
-						default: '',
-						description: 'Object property name which holds binary data.',
+						default: 'data',
+						description: 'Object property name which holds binary data',
 						required: true,
 					},
 					{
@@ -73,18 +77,18 @@ export class Extract implements INodeType {
 						},
 						description: 'Use documenttype from the list',
 						default: '',
-						required: true,
+						required: false,
 					},
 					{
 						displayName: 'Documentsource',
-						name: 'documentsource',
+						name: 'source',
 						type: 'string',
 						default: '',
-						description: 'Set document source',
+						description: 'Set document sourcename',
 						required: false,
 					},
-        ],
-    };
+      	],
+    	};
 		methods = {
 			loadOptions: {
 					async getDocumentTypes(this: IHookFunctions | ILoadOptionsFunctions): Promise<INodePropertyOptions[]>{
@@ -135,59 +139,62 @@ export class Extract implements INodeType {
 			},
 	};
 
-	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		try {
-				let responseData;
-				const items = this.getInputData();
-				const binaryPropertyName = this.getNodeParameter('binaryPropertyName', 0) as string;
-				const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
-				let doc_type = this.getNodeParameter('doc_type', 0) as string;
-				let source = this.getNodeParameter('documentsource', 0) as string;
-				const document_label = this.getNodeParameter('label', 0) as string ?? 'Test_Label';
-				const api_key = credentials.apiKey;
-				const formData = {
-						files: [] as UploadFile[],
-						doc_type: doc_type,
-						source: source,
-						label: document_label as string,
-				};
+    async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+        try {
+            let responseData;
+            const items = this.getInputData();
+            const binaryPropertyName = this.getNodeParameter('binaryPropertyName', 0) as string;
+            const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
+						let doc_type = this.getNodeParameter('doc_type', 0) as string;
+						let source = this.getNodeParameter('source', 0) as string;
+						const document_label = this.getNodeParameter('label', 0) as string ?? 'Test_Label';
+            const api_key = credentials.apiKey;
+            const formData = {
+                files: [] as UploadFile[],
+								doc_type: doc_type,
+								source: source,
+								label: document_label as string,
+            };
 
-				for (let i = 0; i < items.length; i++) {
-						const item = items[i].binary as IBinaryKeyData;
-						const binaryData = item[binaryPropertyName] as IBinaryData;
-						const dataBuffer = (await this.helpers.getBinaryDataBuffer(i, binaryPropertyName));
-						if (document_label) {
-							binaryData.fileName = document_label as string;
-						} else {
-							binaryData.fileName = (i + 1) + 'extract_document.pdf';
-						}
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i].binary as IBinaryKeyData;
+								const binaryData = item[binaryPropertyName] as IBinaryData;
+								if (binaryData === undefined) {
+									throw new NodeOperationError(this.getNode(), `No binary data property "${binaryPropertyName}" does not exists on item!`, { itemIndex: i });
+								}
+								const dataBuffer = (await this.helpers.getBinaryDataBuffer(i, binaryPropertyName));
+								if (document_label) {
+									binaryData.fileName = document_label as string;
+								} else {
+									binaryData.fileName = (i + 1) + 'extract_document.pdf';
+								}
 
-						const file = {
-								value: dataBuffer,
-								options: {
-										filename: binaryData.fileName,
-										contentType: binaryData.mimeType,
-								},
-						} as UploadFile;
-						formData.files.push(file);
-				}
-				let uri = api.process_documents;
-				const options: OptionsWithUri = {
-						headers: {
-								'Content-Type': 'multipart/form-data',
-								'X-API-KEY': api_key,
-						},
-						method: 'POST',
-						body:  formData ,
-						uri: uri,
-						json: true,
-				};
+                const file = {
+                    value: dataBuffer,
+                    options: {
+                        filename: binaryData.fileName,
+                        contentType: binaryData.mimeType,
+                    },
+                } as UploadFile;
+                formData.files.push(file);
+            }
+            let uri = api.process_documents;
+            const options: OptionsWithUri = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'X-API-KEY': api_key,
+                },
+                method: 'POST',
+                body:  formData ,
+                uri: uri,
+                json: true,
+            };
 
-				responseData = await this.helpers.request(options);
-				return [this.helpers.returnJsonArray(responseData)];
-		} catch(e: any) {
-				console.error(e);
-				throw new Error('Some internal error occur. Please try again later');
-		}
-}
+            responseData = await this.helpers.request(options);
+            return [this.helpers.returnJsonArray(responseData)];
+        } catch(e: any) {
+            console.error(e);
+            throw new Error('Some internal error occur. Please try again later');
+        }
+    }
 }
