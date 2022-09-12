@@ -9,6 +9,7 @@ import {
     INodeType,
     INodeTypeDescription,
     IDataObject,
+		NodeOperationError
 } from 'n8n-workflow';
 
 import {
@@ -52,7 +53,7 @@ export class TestClassification implements INodeType {
     };
 
     async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-        
+
         let responseData;
         const items = this.getInputData();
         const binaryPropertyName = this.getNodeParameter('binaryPropertyName', 0) as string;
@@ -62,6 +63,9 @@ export class TestClassification implements INodeType {
             for (let i = 0; i < items.length; i++) {
                 const item = items[i].binary as IBinaryKeyData;
                 const binaryData = item[binaryPropertyName] as IBinaryData;
+								if (binaryData === undefined) {
+									throw new NodeOperationError(this.getNode(), `No binary data property "${binaryPropertyName}" does not exists on item!`, { itemIndex: i });
+								}
                 binaryData.fileName = (i + 1) + 'classification_document.pdf';
                 const dataBuffer = (await this.helpers.getBinaryDataBuffer(i, binaryPropertyName));
 
@@ -76,7 +80,7 @@ export class TestClassification implements INodeType {
                 };
 
                 let uri = api.test_classification;
-                
+
                 const options: OptionsWithUri = {
                     headers: {
                         'Content-Type': 'multipart/form-data',
