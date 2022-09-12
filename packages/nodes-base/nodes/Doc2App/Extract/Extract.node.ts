@@ -15,6 +15,7 @@ import {
 		INodePropertyOptions,
     IHttpRequestOptions,
     IWebhookResponseData,
+		NodeOperationError
 } from 'n8n-workflow';
 
 import {
@@ -158,6 +159,9 @@ export class Extract implements INodeType {
             for (let i = 0; i < items.length; i++) {
                 const item = items[i].binary as IBinaryKeyData;
 								const binaryData = item[binaryPropertyName] as IBinaryData;
+								if (binaryData === undefined) {
+									throw new NodeOperationError(this.getNode(), `No binary data property "${binaryPropertyName}" does not exists on item!`, { itemIndex: i });
+								}
 								const dataBuffer = (await this.helpers.getBinaryDataBuffer(i, binaryPropertyName));
 								if (document_label) {
 									binaryData.fileName = document_label as string;
