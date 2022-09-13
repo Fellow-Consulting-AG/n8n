@@ -80,11 +80,66 @@ export class Extract implements INodeType {
 						required: false,
 					},
 					{
-						displayName: 'Documentsource',
-						name: 'source',
-						type: 'string',
+						displayName: 'Importtype',
+						name: 'importtype',
+						type: 'options',
+						options: [
+							{
+								name: 'Email',
+								value: 'email'
+							},
+							{
+								name: 'Other',
+								value: 'other'
+							}
+						],
 						default: '',
-						description: 'Set document sourcename',
+						description: 'Set importtype',
+						required: false,
+					},
+					{
+						displayName: 'Documentsource',
+						name: 'doc_source',
+						type: 'string',
+						displayOptions: {
+							show: {
+								importtype: [
+									'other'
+								]
+							}
+						},
+						default: '',
+						description: 'Set documentsource',
+						required: false,
+					},
+					{
+						displayName: 'Address',
+						name: 'address',
+						type: 'string',
+						displayOptions: {
+							show: {
+								importtype: [
+									'email'
+								]
+							}
+						},
+						default: '',
+						description: 'Set Importaddress',
+						required: false,
+					},
+					{
+						displayName: 'Inbox',
+						name: 'inbox',
+						type: 'string',
+						displayOptions: {
+							show: {
+								importtype: [
+									'email'
+								]
+							}
+						},
+						default: '',
+						description: 'Set emailinbox',
 						required: false,
 					},
       	],
@@ -146,9 +201,20 @@ export class Extract implements INodeType {
             const binaryPropertyName = this.getNodeParameter('binaryPropertyName', 0) as string;
             const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
 						let doc_type = this.getNodeParameter('doc_type', 0) as string;
-						let source = this.getNodeParameter('source', 0) as string;
+						let doc_source = this.getNodeParameter('doc_source', 0) as string;
+						let inbox = this.getNodeParameter('inbox', 0) as string;
+						let importtype = this.getNodeParameter('importtype', 0) as string;
+						let address = this.getNodeParameter('address', 0) as string;
 						const document_label = this.getNodeParameter('label', 0) as string ?? 'Test_Label';
             const api_key = credentials.apiKey;
+						let source;
+
+						if (importtype == "email") {
+							source = importtype + ":" + address + ":" + inbox
+						} else {
+							source = doc_source
+						}
+
             const formData = {
                 files: [] as UploadFile[],
 								doc_type: doc_type,
