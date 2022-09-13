@@ -218,7 +218,7 @@ export class Extract implements INodeType {
             const formData = {
                 files: [] as UploadFile[],
 								doc_type: doc_type,
-								source: source,
+								source: doc_source,
 								label: document_label as string,
             };
 

@@ -685,9 +685,15 @@ export async function simplifyOutput(
 	return ((data as IDataObject[]) || []).map((item) => {
 		if (item.labelIds) {
 			item.labels = labels.filter((label) =>
-				(item.labelIds as string[]).includes(label.id as string),
+			(item.labelIds as string[]).includes(label.id as string),
 			);
 			delete item.labelIds;
+		}
+		if (item.labelNames) {
+			item.labels = labels.filter((label) =>
+			(item.labelNames as string[]).includes(label.name as string),
+			);
+			delete item.labelNames;
 		}
 		if (item.payload && (item.payload as IDataObject).headers) {
 			const { headers } = item.payload as IDataObject;
