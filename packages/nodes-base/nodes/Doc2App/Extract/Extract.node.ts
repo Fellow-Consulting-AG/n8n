@@ -125,7 +125,7 @@ export class Extract implements INodeType {
 						},
 						default: '',
 						description: 'Set Importaddress',
-						required: false,
+						required: true,
 					},
 					{
 						displayName: 'Inbox',
@@ -140,7 +140,7 @@ export class Extract implements INodeType {
 						},
 						default: '',
 						description: 'Set emailinbox',
-						required: false,
+						required: true,
 					},
       	],
     	};
@@ -202,9 +202,9 @@ export class Extract implements INodeType {
             const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
 						let doc_type = this.getNodeParameter('doc_type', 0) as string;
 						let doc_source = this.getNodeParameter('doc_source', 0) as string;
-						let inbox = this.getNodeParameter('inbox', 0) as string;
+						let inbox = this.getNodeParameter('inbox', 0, false) as string;
 						let importtype = this.getNodeParameter('importtype', 0) as string;
-						let address = this.getNodeParameter('address', 0) as string;
+						let address = this.getNodeParameter('address', 0, false) as string;
 						const document_label = this.getNodeParameter('label', 0) as string ?? 'Test_Label';
             const api_key = credentials.apiKey;
 						let source;

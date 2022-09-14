@@ -145,22 +145,29 @@ export class AssignEmployee implements INodeType {
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 
 			let responseData;
-
+			let formData;
 			const items = this.getInputData();
 
 			const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
 			const api_key = credentials.apiKey;
 
-			const email = this.getNodeParameter('email', 0) as string;
+			const selection = this.getNodeParameter('selection', 0) as string;
+			const email = this.getNodeParameter('e-mail', 0, false) as string;
+			const group = this.getNodeParameter('group', 0, false) as string;
 			const invoiceId = items[0].json.doc_id;
 
 			if (!invoiceId) {
 					throw new Error('Invalid Document / Invalid Documnt ID');
 			}
-
-			const formData = {
-					assign_to : email,
+			if (selection == "email") {
+				formData = {
+						assign_to : email,
+				};
+			} else if (selection == "group") {
+				formData = {
+					assign_to : group,
 			};
+			}
 
 			let uri = api.assign_with_email + `${invoiceId}`;
 
