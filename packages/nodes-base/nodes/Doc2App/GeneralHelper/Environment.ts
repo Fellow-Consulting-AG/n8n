@@ -21,6 +21,7 @@ export const api = {
     remove_trigger: server_url + '/triggers/remove_trigger',
     process_documents: server_url + '/document/process_documents',
     assign_with_email: server_url + '/document/assign_with_email/',
+		assign: server_url + '/document/assign/',
     get_document_types: server_url + '/document_type/get_document_types',
     classify_document: server_url + '/document/classify_document',
     test_classification: server_url + '/custom_classifier/test_classification',

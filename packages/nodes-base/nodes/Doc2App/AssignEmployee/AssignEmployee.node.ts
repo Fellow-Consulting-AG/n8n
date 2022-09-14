@@ -146,6 +146,7 @@ export class AssignEmployee implements INodeType {
 
 			let responseData;
 			let formData;
+			let uri = "";
 			const items = this.getInputData();
 
 			const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
@@ -163,13 +164,13 @@ export class AssignEmployee implements INodeType {
 				formData = {
 						assign_to : email,
 				};
+				let uri = api.assign_with_email + `${invoiceId}`
 			} else if (selection == "group") {
 				formData = {
 					assign_to : group,
-			};
+				};
+				let uri = api.assign + `${invoiceId}`
 			}
-
-			let uri = api.assign_with_email + `${invoiceId}`;
 
 			const options: OptionsWithUri = {
 					headers: {
