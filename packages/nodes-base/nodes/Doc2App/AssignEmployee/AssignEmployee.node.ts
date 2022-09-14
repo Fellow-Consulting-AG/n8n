@@ -48,8 +48,8 @@ export class AssignEmployee implements INodeType {
 						type: 'options',
 						options: [
 							{
-								name: 'Email',
-								value: 'email'
+								name: 'User',
+								value: 'user'
 							},
 							{
 								name: 'Group',
@@ -79,19 +79,22 @@ export class AssignEmployee implements INodeType {
 						description:'Assigning to Group',
 					},
 					{
-						displayName: 'E-mail',
-						name: 'e-mail',
+						displayName: 'User',
+						name: 'user',
 						displayOptions: {
 							show: {
 								selection: [
-									'email',
+									'user',
 								]
 							},
 						},
-						type: 'string',
+						type: 'options',
+						typeOptions: {
+							loadOptionsMethod: 'getUsers',
+						},
 						required: false,
 						default:'',
-						description:'Primary email for the contact',
+						description:'Assign to user',
 					},
 			],
 	};
@@ -139,6 +142,48 @@ export class AssignEmployee implements INodeType {
 
 						return returnData;
 				},
+				async getUsers(this: IHookFunctions | ILoadOptionsFunctions): Promise<INodePropertyOptions[]>{
+					const returnData = [
+							{
+									name: 'Default',
+									value: '',
+							}
+					];
+					const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
+					const api_key = credentials.apiKey;
+					let url = api.get_users;
+					const options: IHttpRequestOptions = {
+							url,
+							headers: {
+									'Content-Type': 'application/json',
+									'X-API-KEY': api_key,
+							},
+							method: 'GET',
+							body:  {},
+							json: true,
+					};
+
+					try {
+							if (this.helpers === undefined) {
+									return returnData;
+							}
+							const response = await this.helpers.httpRequest(options);
+							for (const users of response) {
+									const username = users.first_name + users.last_name;
+									const user_id = users.id;
+
+									returnData.push({
+											name: username,
+											value: user_id,
+									});
+							}
+					} catch(e: any) {
+							console.error(e);
+							// throw new Error('Some internal error occur. Please try again later');
+					}
+
+					return returnData;
+			},
 		},
 };
 
@@ -146,31 +191,33 @@ export class AssignEmployee implements INodeType {
 
 			let responseData;
 			let formData;
-			let uri = "";
+
 			const items = this.getInputData();
 
 			const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
 			const api_key = credentials.apiKey;
 
 			const selection = this.getNodeParameter('selection', 0) as string;
-			const email = this.getNodeParameter('e-mail', 0, false) as string;
+			const user = this.getNodeParameter('user', 0, false) as string;
 			const group = this.getNodeParameter('group', 0, false) as string;
 			const invoiceId = items[0].json.doc_id;
 
 			if (!invoiceId) {
 					throw new Error('Invalid Document / Invalid Documnt ID');
 			}
-			if (selection == "email") {
+			if (selection == "user") {
 				formData = {
-						assign_to : email,
+						assign_to : user,
+						assignment_type: "user",
 				};
-				let uri = api.assign_with_email + `${invoiceId}`
 			} else if (selection == "group") {
 				formData = {
 					assign_to : group,
+					assignment_type: "group",
 				};
-				let uri = api.assign + `${invoiceId}`
 			}
+
+			let uri = api.assign + `${invoiceId}`
 
 			const options: OptionsWithUri = {
 					headers: {
