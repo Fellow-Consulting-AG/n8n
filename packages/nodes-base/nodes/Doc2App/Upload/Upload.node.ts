@@ -30,16 +30,16 @@ import {
     UploadFile,
 } from '../GeneralHelper/type';
 
-export class Extract implements INodeType {
+export class Upload implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Doc2App Extract Invoice',
-        name: 'extract',
-        icon: 'file:extract.svg',
+        displayName: 'Doc2App Upload Documents',
+        name: 'upload',
+        icon: 'file:upload.svg',
         group: ['transform'],
         version: 1,
-        description: 'Send file to server for Extraction',
+        description: 'Upload Document to your doc2app organisation.',
         defaults: {
-            name: 'Extract Invoice',
+            name: 'Upload Document',
             color: '#1A82e2',
         },
         inputs: ['main'],
