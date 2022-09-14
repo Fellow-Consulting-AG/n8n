@@ -199,7 +199,6 @@ export async function parseRawEmail(
 		// @ts-ignore
 		responseData.attachments = undefined;
 	}
-
 	const mailBaseData: IDataObject = {};
 
 	const resolvedModeAddProperties = ['id', 'threadId', 'labelIds', 'sizeEstimate'];
@@ -208,6 +207,34 @@ export async function parseRawEmail(
 		// @ts-ignore
 		mailBaseData[key] = messageData[key];
 	}
+
+	const labelsData = await googleApiRequest.call(this, 'GET', `/gmail/v1/users/me/labels`);
+	const labels = ((labelsData.labels as IDataObject[]) || []).map(({ id, name }) => ({
+		id,
+		name,
+	}));
+
+	var list = new Array
+	var list2 = new Array
+	var dict: IDataObject = {}
+	mailBaseData["labelnames"] = []
+
+	const idArray = mailBaseData['labelIds']?.toString().split(",")
+
+	for (const label of labels) {
+		if (idArray) {
+			for (const labelid of idArray) {
+				if (labelid == label.id) {
+					if (label.name != "UNREAD")
+						dict[labelid] = label.name?.toString()
+						list2.push(label.name?.toString())
+				}
+			}
+		}
+	}
+	list.push(JSON.stringify(dict))
+	mailBaseData["labelnames"] = list
+	mailBaseData["labels"] = list2
 
 	responseData = Object.assign(mailBaseData, responseData);
 
