@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/apiTemplateIo"
+				"url": "https://docs.polydocs.io/credentials/apiTemplateIo"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.apiTemplateIo/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.apiTemplateIo/"
 			}
 		]
 	}

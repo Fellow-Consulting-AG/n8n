@@ -1,0 +1,20 @@
+{
+	"node": "n8n-nodes-base.snowflake",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": [
+		"Data & Storage"
+	],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://docs.polydocs.io/credentials/snowflake"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.snowflake/"
+			}
+		]
+	}
+}

@@ -9,6 +9,7 @@ import {
     INodeType,
     INodeTypeDescription,
     IDataObject,
+		NodeOperationError
 } from 'n8n-workflow';
 
 import {
@@ -104,9 +105,12 @@ export class TrainDocuments implements INodeType {
                 }
 
                 const binaryData = item[binaryPropertyName] as IBinaryData;
+								if (binaryData === undefined) {
+									throw new NodeOperationError(this.getNode(), `No binary data property "${binaryPropertyName}" does not exists on item!`, { itemIndex: i });
+								}
                 binaryData.fileName = (i + 1)  + 'train_document.pdf';
                 const dataBuffer = (await this.helpers.getBinaryDataBuffer(i, binaryPropertyName));
-            
+
                 const file = {
                     value: dataBuffer,
                     options: {
@@ -116,7 +120,7 @@ export class TrainDocuments implements INodeType {
                 } as UploadFile;
                 formData.files.push(file);
             }
-        
+
             let uri = api.train_document;
             const options: OptionsWithUri = {
                 headers: {

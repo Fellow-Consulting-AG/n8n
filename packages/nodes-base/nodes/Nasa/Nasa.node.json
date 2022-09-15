@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/nasa"
+				"url": "https://docs.polydocs.io/credentials/nasa"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.nasa/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.nasa/"
 			}
 		]
 	}

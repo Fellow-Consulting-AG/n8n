@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/imap"
+				"url": "https://docs.polydocs.io/credentials/imap"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/core-nodes/n8n-nodes-base.imapEmail/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.emailReadImap/"
 			}
 		],
 		"generic": [

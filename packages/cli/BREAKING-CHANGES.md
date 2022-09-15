@@ -234,14 +234,14 @@ If you have been using MongoDB as a database for n8n. Please note that this is n
 
 ### How to upgrade:
 
-Before upgrading, you can [export](https://docs.n8n.io/reference/start-workflows-via-cli.html#export-workflows-and-credentials) all your credentials and workflows using the CLI.
+Before upgrading, you can [export](https://docs.polydocs.ioreference/start-workflows-via-cli.html#export-workflows-and-credentials) all your credentials and workflows using the CLI.
 
 ```
 n8n export:workflow --backup --output=backups/latest/
 n8n export:credentials --backup --output=backups/latest/
 ```
 
-You can then change the database to one of the supported databases mentioned [here](https://docs.n8n.io/reference/data/database.html). Finally, you can upgrade n8n and [import](https://docs.n8n.io/reference/start-workflows-via-cli.html#import-workflows-and-credentials) all your credentials and workflows back into n8n.
+You can then change the database to one of the supported databases mentioned [here](https://docs.polydocs.ioreference/data/database.html). Finally, you can upgrade n8n and [import](https://docs.polydocs.ioreference/start-workflows-via-cli.html#import-workflows-and-credentials) all your credentials and workflows back into n8n.
 
 ```
 n8n import:workflow --separate --input=backups/latest/

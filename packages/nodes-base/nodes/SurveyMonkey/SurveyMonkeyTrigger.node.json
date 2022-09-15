@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/surveyMonkey"
+				"url": "https://docs.polydocs.io/credentials/surveyMonkey"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.surveyMonkeyTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.surveyMonkeyTrigger/"
 			}
 		]
 	},

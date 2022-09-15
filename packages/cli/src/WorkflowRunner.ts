@@ -82,7 +82,7 @@ export class WorkflowRunner {
 	}
 
 	/**
-	 * The process did send a hook message so execute the appropiate hook
+	 * The process did send a hook message so execute the appropriate hook
 	 *
 	 * @param {WorkflowHooks} workflowHooks
 	 * @param {IProcessMessageDataHook} hookData
@@ -247,6 +247,7 @@ export class WorkflowRunner {
 			active: data.workflowData.active,
 			nodeTypes,
 			staticData: data.workflowData.staticData,
+			settings: data.workflowData.settings,
 		});
 		const additionalData = await WorkflowExecuteAdditionalData.getBase(
 			data.userId,
@@ -468,7 +469,7 @@ export class WorkflowRunner {
 					 * when Redis crashes and recovers shortly       *
 					 * but during this time, some execution(s)       *
 					 * finished. The end result is that the main     *
-					 * process will wait indefinitively and never    *
+					 * process will wait indefinitely and never      *
 					 * get a response. This adds an active polling to*
 					 * the queue that allows us to identify that the *
 					 * execution finished and get information from   *

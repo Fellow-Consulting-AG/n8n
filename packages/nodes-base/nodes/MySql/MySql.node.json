@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/mySql"
+				"url": "https://docs.polydocs.io/credentials/mySql"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.mySql/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.mySql/"
 			}
 		]
 	}
