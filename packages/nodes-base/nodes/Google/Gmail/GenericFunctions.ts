@@ -225,15 +225,13 @@ export async function parseRawEmail(
 		if (idArray) {
 			for (const labelid of idArray) {
 				if (labelid == label.id) {
-					if (label.name != "UNREAD")
-						dict[labelid] = label.name?.toString()
+					if (label.name?.toString() != "UNREAD" || label.name?.toString() != "IMPORTANT" || label.name?.toString() != "SENT") {
 						list2.push(label.name?.toString())
+					}
 				}
 			}
 		}
 	}
-	list.push(JSON.stringify(dict))
-	mailBaseData["labelnames"] = list
 	mailBaseData["labels"] = list2
 
 	responseData = Object.assign(mailBaseData, responseData);
