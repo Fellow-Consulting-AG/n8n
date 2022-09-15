@@ -20,6 +20,7 @@ export const api = {
     create_update_trigger : server_url + '/triggers/create_update_trigger',
     remove_trigger: server_url + '/triggers/remove_trigger',
     process_documents: server_url + '/document/process_documents',
+		approve_reject: server_url + '/document/approve_or_reject/',
     assign_with_email: server_url + '/document/assign_with_email/',
 		assign: server_url + '/document/assign/',
     get_document_types: server_url + '/document_type/get_document_types',
