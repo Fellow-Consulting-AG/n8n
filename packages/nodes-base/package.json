@@ -414,6 +414,7 @@
       "dist/nodes/Doc2App/TrainDocuments/TrainDocuments.node.js",
       "dist/nodes/Doc2App/Upload/Upload.node.js",
       "dist/nodes/Doc2App/Status/StatusTrigger.node.js",
+      "dist/nodes/Doc2App/ApproveReject/ApproveReject.node.js",
       "dist/nodes/Drift/Drift.node.js",
       "dist/nodes/Dropbox/Dropbox.node.js",
       "dist/nodes/Dropcontact/Dropcontact.node.js",

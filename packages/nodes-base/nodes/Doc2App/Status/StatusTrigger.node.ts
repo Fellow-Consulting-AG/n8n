@@ -2,7 +2,7 @@ import {
     IHookFunctions,
     IWebhookFunctions,
  } from 'n8n-core';
- 
+
  import {
     ILoadOptionsFunctions,
 	INodePropertyOptions,
@@ -16,7 +16,7 @@ import {
 import {
     api,
 } from '../GeneralHelper/Environment';
- 
+
  import {
     OptionsWithUri,
 } from 'request';
@@ -78,6 +78,10 @@ export class StatusTrigger implements INodeType {
                         name: 'Pending Approval',
                         value: 'validated_pending_approval',
                     },
+										{
+											name: 'Pending Second Approval',
+											value: 'approved_pending_second_approval',
+										},
                     {
                         name: 'Pending Export After Approval',
                         value: 'approved_pending_export',
@@ -145,7 +149,7 @@ export class StatusTrigger implements INodeType {
                     console.error(e);
                     // throw new Error('Some internal error occur. Please try again later');
                 }
-                
+
                 return returnData;
             },
         },
@@ -230,11 +234,11 @@ export class StatusTrigger implements INodeType {
 
                 if(webhookData.webhookId) {
                     let uri = api.remove_trigger;
-    
+
                     const formData = {
                         id: webhookData.webhookId as number,
                     };
-    
+
                     const options: OptionsWithUri = {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
@@ -245,7 +249,7 @@ export class StatusTrigger implements INodeType {
                         uri: uri,
                         json: true,
                     };
-    
+
                     let response;
                     try {
                         response = await this.helpers.request(options);
@@ -253,7 +257,7 @@ export class StatusTrigger implements INodeType {
                         console.error(e);
                         throw new Error('Some internal error occur. Please try again later');
                     }
-    
+
                     delete webhookData.webhookId;
                 }
 
@@ -263,7 +267,7 @@ export class StatusTrigger implements INodeType {
     };
 
 
-    
+
     async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
         const req = this.getRequestObject();
         return {
@@ -273,4 +277,3 @@ export class StatusTrigger implements INodeType {
         };
     }
  }
- 
