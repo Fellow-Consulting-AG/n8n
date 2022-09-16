@@ -218,7 +218,7 @@ export class Upload implements INodeType {
             const formData = {
                 files: [] as UploadFile[],
 								doc_type: doc_type,
-								source: doc_source,
+								source: source,
 								label: document_label as string,
             };
 
