@@ -201,17 +201,17 @@ export class Upload implements INodeType {
             const binaryPropertyName = this.getNodeParameter('binaryPropertyName', 0) as string;
             const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
 						let doc_type = this.getNodeParameter('doc_type', 0) as string;
-						let doc_source = this.getNodeParameter('doc_source', 0) as string;
-						let inbox = this.getNodeParameter('inbox', 0, false) as string;
 						let importtype = this.getNodeParameter('importtype', 0) as string;
-						let address = this.getNodeParameter('address', 0, false) as string;
 						const document_label = this.getNodeParameter('label', 0) as string ?? 'Test_Label';
             const api_key = credentials.apiKey;
 						let source;
 
 						if (importtype == "email") {
+							let inbox = this.getNodeParameter('inbox', 0, false) as string;
+							let address = this.getNodeParameter('address', 0, false) as string;
 							source = importtype + ":" + address + ":" + inbox
 						} else {
+							let doc_source = this.getNodeParameter('doc_source', 0) as string;
 							source = doc_source
 						}
 
