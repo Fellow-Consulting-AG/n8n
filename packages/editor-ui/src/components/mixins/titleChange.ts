@@ -24,7 +24,7 @@ export const titleChange = Vue.extend({
 		},
 
 		$titleReset() {
-			document.title = `n8n - Workflow Automation`;
+			document.title = `Polydocs Workflow Automation`;
 		},
 
 	},
