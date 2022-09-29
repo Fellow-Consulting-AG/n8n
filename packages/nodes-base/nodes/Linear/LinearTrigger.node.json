@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/linear/"
+				"url": "https://docs.polydocs.io/credentials/linear/"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.linearTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.linearTrigger/"
 			}
 		]
 	}

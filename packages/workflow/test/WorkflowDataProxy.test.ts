@@ -10,16 +10,18 @@ describe('WorkflowDataProxy', () => {
 				name: 'Start',
 				type: 'test.set',
 				typeVersion: 1,
+				id: 'uuid-1',
 				position: [100, 200],
 			},
 			{
 				parameters: {
 					functionCode:
-						'// Code here will run only once, no matter how many input items there are.\n// More info and help: https://docs.polydocs.io/workflow/integrations/core-nodes/n8n-nodes-base.function \nconst { DateTime, Duration, Interval } = require("luxon");\n\nconst data = [\n  {\n  "length": 105\n  },\n  {\n  "length": 160\n  },\n  {\n  "length": 121\n  },\n  {\n  "length": 275\n  },\n  {\n  "length": 950\n  },\n];\n\nreturn data.map(fact => ({json: fact}));',
+						'// Code here will run only once, no matter how many input items there are.\n// More info and help: https://docs.polydocs.io/nodes/n8n-nodes-base.function\nconst { DateTime, Duration, Interval } = require("luxon");\n\nconst data = [\n  {\n  "length": 105\n  },\n  {\n  "length": 160\n  },\n  {\n  "length": 121\n  },\n  {\n  "length": 275\n  },\n  {\n  "length": 950\n  },\n];\n\nreturn data.map(fact => ({json: fact}));',
 				},
 				name: 'Function',
 				type: 'test.set',
 				typeVersion: 1,
+				id: 'uuid-2',
 				position: [280, 200],
 			},
 			{
@@ -36,6 +38,7 @@ describe('WorkflowDataProxy', () => {
 				name: 'Rename',
 				type: 'test.set',
 				typeVersion: 1,
+				id: 'uuid-3',
 				position: [460, 200],
 			},
 		];
@@ -94,6 +97,7 @@ describe('WorkflowDataProxy', () => {
 									],
 								],
 							},
+							source: [],
 						},
 					],
 					Rename: [
@@ -122,6 +126,7 @@ describe('WorkflowDataProxy', () => {
 									],
 								],
 							},
+							source: [],
 						},
 					],
 				},

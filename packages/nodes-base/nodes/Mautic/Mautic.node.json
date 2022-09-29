@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/mautic"
+				"url": "https://docs.polydocs.io/credentials/mautic"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.mautic/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.mautic/"
 			}
 		],
 		"generic": [

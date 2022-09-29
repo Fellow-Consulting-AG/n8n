@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -22,6 +23,7 @@ import {
 	ITaskData,
 	IWorkflowExecuteAdditionalData,
 	IWorkflowExecuteHooks,
+	IWorkflowSettings,
 	LoggerProxy,
 	Workflow,
 	WorkflowExecuteMode,
@@ -176,17 +178,23 @@ export class WorkflowRunnerProcess {
 		// Credentials should now be loaded from database.
 		// We check if any node uses credentials. If it does, then
 		// init database.
-		let shouldInitializaDb = false;
+		let shouldInitializeDb = false;
 		// eslint-disable-next-line array-callback-return
 		inputData.workflowData.nodes.map((node) => {
 			if (Object.keys(node.credentials === undefined ? {} : node.credentials).length > 0) {
-				shouldInitializaDb = true;
+				shouldInitializeDb = true;
+			}
+			if (node.type === 'n8n-nodes-base.executeWorkflow') {
+				// With UM, child workflows from arbitrary JSON
+				// Should be persisted by the child process,
+				// so DB needs to be initialized
+				shouldInitializeDb = true;
 			}
 		});
 
 		// This code has been split into 4 ifs just to make it easier to understand
 		// Can be made smaller but in the end it will make it impossible to read.
-		if (shouldInitializaDb) {
+		if (shouldInitializeDb) {
 			// initialize db as we need to load credentials
 			await Db.init();
 		} else if (
@@ -230,6 +238,7 @@ export class WorkflowRunnerProcess {
 			nodeTypes,
 			staticData: this.data.workflowData.staticData,
 			settings: this.data.workflowData.settings,
+			pinData: this.data.pinData,
 		});
 		await checkPermissionsForExecution(this.workflow, userId);
 		const additionalData = await WorkflowExecuteAdditionalData.getBase(
@@ -269,16 +278,22 @@ export class WorkflowRunnerProcess {
 		additionalData.executeWorkflow = async (
 			workflowInfo: IExecuteWorkflowInfo,
 			additionalData: IWorkflowExecuteAdditionalData,
-			inputData?: INodeExecutionData[] | undefined,
+			options?: {
+				parentWorkflowId?: string;
+				inputData?: INodeExecutionData[];
+				parentWorkflowSettings?: IWorkflowSettings;
+			},
 		): Promise<Array<INodeExecutionData[] | null> | IRun> => {
 			const workflowData = await WorkflowExecuteAdditionalData.getWorkflowData(
 				workflowInfo,
 				userId,
+				options?.parentWorkflowId,
+				options?.parentWorkflowSettings,
 			);
 			const runData = await WorkflowExecuteAdditionalData.getRunData(
 				workflowData,
 				additionalData.userId,
-				inputData,
+				options?.inputData,
 			);
 			await sendToParentProcess('startExecution', { runData });
 			const executionId: string = await new Promise((resolve) => {
@@ -291,10 +306,14 @@ export class WorkflowRunnerProcess {
 				const executeWorkflowFunctionOutput = (await executeWorkflowFunction(
 					workflowInfo,
 					additionalData,
-					inputData,
-					executionId,
-					workflowData,
-					runData,
+					{
+						parentWorkflowId: options?.parentWorkflowId,
+						inputData: options?.inputData,
+						parentExecutionId: executionId,
+						loadedWorkflowData: workflowData,
+						loadedRunData: runData,
+						parentWorkflowSettings: options?.parentWorkflowSettings,
+					},
 				)) as { workflowExecute: WorkflowExecute; workflow: Workflow } as IWorkflowExecuteProcess;
 				const { workflowExecute } = executeWorkflowFunctionOutput;
 				this.childExecutions[executionId] = executeWorkflowFunctionOutput;
@@ -345,9 +364,22 @@ export class WorkflowRunnerProcess {
 		) {
 			// Execute all nodes
 
+			let startNode;
+			if (
+				this.data.startNodes?.length === 1 &&
+				Object.keys(this.data.pinData ?? {}).includes(this.data.startNodes[0])
+			) {
+				startNode = this.workflow.getNode(this.data.startNodes[0]) ?? undefined;
+			}
+
 			// Can execute without webhook so go on
 			this.workflowExecute = new WorkflowExecute(additionalData, this.data.executionMode);
-			return this.workflowExecute.run(this.workflow, undefined, this.data.destinationNode);
+			return this.workflowExecute.run(
+				this.workflow,
+				startNode,
+				this.data.destinationNode,
+				this.data.pinData,
+			);
 		}
 		// Execute only the nodes between start and destination nodes
 		this.workflowExecute = new WorkflowExecute(additionalData, this.data.executionMode);
@@ -356,6 +388,7 @@ export class WorkflowRunnerProcess {
 			this.data.runData,
 			this.data.startNodes,
 			this.data.destinationNode,
+			this.data.pinData,
 		);
 	}
 
@@ -457,7 +490,7 @@ async function sendToParentProcess(type: string, data: any): Promise<void> {
 const workflowRunner = new WorkflowRunnerProcess();
 
 // Listen to messages from parent process which send the data of
-// the worflow to process
+// the workflow to process
 process.on('message', async (message: IProcessMessage) => {
 	try {
 		if (message.type === 'startWorkflow') {

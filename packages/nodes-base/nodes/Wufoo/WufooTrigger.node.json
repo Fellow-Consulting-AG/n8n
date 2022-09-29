@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/wufoo"
+				"url": "https://docs.polydocs.io/credentials/wufoo"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.wufooTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.wufooTrigger/"
 			}
 		]
 	},

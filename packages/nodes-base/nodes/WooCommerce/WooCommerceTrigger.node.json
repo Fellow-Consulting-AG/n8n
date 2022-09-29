@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/wooCommerce"
+				"url": "https://docs.polydocs.io/credentials/wooCommerce"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.wooCommerceTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.wooCommerceTrigger/"
 			}
 		]
 	}

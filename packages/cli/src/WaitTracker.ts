@@ -43,14 +43,14 @@ export class WaitTrackerClass {
 
 		// Poll every 60 seconds a list of upcoming executions
 		this.mainTimer = setInterval(() => {
-			this.getwaitingExecutions();
+			this.getWaitingExecutions();
 		}, 60000);
 
-		this.getwaitingExecutions();
+		this.getWaitingExecutions();
 	}
 
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-	async getwaitingExecutions() {
+	async getWaitingExecutions() {
 		Logger.debug('Wait tracker querying database for waiting executions');
 		// Find all the executions which should be triggered in the next 70 seconds
 		const findQuery: FindManyOptions<IExecutionFlattedDb> = {
@@ -71,7 +71,7 @@ export class WaitTrackerClass {
 			);
 		}
 
-		const executions = await Db.collections.Execution!.find(findQuery);
+		const executions = await Db.collections.Execution.find(findQuery);
 
 		if (executions.length === 0) {
 			return;
@@ -100,14 +100,14 @@ export class WaitTrackerClass {
 
 	async stopExecution(executionId: string): Promise<IExecutionsStopData> {
 		if (this.waitingExecutions[executionId] !== undefined) {
-			// The waiting execution was already sheduled to execute.
+			// The waiting execution was already scheduled to execute.
 			// So stop timer and remove.
 			clearTimeout(this.waitingExecutions[executionId].timer);
 			delete this.waitingExecutions[executionId];
 		}
 
 		// Also check in database
-		const execution = await Db.collections.Execution!.findOne(executionId);
+		const execution = await Db.collections.Execution.findOne(executionId);
 
 		if (execution === undefined || !execution.waitTill) {
 			throw new Error(`The execution ID "${executionId}" could not be found.`);
@@ -127,7 +127,7 @@ export class WaitTrackerClass {
 		fullExecutionData.stoppedAt = new Date();
 		fullExecutionData.waitTill = undefined;
 
-		await Db.collections.Execution!.update(
+		await Db.collections.Execution.update(
 			executionId,
 			ResponseHelper.flattenExecutionData(fullExecutionData),
 		);
@@ -146,7 +146,7 @@ export class WaitTrackerClass {
 
 		(async () => {
 			// Get the data to execute
-			const fullExecutionDataFlatted = await Db.collections.Execution!.findOne(executionId);
+			const fullExecutionDataFlatted = await Db.collections.Execution.findOne(executionId);
 
 			if (fullExecutionDataFlatted === undefined) {
 				throw new Error(`The execution with the id "${executionId}" does not exist.`);

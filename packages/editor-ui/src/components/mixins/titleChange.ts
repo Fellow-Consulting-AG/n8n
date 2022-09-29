@@ -20,11 +20,11 @@ export const titleChange = Vue.extend({
 				icon = '▶️';
 			}
 
-			window.document.title = `${icon} ${workflow}`;
+			window.document.title = `n8n - ${icon} ${workflow}`;
 		},
 
 		$titleReset() {
-			document.title = `Workflow Automation`;
+			document.title = `Polydocs Workflow Automation`;
 		},
 
 	},

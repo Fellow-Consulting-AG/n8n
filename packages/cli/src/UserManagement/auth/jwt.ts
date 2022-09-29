@@ -6,7 +6,7 @@ import { Response } from 'express';
 import { createHash } from 'crypto';
 import { Db } from '../..';
 import { AUTH_COOKIE_NAME } from '../../constants';
-import { JwtToken, JwtPayload } from '../Interfaces';
+import { JwtPayload, JwtToken } from '../Interfaces';
 import { User } from '../../databases/entities/User';
 import * as config from '../../../config';
 
@@ -37,7 +37,7 @@ export function issueJWT(user: User): JwtToken {
 }
 
 export async function resolveJwtContent(jwtPayload: JwtPayload): Promise<User> {
-	const user = await Db.collections.User!.findOne(jwtPayload.id, {
+	const user = await Db.collections.User.findOne(jwtPayload.id, {
 		relations: ['globalRole'],
 	});
 

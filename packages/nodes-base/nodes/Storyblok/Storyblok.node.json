@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/storyblok"
+				"url": "https://docs.polydocs.io/credentials/storyblok"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/workflow-nodes-base.storyblok/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.storyblok/"
 			}
 		]
 	}

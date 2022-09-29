@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/unleashedSoftware"
+				"url": "https://docs.polydocs.io/credentials/unleashedSoftware"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/workflow-nodes-base.unleashedSoftware/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.unleashedSoftware/"
 			}
 		]
 	}
