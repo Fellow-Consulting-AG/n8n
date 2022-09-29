@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/box"
+				"url": "https://docs.polydocs.io/credentials/box"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.boxTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.boxTrigger/"
 			}
 		]
 	}

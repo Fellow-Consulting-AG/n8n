@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -84,7 +85,7 @@ export class Worker extends Command {
 			const externalHooks = ExternalHooks();
 			await externalHooks.run('n8n.stop', []);
 
-			const maxStopTime = 30000;
+			const maxStopTime = config.getEnv('queue.bull.gracefulShutdownTimeout') * 1000;
 
 			const stopTime = new Date().getTime() + maxStopTime;
 
@@ -119,13 +120,18 @@ export class Worker extends Command {
 
 	async runJob(job: Bull.Job, nodeTypes: INodeTypes): Promise<IBullJobResponse> {
 		const jobData = job.data as IBullJobData;
-		const executionDb = await Db.collections.Execution!.findOne(jobData.executionId);
+		const executionDb = await Db.collections.Execution.findOne(jobData.executionId);
 
 		if (!executionDb) {
-			LoggerProxy.error('Worker failed to find execution data in database. Cannot continue.', {
-				executionId: jobData.executionId,
-			});
-			throw new Error('Unable to find execution data in database. Aborting execution.');
+			LoggerProxy.error(
+				`Worker failed to find data of execution "${jobData.executionId}" in database. Cannot continue.`,
+				{
+					executionId: jobData.executionId,
+				},
+			);
+			throw new Error(
+				`Unable to find data of execution "${jobData.executionId}" in database. Aborting execution.`,
+			);
 		}
 		const currentExecutionDb = ResponseHelper.unflattenExecutionData(executionDb);
 		LoggerProxy.info(
@@ -139,7 +145,7 @@ export class Worker extends Command {
 			const findOptions = {
 				select: ['id', 'staticData'],
 			} as FindOneOptions;
-			const workflowData = await Db.collections.Workflow!.findOne(
+			const workflowData = await Db.collections.Workflow.findOne(
 				currentExecutionDb.workflowData.id,
 				findOptions,
 			);
@@ -349,6 +355,7 @@ export class Worker extends Command {
 						process.exit(2);
 					} else {
 						logger.error('Error from queue: ', error);
+						throw error;
 					}
 				});
 
@@ -384,7 +391,7 @@ export class Worker extends Command {
 							}
 
 							// Just to be complete, generally will the worker stop automatically
-							// if it loses the conection to redis
+							// if it loses the connection to redis
 							try {
 								// Redis ping
 								await Worker.jobQueue.client.ping();

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable import/no-cycle */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Request, Response } from 'express';
 import { IDataObject } from 'n8n-workflow';
@@ -32,7 +31,7 @@ export function authenticationMethods(this: N8nApp): void {
 
 			let user;
 			try {
-				user = await Db.collections.User!.findOne(
+				user = await Db.collections.User.findOne(
 					{
 						email: req.body.email,
 					},
@@ -44,7 +43,7 @@ export function authenticationMethods(this: N8nApp): void {
 				throw new Error('Unable to access database.');
 			}
 
-			if (!user || !user.password || !(await compareHash(req.body.password, user.password))) {
+			if (!user?.password || !(await compareHash(req.body.password, user.password))) {
 				// password is empty until user signs up
 				const error = new Error('Wrong username or password. Do you have caps lock on?');
 				// @ts-ignore
@@ -91,7 +90,7 @@ export function authenticationMethods(this: N8nApp): void {
 			}
 
 			try {
-				user = await Db.collections.User!.findOneOrFail({ relations: ['globalRole'] });
+				user = await Db.collections.User.findOneOrFail({ relations: ['globalRole'] });
 			} catch (error) {
 				throw new Error(
 					'No users found in database - did you wipe the users table? Create at least one user.',

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
@@ -81,7 +82,7 @@ export class WorkflowRunner {
 	}
 
 	/**
-	 * The process did send a hook message so execute the appropiate hook
+	 * The process did send a hook message so execute the appropriate hook
 	 *
 	 * @param {WorkflowHooks} workflowHooks
 	 * @param {IProcessMessageDataHook} hookData
@@ -246,6 +247,7 @@ export class WorkflowRunner {
 			active: data.workflowData.active,
 			nodeTypes,
 			staticData: data.workflowData.staticData,
+			settings: data.workflowData.settings,
 		});
 		const additionalData = await WorkflowExecuteAdditionalData.getBase(
 			data.userId,
@@ -310,7 +312,12 @@ export class WorkflowRunner {
 
 				// Can execute without webhook so go on
 				const workflowExecute = new WorkflowExecute(additionalData, data.executionMode);
-				workflowExecution = workflowExecute.run(workflow, undefined, data.destinationNode);
+				workflowExecution = workflowExecute.run(
+					workflow,
+					undefined,
+					data.destinationNode,
+					data.pinData,
+				);
 			} else {
 				Logger.debug(`Execution ID ${executionId} is a partial execution.`, { executionId });
 				// Execute only the nodes between start and destination nodes
@@ -320,6 +327,7 @@ export class WorkflowRunner {
 					data.runData,
 					data.startNodes,
 					data.destinationNode,
+					data.pinData,
 				);
 			}
 
@@ -461,7 +469,7 @@ export class WorkflowRunner {
 					 * when Redis crashes and recovers shortly       *
 					 * but during this time, some execution(s)       *
 					 * finished. The end result is that the main     *
-					 * process will wait indefinitively and never    *
+					 * process will wait indefinitely and never      *
 					 * get a response. This adds an active polling to*
 					 * the queue that allows us to identify that the *
 					 * execution finished and get information from   *
@@ -513,7 +521,7 @@ export class WorkflowRunner {
 					reject(error);
 				}
 
-				const executionDb = (await Db.collections.Execution!.findOne(
+				const executionDb = (await Db.collections.Execution.findOne(
 					executionId,
 				)) as IExecutionFlattedDb;
 				const fullExecutionData = ResponseHelper.unflattenExecutionData(executionDb);
@@ -548,7 +556,7 @@ export class WorkflowRunner {
 						(workflowDidSucceed && saveDataSuccessExecution === 'none') ||
 						(!workflowDidSucceed && saveDataErrorExecution === 'none')
 					) {
-						await Db.collections.Execution!.delete(executionId);
+						await Db.collections.Execution.delete(executionId);
 						await BinaryDataManager.getInstance().markDataForDeletionByExecutionId(executionId);
 					}
 					// eslint-disable-next-line id-denylist
@@ -560,6 +568,12 @@ export class WorkflowRunner {
 				resolve(runData);
 			},
 		);
+
+		workflowExecution.catch(() => {
+			// We `reject` this promise if the execution fails
+			// but the error is handled already by processError
+			// So we're just preventing crashes here.
+		});
 
 		this.activeExecutions.attachWorkflowExecution(executionId, workflowExecution);
 		return executionId;

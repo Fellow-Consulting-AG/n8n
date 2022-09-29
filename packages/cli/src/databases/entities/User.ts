@@ -12,15 +12,16 @@ import {
 	ManyToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
+	BeforeInsert,
 } from 'typeorm';
 import { IsEmail, IsString, Length } from 'class-validator';
 import * as config from '../../../config';
-import { DatabaseType, IPersonalizationSurveyAnswers } from '../..';
+import { DatabaseType, IPersonalizationSurveyAnswers, IUserSettings } from '../..';
 import { Role } from './Role';
 import { SharedWorkflow } from './SharedWorkflow';
 import { SharedCredentials } from './SharedCredentials';
 import { NoXss } from '../utils/customValidators';
-import { answersFormatter } from '../utils/transformers';
+import { objectRetriever, lowerCaser } from '../utils/transformers';
 
 export const MIN_PASSWORD_LENGTH = 8;
 
@@ -62,7 +63,11 @@ export class User {
 	@PrimaryGeneratedColumn('uuid')
 	id: string;
 
-	@Column({ length: 254, nullable: true })
+	@Column({
+		length: 254,
+		nullable: true,
+		transformer: lowerCaser,
+	})
 	@Index({ unique: true })
 	@IsEmail()
 	email: string;
@@ -93,9 +98,15 @@ export class User {
 	@Column({
 		type: resolveDataType('json') as ColumnOptions['type'],
 		nullable: true,
-		transformer: answersFormatter,
+		transformer: objectRetriever,
 	})
 	personalizationAnswers: IPersonalizationSurveyAnswers | null;
+
+	@Column({
+		type: resolveDataType('json') as ColumnOptions['type'],
+		nullable: true,
+	})
+	settings: IUserSettings | null;
 
 	@ManyToOne(() => Role, (role) => role.globalForUsers, {
 		cascade: true,
@@ -119,10 +130,16 @@ export class User {
 	})
 	updatedAt: Date;
 
+	@BeforeInsert()
 	@BeforeUpdate()
-	setUpdateDate(): void {
+	preUpsertHook(): void {
+		this.email = this.email?.toLowerCase() ?? null;
 		this.updatedAt = new Date();
 	}
+
+	@Column({ type: String, nullable: true })
+	@Index({ unique: true })
+	apiKey?: string | null;
 
 	/**
 	 * Whether the user is pending setup completion.

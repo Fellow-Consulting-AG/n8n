@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/shopify"
+				"url": "https://docs.polydocs.io/credentials/shopify"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.shopifyTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.shopifyTrigger/"
 			}
 		],
 		"generic": [

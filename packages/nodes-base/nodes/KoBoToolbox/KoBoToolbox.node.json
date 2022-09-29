@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/kobotoolbox"
+				"url": "https://docs.polydocs.io/credentials/kobotoolbox"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.koBoToolbox/"
+				"url": "https://docs.polydocs.iointegrations/nodes/n8n-nodes-base.kobotoolbox/"
 			}
 		]
 	}

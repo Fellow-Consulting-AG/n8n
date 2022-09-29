@@ -121,7 +121,7 @@ export async function getConfigValue(
 		return config.getEnv(configKey);
 	}
 
-	// Check if special file enviroment variable exists
+	// Check if special file environment variable exists
 	const fileEnvironmentVariable = process.env[`${currentSchema.env}_FILE`];
 	if (fileEnvironmentVariable === undefined) {
 		// Does not exist, so return value from config
@@ -165,12 +165,12 @@ export async function generateUniqueName(
 
 	const found: Array<WorkflowEntity | ICredentialsDb> =
 		entityType === 'workflow'
-			? await Db.collections.Workflow!.find(findConditions)
-			: await Db.collections.Credentials!.find(findConditions);
+			? await Db.collections.Workflow.find(findConditions)
+			: await Db.collections.Credentials.find(findConditions);
 
 	// name is unique
 	if (found.length === 0) {
-		return { name: requestedName };
+		return requestedName;
 	}
 
 	const maxSuffix = found.reduce((acc, { name }) => {
@@ -190,10 +190,10 @@ export async function generateUniqueName(
 
 	// name is duplicate but no numeric suffixes exist yet
 	if (maxSuffix === 0) {
-		return { name: `${requestedName} 2` };
+		return `${requestedName} 2`;
 	}
 
-	return { name: `${requestedName} ${maxSuffix + 1}` };
+	return `${requestedName} ${maxSuffix + 1}`;
 }
 
 export async function validateEntity(

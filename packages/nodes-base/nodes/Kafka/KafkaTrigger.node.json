@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/kafka"
+				"url": "https://docs.polydocs.io/credentials/kafka"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.kafkaTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.kafkaTrigger/"
 			}
 		]
 	}

@@ -9,7 +9,7 @@
 			<n8n-menu default-active="workflow" @select="handleSelect" :collapse="isCollapsed">
 
 				<n8n-menu-item index="logo" class="logo-item">
-					<a href="https://polydocs.io" target="_blank">
+					<a href="https://n8n.io" target="_blank">
 						<img :src="basePath + 'polydocs_white.svg'" class="icon" alt="polydocs.io" style="margin-left: 18px;"/>
 						<span class="logo-text" slot="title">polydocs.io</span>
 					</a>
@@ -151,14 +151,16 @@
 						<span slot="title" class="item-title-root">{{nextVersions.length > 99 ? '99+' : nextVersions.length}} update{{nextVersions.length > 1 ? 's' : ''}} available</span>
 					</n8n-menu-item>
 					<el-dropdown placement="right-end" trigger="click" @command="onUserActionToggle" v-if="canUserAccessSidebarUserInfo && currentUser">
-						<n8n-menu-item class="user">
-							<div class="avatar">
-								<n8n-avatar :firstName="currentUser.firstName" :lastName="currentUser.lastName" size="small" />
-							</div>
-							<span slot="title" class="item-title-root" v-if="!isCollapsed">
-								{{currentUser.fullName}}
-							</span>
-						</n8n-menu-item>
+						<div ref="user">
+							<n8n-menu-item class="user">
+								<div class="avatar">
+									<n8n-avatar :firstName="currentUser.firstName" :lastName="currentUser.lastName" size="small" />
+								</div>
+								<span slot="title" class="item-title-root" v-if="!isCollapsed">
+									{{currentUser.fullName}}
+								</span>
+							</n8n-menu-item>
+						</div>
 						<el-dropdown-menu slot="dropdown">
 							<el-dropdown-item
 								command="settings"
@@ -188,7 +190,7 @@ import {
 	IExecutionResponse,
 	IWorkflowDataUpdate,
 	IMenuItem,
-	IUser,
+	IWorkflowToShare,
 } from '../Interface';
 
 import ExecutionsList from '@/components/ExecutionsList.vue';
@@ -264,17 +266,48 @@ export default mixins(
 				'isTemplatesEnabled',
 			]),
 			canUserAccessSettings(): boolean {
-				return this.canUserAccessRouteByName(VIEWS.PERSONAL_SETTINGS) || this.canUserAccessRouteByName(VIEWS.USERS_SETTINGS);
+				const accessibleRoute = this.findFirstAccessibleSettingsRoute();
+				return accessibleRoute !== null;
 			},
 			helpMenuItems (): object[] {
 				return [
 					{
+						id: 'quickstart',
+						type: 'link',
+						properties: {
+							href: 'https://www.youtube.com/watch?v=RpjQTGKm-ok',
+							title: this.$locale.baseText('mainSidebar.helpMenuItems.quickstart'),
+							icon: 'video',
+							newWindow: true,
+						},
+					},
+					{
 						id: 'docs',
 						type: 'link',
 						properties: {
-							href: 'https://docs.polydocs.io',
+							href: 'https://docs.n8n.io',
 							title: this.$locale.baseText('mainSidebar.helpMenuItems.documentation'),
 							icon: 'book',
+							newWindow: true,
+						},
+					},
+					{
+						id: 'forum',
+						type: 'link',
+						properties: {
+							href: 'https://community.n8n.io',
+							title: this.$locale.baseText('mainSidebar.helpMenuItems.forum'),
+							icon: 'users',
+							newWindow: true,
+						},
+					},
+					{
+						id: 'examples',
+						type: 'link',
+						properties: {
+							href: 'https://docs.polydocs.iocourses',
+							title: this.$locale.baseText('mainSidebar.helpMenuItems.course'),
+							icon: 'graduation-cap',
 							newWindow: true,
 						},
 					},
@@ -285,14 +318,14 @@ export default mixins(
 			},
 			executionFinished (): boolean {
 				if (!this.isExecutionPage) {
-					// We are not on an exeuction page so return false
+					// We are not on an execution page so return false
 					return false;
 				}
 
 				const fullExecution = this.$store.getters.getWorkflowExecution;
 
 				if (fullExecution === null) {
-					// No exeuction loaded so return also false
+					// No execution loaded so return also false
 					return false;
 				}
 
@@ -332,6 +365,11 @@ export default mixins(
 			onWorkflowPage(): boolean {
 				return this.$route.meta && this.$route.meta.nodeView;
 			},
+		},
+		mounted() {
+			if (this.$refs.user) {
+				this.$externalHooks().run('mainSidebar.mounted', { userRef: this.$refs.user });
+			}
 		},
 		methods: {
 			trackHelpItemClick (itemType: string) {
@@ -404,9 +442,9 @@ export default mixins(
 				reader.onload = (event: ProgressEvent) => {
 					const data = (event.target as FileReader).result;
 
-					let worflowData: IWorkflowDataUpdate;
+					let workflowData: IWorkflowDataUpdate;
 					try {
-						worflowData = JSON.parse(data as string);
+						workflowData = JSON.parse(data as string);
 					} catch (error) {
 						this.$showMessage({
 							title: this.$locale.baseText('mainSidebar.showMessage.handleFileImport.title'),
@@ -416,8 +454,7 @@ export default mixins(
 						return;
 					}
 
-					this.$telemetry.track('User imported workflow', { source: 'file', workflow_id: this.$store.getters.workflowId });
-					this.$root.$emit('importWorkflowData', { data: worflowData });
+					this.$root.$emit('importWorkflowData', { data: workflowData });
 				};
 
 				const input = this.$refs.importFile as HTMLInputElement;
@@ -486,9 +523,23 @@ export default mixins(
 					if (data.id && typeof data.id === 'string') {
 						data.id = parseInt(data.id, 10);
 					}
-					const blob = new Blob([JSON.stringify(data, null, 2)], {
+
+					const exportData: IWorkflowToShare = {
+						...data,
+						meta: {
+							instanceId: this.$store.getters.instanceId,
+						},
+						tags: (tags || []).map(tagId => {
+							const {usageCount, ...tag} = this.$store.getters["tags/getTagById"](tagId);
+
+							return tag;
+						}),
+					};
+
+					const blob = new Blob([JSON.stringify(exportData, null, 2)], {
 						type: 'application/json;charset=utf-8',
 					});
+
 
 					let workflowName = this.$store.getters.workflowName || 'unsaved_workflow';
 
@@ -576,40 +627,55 @@ export default mixins(
 				} else if (key === 'executions') {
 					this.$store.dispatch('ui/openModal', EXECUTIONS_MODAL_KEY);
 				} else if (key === 'settings') {
-					if ((this.currentUser as IUser).isDefaultUser) {
-						this.$router.push('/settings/users');
-					}
-					else {
-						this.$router.push('/settings/personal');
+					const defaultRoute = this.findFirstAccessibleSettingsRoute();
+					if (defaultRoute) {
+						const routeProps = this.$router.resolve({ name: defaultRoute });
+						this.$router.push(routeProps.route.path);
 					}
 				} else if (key === 'apps') {
-					// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@stage.testamnadev.workflow.cloudintegration.eu/templates
-					// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@dev.testamnadev.workflow.cloudintegration.eu/templates
-					// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@sandbox.testamnadev.workflow.cloudintegration.eu/templates
-					
+						// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@stage.testamnadev.workflow.cloudintegration.eu/templates
+						// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@dev.testamnadev.workflow.cloudintegration.eu/templates
+						// https://admin:95412569f042325b1bb0f2dab8c40c9c2aeb9587185b9df05686aff03bb86961@sandbox.testamnadev.workflow.cloudintegration.eu/templates
+						
 
-					const urlEnd = process.env.DB_MYSQLDB_PASSWORD ? process.env.DB_MYSQLDB_PASSWORD : 'app.polydocs.io/apps';
-					const urlIndentifier = ['@stage', '@dev', '@sandbox', '//dev', '//stage', '//sandbox'];
-					const url = window.location.origin;
-					let redirectUrl = '';
-					let prefix = '';
-					Array.from(urlIndentifier).forEach((value: string, index: number) => {
-						if (url.includes(value)) {
-							value.replace('@', '').replace('//', '');
-							prefix = value + '.';
-						}
-					});
+						const urlEnd = process.env.DB_MYSQLDB_PASSWORD ? process.env.DB_MYSQLDB_PASSWORD : 'app.polydocs.io/apps';
+						const urlIndentifier = ['@stage', '@dev', '@sandbox', '//dev', '//stage', '//sandbox'];
+						const url = window.location.origin;
+						let redirectUrl = '';
+						let prefix = '';
+						Array.from(urlIndentifier).forEach((value: string, index: number) => {
+							if (url.includes(value)) {
+								value.replace('@', '').replace('//', '');
+								prefix = value + '.';
+							}
+						});
 
-					redirectUrl = 'https://' + prefix + urlEnd;
-					/* eslint-disable no-console */
-					console.log('redirect url',redirectUrl);
-					if (!redirectUrl) {
+						redirectUrl = 'https://' + prefix + urlEnd;
 						/* eslint-disable no-console */
-						console.log('redirect  url is not correct',redirectUrl);
-						return;
-					}
-					window.open(redirectUrl);
+						console.log('redirect url',redirectUrl);
+						if (!redirectUrl) {
+							/* eslint-disable no-console */
+							console.log('redirect  url is not correct',redirectUrl);
+							return;
+						}
+						window.open(redirectUrl);
 				}
+			},
+			findFirstAccessibleSettingsRoute() {
+				// Get all settings rotes by filtering them by pageCategory property
+				const settingsRoutes = this.$router.getRoutes().filter(
+					category => category.meta.telemetry &&
+						category.meta.telemetry.pageCategory === 'settings',
+				).map(route => route.name || '');
+				let defaultSettingsRoute = null;
+
+				for (const route of settingsRoutes) {
+					if (this.canUserAccessRouteByName(route)) {
+						defaultSettingsRoute = route;
+						break;
+					}
+				}
+				return defaultSettingsRoute;
 			},
 		},
 	});
@@ -622,7 +688,7 @@ export default mixins(
 		height: 35px;
 		line-height: 35px;
 		color: $--custom-dialog-text-color;
-		--menu-item-hover-fill: #fff0ef;
+		--menu-item-hover-fill: var(--color-primary-tint-3);
 
 		.item-title {
 			position: absolute;
@@ -642,7 +708,7 @@ export default mixins(
 	.el-menu {
 		border: none;
 		font-size: 14px;
-		--menu-item-hover-fill: #fff0ef;
+		--menu-item-hover-fill: var(--color-primary-tint-3);
 
 		.el-menu--collapse {
 			width: 75px;
@@ -693,7 +759,7 @@ export default mixins(
 
 	.el-menu-item {
 		a {
-			color: #666;
+			color: var(--color-text-base);
 
 			&.primary-item {
 				color: $--color-primary;
@@ -733,7 +799,7 @@ export default mixins(
 	line-height: 24px;
 	height: 20px;
 	width: 20px;
-	background-color: #fff;
+	background-color: var(--color-foreground-xlight);
 	border: none;
 	border-radius: 15px;
 
@@ -764,7 +830,7 @@ export default mixins(
 	top: -3px;
 	left: 5px;
 	font-weight: bold;
-	color: #fff;
+	color: var(--color-foreground-xlight);
 	text-decoration: none;
 }
 

@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/microsoft"
+				"url": "https://docs.polydocs.io/credentials/microsoft"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.microsoftDynamicsCrm/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.microsoftDynamicsCrm/"
 			}
 		]
 	}

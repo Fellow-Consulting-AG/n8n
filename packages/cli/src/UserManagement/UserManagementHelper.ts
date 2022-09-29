@@ -15,7 +15,7 @@ import * as config from '../../config';
 import { getWebhookBaseUrl } from '../WebhookHelpers';
 
 export async function getWorkflowOwner(workflowId: string | number): Promise<User> {
-	const sharedWorkflow = await Db.collections.SharedWorkflow!.findOneOrFail({
+	const sharedWorkflow = await Db.collections.SharedWorkflow.findOneOrFail({
 		where: { workflow: { id: workflowId } },
 		relations: ['user', 'user.globalRole'],
 	});
@@ -32,8 +32,22 @@ export function isEmailSetUp(): boolean {
 	return smtp && host && user && pass;
 }
 
+export function isUserManagementEnabled(): boolean {
+	return (
+		!config.getEnv('userManagement.disabled') ||
+		config.getEnv('userManagement.isInstanceOwnerSetUp')
+	);
+}
+
+export function isUserManagementDisabled(): boolean {
+	return (
+		config.getEnv('userManagement.disabled') &&
+		!config.getEnv('userManagement.isInstanceOwnerSetUp')
+	);
+}
+
 async function getInstanceOwnerRole(): Promise<Role> {
-	const ownerRole = await Db.collections.Role!.findOneOrFail({
+	const ownerRole = await Db.collections.Role.findOneOrFail({
 		where: {
 			name: 'owner',
 			scope: 'global',
@@ -45,7 +59,7 @@ async function getInstanceOwnerRole(): Promise<Role> {
 export async function getInstanceOwner(): Promise<User> {
 	const ownerRole = await getInstanceOwnerRole();
 
-	const owner = await Db.collections.User!.findOneOrFail({
+	const owner = await Db.collections.User.findOneOrFail({
 		relations: ['globalRole'],
 		where: {
 			globalRole: ownerRole,
@@ -107,8 +121,8 @@ export function sanitizeUser(user: User, withoutKeys?: string[]): PublicUser {
 		password,
 		resetPasswordToken,
 		resetPasswordTokenExpiration,
-		createdAt,
 		updatedAt,
+		apiKey,
 		...sanitizedUser
 	} = user;
 	if (withoutKeys) {
@@ -121,7 +135,7 @@ export function sanitizeUser(user: User, withoutKeys?: string[]): PublicUser {
 }
 
 export async function getUserById(userId: string): Promise<User> {
-	const user = await Db.collections.User!.findOneOrFail(userId, {
+	const user = await Db.collections.User.findOneOrFail(userId, {
 		relations: ['globalRole'],
 	});
 	return user;
@@ -136,6 +150,10 @@ export async function checkPermissionsForExecution(
 	// Iterate over all nodes
 	nodeNames.forEach((nodeName) => {
 		const node = workflow.nodes[nodeName];
+		if (node.disabled === true) {
+			// If a node is disabled there is no need to check its credentials
+			return;
+		}
 		// And check if any of the nodes uses credentials.
 		if (node.credentials) {
 			const credentialNames = Object.keys(node.credentials);
@@ -143,12 +161,17 @@ export async function checkPermissionsForExecution(
 			credentialNames.forEach((credentialName) => {
 				const credentialDetail = node.credentials![credentialName];
 				// If it does not contain an id, it means it is a very old
-				// workflow. Nowaways it should not happen anymore.
+				// workflow. Nowadays it should not happen anymore.
 				// Migrations should handle the case where a credential does
 				// not have an id.
+				if (credentialDetail.id === null) {
+					throw new Error(
+						`The credential on node '${node.name}' is not valid. Please open the workflow and set it to a valid value.`,
+					);
+				}
 				if (!credentialDetail.id) {
 					throw new Error(
-						'Error initializing workflow: credential ID not present. Please open the workflow and save it to fix this error.',
+						`Error initializing workflow: credential ID not present. Please open the workflow and save it to fix this error. [Node: '${node.name}']`,
 					);
 				}
 				credentialIds.add(credentialDetail.id.toString());
@@ -166,7 +189,7 @@ export async function checkPermissionsForExecution(
 		return true;
 	}
 	// If this check happens on top, we may get
-	// unitialized db errors.
+	// uninitialized db errors.
 	// Db is certainly initialized if workflow uses credentials.
 	const user = await getUserById(userId);
 	if (user.globalRole.name === 'owner') {
@@ -174,7 +197,7 @@ export async function checkPermissionsForExecution(
 	}
 
 	// Check for the user's permission to all used credentials
-	const credentialCount = await Db.collections.SharedCredentials!.count({
+	const credentialCount = await Db.collections.SharedCredentials.count({
 		where: {
 			user: { id: userId },
 			credentials: In(ids),
@@ -185,7 +208,7 @@ export async function checkPermissionsForExecution(
 	// then both arrays (allowed credentials vs used credentials)
 	// must be the same length
 	if (ids.length !== credentialCount) {
-		throw new Error('One or more of the used credentials are not accessable.');
+		throw new Error('One or more of the used credentials are not accessible.');
 	}
 	return true;
 }
@@ -230,6 +253,7 @@ export async function compareHash(plaintext: string, hashed: string): Promise<bo
 				'. Comparison against unhashed string. Please check that the value compared against has been hashed.';
 		}
 
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		throw new Error(error);
 	}
 }

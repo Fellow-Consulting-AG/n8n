@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/redis"
+				"url": "https://docs.polydocs.io/credentials/redis"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.redis/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.redis/"
 			}
 		],
 		"generic": [

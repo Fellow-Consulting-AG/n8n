@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/dhl"
+				"url": "https://docs.polydocs.io/credentials/dhl"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/nodes/n8n-nodes-base.dhl/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.dhl/"
 			}
 		]
 	},

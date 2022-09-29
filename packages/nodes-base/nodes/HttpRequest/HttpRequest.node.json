@@ -10,7 +10,7 @@
 	"resources": {
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/core-nodes/n8n-nodes-base.httpRequest/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.httpRequest/"
 			}
 		],
 		"generic": [

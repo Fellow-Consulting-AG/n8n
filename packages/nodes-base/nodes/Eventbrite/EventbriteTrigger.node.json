@@ -8,12 +8,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/credentials/eventbrite"
+				"url": "https://docs.polydocs.io/credentials/eventbrite"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.polydocs.io/workflow/integrations/trigger-nodes/n8n-nodes-base.eventbriteTrigger/"
+				"url": "https://docs.polydocs.io/nodes/n8n-nodes-base.eventbriteTrigger/"
 			}
 		],
 		"generic": [
