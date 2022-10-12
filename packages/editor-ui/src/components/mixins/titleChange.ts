@@ -20,7 +20,7 @@ export const titleChange = Vue.extend({
 				icon = '▶️';
 			}
 
-			window.document.title = `n8n - ${icon} ${workflow}`;
+			window.document.title = `WF² - ${icon} ${workflow}`;
 		},
 
 		$titleReset() {
