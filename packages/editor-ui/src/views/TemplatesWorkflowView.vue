@@ -118,10 +118,10 @@ export default mixins(workflowHelpers).extend({
 	watch: {
 		template(template: ITemplatesWorkflowFull) {
 			if (template) {
-				setPageTitle(`n8n - Template template: ${template.name}`);
+				setPageTitle(`WF² - Template template: ${template.name}`);
 			}
 			else {
-				setPageTitle(`n8n - Templates`);
+				setPageTitle(`WF² - Templates`);
 			}
 		},
 	},

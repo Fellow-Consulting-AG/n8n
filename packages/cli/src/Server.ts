@@ -439,7 +439,7 @@ class App {
 					) {
 						return next();
 					}
-					const realm = 'n8n - Editor UI';
+					const realm = 'WF² - Editor UI';
 					const basicAuthData = basicAuth(req);
 
 					if (basicAuthData === undefined) {
