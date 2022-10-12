@@ -196,8 +196,10 @@ export class Upload implements INodeType {
 
     async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
         try {
+			console.log('doc2app Upload::execute::Enter');
             let responseData;
             const items = this.getInputData();
+			console.log('doc2app Upload::execute::Enter items', items);
             const binaryPropertyName = this.getNodeParameter('binaryPropertyName', 0) as string;
             const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
 						let doc_type = this.getNodeParameter('doc_type', 0) as string;
@@ -255,6 +257,7 @@ export class Upload implements INodeType {
                 uri: uri,
                 json: true,
             };
+			console.log('doc2app Upload::execute::SendtoDoc2app files::length', formData.files.length, uri);
 
             responseData = await this.helpers.request(options);
             return [this.helpers.returnJsonArray(responseData)];
