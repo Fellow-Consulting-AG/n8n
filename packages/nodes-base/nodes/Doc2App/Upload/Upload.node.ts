@@ -228,8 +228,8 @@ export class Upload implements INodeType {
 										return returnData;
 								}
 								const response = await this.helpers.httpRequest(options);
-								for (const sub_orgs of response.data) {
-										const sub_org_Name = sub_orgs.title;
+								for (const sub_orgs of response) {
+										const sub_org_Name = sub_orgs.name;
 										const sub_org_id = sub_orgs.id;
 
 										returnData.push({
@@ -256,6 +256,7 @@ export class Upload implements INodeType {
             const binaryPropertyName = this.getNodeParameter('binaryPropertyName', 0) as string;
             const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
 						let doc_type = this.getNodeParameter('doc_type', 0) as string;
+						let sub_org = this.getNodeParameter('sub_org', 0) as string;
 						let importtype = this.getNodeParameter('importtype', 0) as string;
 						const document_label = this.getNodeParameter('label', 0) as string ?? 'Test_Label';
             const api_key = credentials.apiKey;
@@ -275,6 +276,7 @@ export class Upload implements INodeType {
 								doc_type: doc_type,
 								source: source,
 								label: document_label as string,
+								sub_org_id: sub_org,
             };
 
             for (let i = 0; i < items.length; i++) {
