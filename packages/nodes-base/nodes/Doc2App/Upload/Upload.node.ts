@@ -142,6 +142,17 @@ export class Upload implements INodeType {
 						description: 'Set emailinbox',
 						required: true,
 					},
+					{
+						displayName: 'Sub-Organisation',
+						name: 'sub_org',
+						type: 'options',
+						typeOptions: {
+							loadOptionsMethod: 'getSubOrgs',
+						},
+						description: 'Use Suborganisation from the list',
+						default: '',
+						required: false,
+					},
       	],
     	};
 		methods = {
@@ -191,6 +202,48 @@ export class Upload implements INodeType {
 
 							return returnData;
 					},
+					async getSubOrgs(this: IHookFunctions | ILoadOptionsFunctions): Promise<INodePropertyOptions[]>{
+						const returnData = [
+								{
+										name: 'All',
+										value: '',
+								}
+						];
+						const credentials = await this.getCredentials('Doc2AppApi') as IDataObject;
+						const api_key = credentials.apiKey;
+						let url = api.get_sub_orgs;
+						const options: IHttpRequestOptions = {
+								url,
+								headers: {
+										'Content-Type': 'application/json',
+										'X-API-KEY': api_key,
+								},
+								method: 'GET',
+								body:  {},
+								json: true,
+						};
+
+						try {
+								if (this.helpers === undefined) {
+										return returnData;
+								}
+								const response = await this.helpers.httpRequest(options);
+								for (const sub_orgs of response.data) {
+										const sub_org_Name = sub_orgs.title;
+										const sub_org_id = sub_orgs.id;
+
+										returnData.push({
+												name: sub_org_Name,
+												value: sub_org_id,
+										});
+								}
+						} catch(e: any) {
+								console.error(e);
+								// throw new Error('Some internal error occur. Please try again later');
+						}
+
+						return returnData;
+				},
 			},
 	};
 
