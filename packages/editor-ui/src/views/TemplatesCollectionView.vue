@@ -129,10 +129,10 @@ export default mixins(workflowHelpers).extend({
 	watch: {
 		collection(collection: ITemplatesCollection) {
 			if (collection) {
-				setPageTitle(`n8n - Template collection: ${collection.name}`);
+				setPageTitle(`WF² - Template collection: ${collection.name}`);
 			}
 			else {
-				setPageTitle(`n8n - Templates`);
+				setPageTitle(`WF² - Templates`);
 			}
 		},
 	},
