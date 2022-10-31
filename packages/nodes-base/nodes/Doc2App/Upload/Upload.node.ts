@@ -112,21 +112,21 @@ export class Upload implements INodeType {
 						description: 'Set documentsource',
 						required: false,
 					},
-					{
-						displayName: 'Address',
-						name: 'address',
-						type: 'string',
-						displayOptions: {
-							show: {
-								importtype: [
-									'email'
-								]
-							}
-						},
-						default: '',
-						description: 'Set Importaddress',
-						required: true,
-					},
+					// {
+					// 	displayName: 'Address',
+					// 	name: 'address',
+					// 	type: 'string',
+					// 	displayOptions: {
+					// 		show: {
+					// 			importtype: [
+					// 				'email'
+					// 			]
+					// 		}
+					// 	},
+					// 	default: '',
+					// 	description: 'Set Importaddress',
+					// 	required: true,
+					// },
 					{
 						displayName: 'Inbox',
 						name: 'inbox',
@@ -264,8 +264,8 @@ export class Upload implements INodeType {
 
 						if (importtype == "email") {
 							let inbox = this.getNodeParameter('inbox', 0, false) as string;
-							let address = this.getNodeParameter('address', 0, false) as string;
-							source = importtype + ":" + address + ":" + inbox
+							// let address = this.getNodeParameter('address', 0, false) as string;
+							source = importtype + ":" + inbox
 						} else {
 							let doc_source = this.getNodeParameter('doc_source', 0) as string;
 							source = doc_source
@@ -273,7 +273,6 @@ export class Upload implements INodeType {
 
             const formData = {
                 files: [] as UploadFile[],
-								doc_type: doc_type,
 								source: source,
 								label: document_label as string,
 								sub_org_id: sub_org,
