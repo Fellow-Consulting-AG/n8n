@@ -288,7 +288,7 @@ export class Upload implements INodeType {
 								if (document_label) {
 									binaryData.fileName = document_label as string;
 								} else {
-									binaryData.fileName = (i + 1) + 'extract_document.pdf';
+									binaryData.fileName = (i + 1) + '_document.pdf';
 								}
 
                 const file = {
