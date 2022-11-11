@@ -64,6 +64,6 @@ FormBox.args = {
 	],
 	buttonText: 'Action',
 	redirectText: 'Go somewhere',
-	redirectLink: 'https://n8n.io',
+	redirectLink: 'https://polydocs.io',
 };
 
