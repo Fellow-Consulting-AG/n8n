@@ -2,7 +2,7 @@
   "name": "n8n",
   "version": "0.193.5",
   "private": true,
-  "homepage": "https://n8n.io",
+  "homepage": "https://polydocs.io",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",

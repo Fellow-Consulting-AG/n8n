@@ -29,5 +29,5 @@ const Template = (args, { argTypes }) => ({
 
 export const Link = Template.bind({});
 Link.args = {
-	href: 'https://n8n.io/',
+	href: 'https://polydocs.io/',
 };

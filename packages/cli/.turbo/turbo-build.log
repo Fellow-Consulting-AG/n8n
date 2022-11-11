@@ -1,4 +1,4 @@
-n8n:build: cache hit, replaying output [2m8e78c206c256b63e[0m
+n8n:build: cache hit, replaying output [2mc3e268fd310daecd[0m
 [32mn8n:build: [0m
 [32mn8n:build: [0m> n8n@0.193.5 build
 [32mn8n:build: [0m> node scripts/build.mjs

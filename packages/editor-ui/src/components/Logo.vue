@@ -2,7 +2,7 @@
 	<img
 		:src="basePath + 'polydocs.svg'"
 		:class="$style.img"
-		alt="n8n.io"
+		alt="polydocs.io"
 	/>
 </template>
 

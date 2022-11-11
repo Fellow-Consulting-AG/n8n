@@ -9,7 +9,7 @@
 			<n8n-menu default-active="workflow" @select="handleSelect" :collapse="isCollapsed">
 
 				<n8n-menu-item index="logo" class="logo-item">
-					<a href="https://n8n.io" target="_blank">
+					<a href="https://polydocs.io" target="_blank">
 						<img :src="basePath + 'polydocs_white.svg'" class="icon" alt="polydocs.io" style="margin-left: 18px;"/>
 						<span class="logo-text" slot="title">polydocs.io</span>
 					</a>

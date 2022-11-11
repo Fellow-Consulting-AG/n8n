@@ -1,4 +1,4 @@
-n8n-editor-ui:build: cache hit, replaying output [2m9a7d7237a7501873[0m
+n8n-editor-ui:build: cache hit, replaying output [2mbb4f0d2ef48f307e[0m
 [33mn8n-editor-ui:build: [0m
 [33mn8n-editor-ui:build: [0m> n8n-editor-ui@0.159.4 build
 [33mn8n-editor-ui:build: [0m> cross-env VUE_APP_PUBLIC_PATH="/%BASE_PATH%/" vue-cli-service build
@@ -7,7 +7,7 @@ n8n-editor-ui:build: cache hit, replaying output [2m9a7d7237a7501873[0m
 [33mn8n-editor-ui:build: [0m-  Building for production...
 [33mn8n-editor-ui:build: [0mStarting type checking and linting service...
 [33mn8n-editor-ui:build: [0mUsing 1 worker with 2048MB memory limit
-[33mn8n-editor-ui:build: [0m WARNING  Compiled with 2 warnings11:26:37
+[33mn8n-editor-ui:build: [0m WARNING  Compiled with 2 warnings08:56:16
 [33mn8n-editor-ui:build: [0m
 [33mn8n-editor-ui:build: [0m warning  
 [33mn8n-editor-ui:build: [0m
@@ -16,9 +16,9 @@ n8n-editor-ui:build: cache hit, replaying output [2m9a7d7237a7501873[0m
 [33mn8n-editor-ui:build: [0mAssets: 
 [33mn8n-editor-ui:build: [0m  json.worker.js (260 KiB)
 [33mn8n-editor-ui:build: [0m  ts.worker.js (4.51 MiB)
-[33mn8n-editor-ui:build: [0m  js/app.15fc5187.js (801 KiB)
+[33mn8n-editor-ui:build: [0m  js/app.171dc9d3.js (801 KiB)
 [33mn8n-editor-ui:build: [0m  css/chunk-vendors.0d9ea7ec.css (363 KiB)
-[33mn8n-editor-ui:build: [0m  js/chunk-vendors.61ff226a.js (4.98 MiB)
+[33mn8n-editor-ui:build: [0m  js/chunk-vendors.a2ae67fe.js (4.98 MiB)
 [33mn8n-editor-ui:build: [0m  static/quickstart_thumbnail.png (389 KiB)
 [33mn8n-editor-ui:build: [0m
 [33mn8n-editor-ui:build: [0m warning  
@@ -27,17 +27,17 @@ n8n-editor-ui:build: cache hit, replaying output [2m9a7d7237a7501873[0m
 [33mn8n-editor-ui:build: [0mEntrypoints:
 [33mn8n-editor-ui:build: [0m  app (6.23 MiB)
 [33mn8n-editor-ui:build: [0m      css/chunk-vendors.0d9ea7ec.css
-[33mn8n-editor-ui:build: [0m      js/chunk-vendors.61ff226a.js
+[33mn8n-editor-ui:build: [0m      js/chunk-vendors.a2ae67fe.js
 [33mn8n-editor-ui:build: [0m      css/app.e5062baa.css
-[33mn8n-editor-ui:build: [0m      js/app.15fc5187.js
+[33mn8n-editor-ui:build: [0m      js/app.171dc9d3.js
 [33mn8n-editor-ui:build: [0m
 [33mn8n-editor-ui:build: [0m
-[33mn8n-editor-ui:build: [0mWebpack Bundle Analyzer saved report to /Users/benjaminroder/dev/n8n-master/packages/editor-ui/dist/report.html
+[33mn8n-editor-ui:build: [0mWebpack Bundle Analyzer saved report to /Users/Anian/dev/n8n/packages/editor-ui/dist/report.html
 [33mn8n-editor-ui:build: [0m  File                                   Size              Gzipped
 [33mn8n-editor-ui:build: [0m
-[33mn8n-editor-ui:build: [0m  dist/js/chunk-vendors.61ff226a.js      5104.16 KiB       1348.55 KiB
+[33mn8n-editor-ui:build: [0m  dist/js/chunk-vendors.a2ae67fe.js      5104.16 KiB       1348.55 KiB
 [33mn8n-editor-ui:build: [0m  dist/ts.worker.js                      4622.17 KiB       1037.68 KiB
-[33mn8n-editor-ui:build: [0m  dist/js/app.15fc5187.js                801.07 KiB        201.28 KiB
+[33mn8n-editor-ui:build: [0m  dist/js/app.171dc9d3.js                801.13 KiB        201.29 KiB
 [33mn8n-editor-ui:build: [0m  dist/json.worker.js                    260.45 KiB        78.30 KiB
 [33mn8n-editor-ui:build: [0m  dist/editor.worker.js                  135.16 KiB        44.64 KiB
 [33mn8n-editor-ui:build: [0m  dist/js/chunk-2d0b325a.75271eb0.js     36.89 KiB         9.71 KiB
